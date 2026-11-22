@@ -3,19 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <meta name="theme-color" content="#C86D51" />
+  <title>Style For You &bull; Curated Weekly Drops</title>
+  <meta name="theme-color" content="#FAF7F2" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="Style For You" />
-  <title>Style For You | Curated Weekly Drops</title>
-
-  <!-- Google Fonts: Cormorant Garamond (Boutique Serif) & Plus Jakarta Sans (Clean Modern UI) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Cormorant Garamond & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
@@ -25,16 +25,16 @@
       theme: {
         extend: {
           colors: {
-            cream: '#FAF8F5',
-            terracotta: '#C86D51',
-            terracottaDark: '#B05A3F',
-            espresso: '#231F20',
-            sand: '#F3ECE4',
-            blush: '#F8EFEA',
+            cream: '#FAF7F2',
+            sand: '#F2ECE1',
+            terracotta: '#C46D4E',
+            terracottaDark: '#A8573B',
+            charcoal: '#1F1D1A',
+            muted: '#6E685F',
           },
           fontFamily: {
             serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
-            sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
           },
         },
       },
@@ -43,13 +43,11 @@
 
   <style>
     body {
-      background-color: #FAF8F5;
-      color: #231F20;
+      background-color: #FAF7F2;
+      color: #1F1D1A;
       font-family: 'Plus Jakarta Sans', sans-serif;
       -webkit-tap-highlight-color: transparent;
-      overflow-x: hidden;
     }
-
     .no-scrollbar::-webkit-scrollbar {
       display: none;
     }
@@ -57,268 +55,343 @@
       -ms-overflow-style: none;
       scrollbar-width: none;
     }
-
-    @keyframes slideUp {
-      from { transform: translateY(100%); opacity: 0.5; }
-      to { transform: translateY(0); opacity: 1; }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.97); }
-      to { opacity: 1; transform: scale(1); }
-    }
-    .animate-slide-up {
-      animation: slideUp 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-    .animate-fade-in {
-      animation: fadeIn 0.2s ease-out forwards;
-    }
-
-    .glass-nav {
-      background: rgba(250, 248, 245, 0.94);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+    .animate-fade-up {
+      animation: fadeUp 0.25s ease-out forwards;
     }
   </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between selection:bg-terracotta selection:text-white">
+<body class="min-h-screen flex flex-col max-w-md mx-auto bg-cream shadow-sm relative selection:bg-terracotta/20">
 
-  <!-- ===================================================================== -->
-  <!-- TOP PWA AUTO-SHORTCUT INSTALL BANNER                                  -->
-  <!-- ===================================================================== -->
-  <div id="pwaBanner" class="bg-espresso text-white px-3.5 py-2.5 flex items-center justify-between gap-2 text-xs shadow-md sticky top-0 z-50">
+  <!-- Top Install / Shortcut Banner -->
+  <div id="install-banner" class="bg-charcoal text-cream px-3.5 py-2.5 flex items-center justify-between gap-2 text-xs">
     <div class="flex items-center gap-2.5 min-w-0">
-      <div class="w-8 h-8 rounded-xl bg-terracotta flex items-center justify-center shrink-0 font-serif font-bold text-sm text-white shadow-inner">
+      <div class="w-8 h-8 rounded-full bg-terracotta text-white font-serif font-bold text-sm flex items-center justify-center shrink-0">
         SFY
       </div>
       <div class="truncate">
-        <p class="font-semibold text-white truncate" id="bannerTitleText">Get the Style For You App Icon on your Home Screen</p>
-        <p class="text-[11px] text-stone-300 truncate">1-tap access to weekly fashion drops</p>
+        <p class="font-semibold text-white truncate">Get the Style For You App</p>
+        <p class="text-stone-300 text-[11px] truncate">1-tap access to weekly drops</p>
       </div>
     </div>
     <div class="flex items-center gap-1.5 shrink-0">
-      <button onclick="handleInstallShortcut()" class="bg-terracotta hover:bg-terracottaDark text-white font-semibold px-3 py-1.5 rounded-full text-xs transition active:scale-95">
-        Install / Add Shortcut
+      <button onclick="openInstallGuide()" class="bg-terracotta hover:bg-terracottaDark text-white font-semibold px-3 py-1.5 rounded-full text-[11px] transition active:scale-95">
+        Add Shortcut
       </button>
-      <button onclick="dismissPwaBanner()" aria-label="Dismiss banner" class="p-1 text-stone-400 hover:text-white">
+      <button onclick="dismissBanner()" aria-label="Close banner" class="p-1 text-stone-400 hover:text-white">
         <i data-lucide="x" class="w-4 h-4"></i>
       </button>
     </div>
   </div>
 
-  <!-- ===================================================================== -->
-  <!-- STOREFRONT HEADER                                                     -->
-  <!-- ===================================================================== -->
-  <header id="storeHeader" class="glass-nav border-b border-stone-200/80 sticky top-[44px] z-40 transition-all">
-    <div class="max-w-3xl mx-auto px-4 pt-3 pb-2.5">
-      <!-- Brand Row & Cart -->
-      <div class="flex items-center justify-between gap-2">
-        <div onclick="resetAllFilters()" class="cursor-pointer min-w-0">
-          <h1 id="headerBrandName" class="font-serif text-2xl sm:text-3xl font-bold tracking-tight text-espresso leading-none truncate">
-            Style For You
-          </h1>
-          <p id="headerTagline" class="text-[11px] text-terracotta font-semibold tracking-wide mt-1 truncate">
-            Curated Weekly Drops • Women's &amp; Men's Fashion
-          </p>
-        </div>
-
-        <div class="flex items-center gap-2 shrink-0">
-          <!-- Save Shortcut Icon Button -->
-          <button onclick="openInstallModal()" title="Add to Home Screen" class="p-2.5 rounded-full bg-white border border-stone-200 text-espresso hover:border-terracotta hover:text-terracotta transition shadow-2xs active:scale-95">
-            <i data-lucide="smartphone" class="w-4 h-4"></i>
-          </button>
-
-          <!-- Shopping Bag Button -->
-          <button onclick="openCartDrawer()" class="relative p-2.5 rounded-full bg-espresso text-white hover:bg-terracotta transition shadow-sm active:scale-95">
-            <i data-lucide="shopping-bag" class="w-4 h-4"></i>
-            <span id="cartBadge" class="hidden absolute -top-1 -right-1 bg-terracotta text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-cream">
-              0
-            </span>
-          </button>
-        </div>
+  <!-- Sticky Header -->
+  <header class="sticky top-0 z-30 bg-cream/95 backdrop-blur-md border-b border-stone-200/80 px-4 pt-3.5 pb-3">
+    <div class="flex items-center justify-between gap-2">
+      <!-- Secret 5-tap trigger on Brand Title for Reseller Admin -->
+      <div id="secret-brand-trigger" onclick="handleSecretTitleTap()" class="cursor-pointer select-none">
+        <h1 class="font-serif text-[28px] leading-none font-bold tracking-tight text-charcoal">
+          Style For You
+        </h1>
+        <p class="text-[11px] font-medium text-terracotta mt-1">
+          Curated Weekly Drops &bull; Women's &amp; Men's
+        </p>
       </div>
 
-      <!-- Search Input -->
-      <div class="mt-2.5 relative">
-        <i data-lucide="search" class="w-4 h-4 text-stone-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
-        <input
-          type="text"
-          id="searchInput"
-          oninput="onSearchInput(this.value)"
-          placeholder="Search watches, dresses, cord sets, sunglasses..."
-          class="w-full bg-white border border-stone-200 focus:border-terracotta focus:ring-2 focus:ring-terracotta/15 rounded-full pl-9 pr-9 py-2 text-xs sm:text-sm outline-none transition placeholder:text-stone-400"
-        />
-        <button id="clearSearchBtn" onclick="clearSearchInput()" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-espresso">
-          <i data-lucide="x-circle" class="w-4 h-4"></i>
+      <div class="flex items-center gap-2">
+        <button onclick="openInstallGuide()" title="Save App Shortcut" class="w-10 h-10 rounded-full bg-white border border-stone-200 flex items-center justify-center text-charcoal hover:bg-sand transition active:scale-95">
+          <i data-lucide="smartphone" class="w-4 h-4"></i>
         </button>
-      </div>
 
-      <!-- Primary Collection Tabs -->
-      <div class="flex items-center gap-2 mt-3">
-        <button onclick="selectPrimaryCategory('All')" id="catBtn-All" class="primary-cat-btn flex-1 py-2 px-3 rounded-xl text-xs sm:text-sm font-semibold transition bg-espresso text-white shadow-2xs">
-          All Drops
-        </button>
-        <button onclick="selectPrimaryCategory('Womens')" id="catBtn-Womens" class="primary-cat-btn flex-1 py-2 px-3 rounded-xl text-xs sm:text-sm font-semibold transition bg-white text-espresso border border-stone-200 hover:border-terracotta">
-          Women's
-        </button>
-        <button onclick="selectPrimaryCategory('Mens')" id="catBtn-Mens" class="primary-cat-btn flex-1 py-2 px-3 rounded-xl text-xs sm:text-sm font-semibold transition bg-white text-espresso border border-stone-200 hover:border-terracotta">
-          Men's
+        <button onclick="toggleCart(true)" aria-label="Open Bag" class="relative w-10 h-10 rounded-full bg-charcoal text-white flex items-center justify-center shadow-sm hover:bg-stone-800 transition active:scale-95">
+          <i data-lucide="shopping-bag" class="w-4 h-4"></i>
+          <span id="cart-badge" class="hidden absolute -top-1 -right-1 w-5 h-5 rounded-full bg-terracotta text-white text-[10px] font-bold flex items-center justify-center border-2 border-cream">
+            0
+          </span>
         </button>
       </div>
+    </div>
 
-      <!-- Sub-Category Filter Pills -->
-      <div id="subFilterContainer" class="flex items-center gap-2 overflow-x-auto no-scrollbar pt-2.5 pb-0.5">
-        <!-- Rendered dynamically -->
-      </div>
+    <!-- Search Bar -->
+    <div class="mt-3 relative">
+      <i data-lucide="search" class="w-4 h-4 text-muted absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+      <input
+        id="search-input"
+        type="text"
+        oninput="handleSearch(this.value)"
+        placeholder="Search watches, dresses, cord sets, sunglasses..."
+        class="w-full bg-white border border-stone-200/90 rounded-full pl-10 pr-9 py-2 text-xs text-charcoal placeholder:text-stone-400 focus:outline-none focus:border-terracotta transition"
+      />
+      <button id="clear-search-btn" onclick="clearSearch()" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-charcoal">
+        <i data-lucide="x-circle" class="w-4 h-4"></i>
+      </button>
+    </div>
+
+    <!-- Gender Tabs -->
+    <div class="grid grid-cols-3 gap-2 mt-3">
+      <button onclick="setGenderFilter('All')" id="gender-All" class="gender-btn py-1.5 px-3 rounded-full text-xs font-semibold bg-charcoal text-white transition">
+        All Drops
+      </button>
+      <button onclick="setGenderFilter('Women')" id="gender-Women" class="gender-btn py-1.5 px-3 rounded-full text-xs font-semibold bg-white text-charcoal border border-stone-200 transition">
+        Women's
+      </button>
+      <button onclick="setGenderFilter('Men')" id="gender-Men" class="gender-btn py-1.5 px-3 rounded-full text-xs font-semibold bg-white text-charcoal border border-stone-200 transition">
+        Men's
+      </button>
+    </div>
+
+    <!-- Category Pills -->
+    <div id="category-pills" class="flex items-center gap-2 overflow-x-auto no-scrollbar mt-2.5 pb-0.5">
+      <!-- Populated dynamically via JS -->
     </div>
   </header>
 
-  <!-- ===================================================================== -->
-  <!-- MAIN STOREFRONT VIEW                                                  -->
-  <!-- ===================================================================== -->
-  <main id="storefrontView" class="flex-1 max-w-3xl w-full mx-auto px-4 pt-4 pb-16">
-    <!-- Weekly Drop Info Banner -->
-    <div class="bg-blush border border-terracotta/20 rounded-2xl p-3.5 mb-4 flex items-center justify-between gap-3">
+  <!-- Main Storefront Content -->
+  <main class="flex-1 px-4 pt-3.5 pb-12">
+    <!-- Weekly Drop Hero Banner -->
+    <div class="bg-sand/90 border border-stone-200/70 rounded-2xl p-4 mb-4 flex items-center justify-between gap-3">
       <div>
-        <span class="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-terracotta bg-white px-2.5 py-0.5 rounded-full shadow-2xs">
+        <span class="inline-flex items-center gap-1 bg-white text-terracotta text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full shadow-2xs">
           <i data-lucide="sparkles" class="w-3 h-3"></i> Fresh Weekly Drop
         </span>
-        <h2 class="font-serif text-lg sm:text-xl font-bold text-espresso mt-1 leading-snug">
+        <h2 class="font-serif text-xl font-bold text-charcoal mt-1.5 leading-snug">
           Handpicked Styles, Direct to You
         </h2>
-        <p class="text-[11px] sm:text-xs text-stone-600 mt-0.5">
+        <p class="text-[11px] text-muted mt-0.5 leading-relaxed">
           Select your size &amp; tap Order on WhatsApp for instant confirmation.
         </p>
       </div>
-      <span id="itemCountBadge" class="shrink-0 text-xs font-bold text-espresso bg-white px-3 py-1.5 rounded-xl border border-stone-200/80">
-        0 Items
-      </span>
+      <div class="shrink-0 bg-white border border-stone-200/80 rounded-full px-3 py-1.5 text-xs font-bold text-charcoal shadow-2xs">
+        <span id="item-count">0</span> Items
+      </div>
     </div>
 
     <!-- Product Grid -->
-    <div id="productGrid" class="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
-      <!-- Product cards rendered here -->
+    <div id="product-grid" class="grid grid-cols-2 gap-3.5">
+      <!-- Product Cards Rendered via JS -->
     </div>
 
-    <!-- Empty Filter State -->
-    <div id="emptyCatalogState" class="hidden text-center py-14 px-4 bg-white rounded-3xl border border-stone-200/70 mt-2">
-      <div class="w-12 h-12 rounded-full bg-blush text-terracotta flex items-center justify-center mx-auto mb-3">
-        <i data-lucide="shopping-bag" class="w-6 h-6"></i>
+    <!-- Empty State -->
+    <div id="empty-state" class="hidden text-center py-12 px-4">
+      <div class="w-12 h-12 rounded-full bg-sand text-terracotta flex items-center justify-center mx-auto mb-3">
+        <i data-lucide="search-x" class="w-6 h-6"></i>
       </div>
-      <h3 class="font-serif text-xl font-bold text-espresso">No styles match this filter</h3>
-      <p class="text-xs text-stone-500 mt-1 max-w-xs mx-auto">
-        Switch back to All Drops or clear your search to view this week's collection.
-      </p>
-      <button onclick="resetAllFilters()" class="mt-4 bg-espresso text-white text-xs font-semibold px-5 py-2.5 rounded-full hover:bg-terracotta transition">
-        View All Drops
+      <h3 class="font-serif text-xl font-bold text-charcoal">No matching styles found</h3>
+      <p class="text-xs text-muted mt-1">Try switching category tabs or clearing your search.</p>
+      <button onclick="resetFilters()" class="mt-4 bg-charcoal text-white text-xs font-semibold px-4 py-2 rounded-full">
+        Show All Styles
       </button>
     </div>
   </main>
 
-  <!-- ===================================================================== -->
-  <!-- PIN-PROTECTED RESELLER ADMIN DASHBOARD                                -->
-  <!-- ===================================================================== -->
-  <section id="adminDashboardView" class="hidden flex-1 max-w-3xl w-full mx-auto px-4 pt-4 pb-20">
-    <!-- Admin Header Card -->
-    <div class="bg-espresso text-white rounded-2xl p-4 mb-4 flex items-center justify-between shadow-md">
-      <div>
-        <div class="flex items-center gap-1.5">
-          <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-          <span class="text-[10px] uppercase tracking-widest text-stone-300 font-bold">Owner Control Panel</span>
-        </div>
-        <h2 id="adminHeaderTitle" class="font-serif text-xl font-bold mt-0.5">Style For You — Admin</h2>
-      </div>
-      <button onclick="exitAdminDashboard()" class="bg-white/15 hover:bg-white/25 text-white text-xs font-semibold px-3.5 py-2 rounded-xl flex items-center gap-1.5 transition">
-        <i data-lucide="store" class="w-4 h-4"></i> View Shop
-      </button>
-    </div>
+  <!-- Clean Customer Footer (No Visible Admin Button) -->
+  <footer class="border-t border-stone-200/80 bg-white/60 px-4 py-5 text-center text-[11px] text-muted">
+    <p class="font-serif text-base font-bold text-charcoal">Style For You</p>
+    <p class="mt-0.5">Curated Women's &amp; Men's Fashion &bull; Direct WhatsApp Orders</p>
+    <p class="mt-1 text-[10px] text-stone-400">Shipping charges calculated extra as per delivery pincode</p>
+  </footer>
 
-    <!-- 4 Navigation Tabs -->
-    <div class="grid grid-cols-4 gap-1 bg-white p-1.5 rounded-2xl border border-stone-200 mb-4">
-      <button onclick="switchAdminTab('add')" id="tabBtn-add" class="admin-nav-btn py-2 px-1.5 rounded-xl text-[11px] sm:text-xs font-bold bg-terracotta text-white transition">
-        + Add Product
-      </button>
-      <button onclick="switchAdminTab('stock')" id="tabBtn-stock" class="admin-nav-btn py-2 px-1.5 rounded-xl text-[11px] sm:text-xs font-bold text-stone-600 hover:bg-stone-50 transition">
-        Manage Stock
-      </button>
-      <button onclick="switchAdminTab('orders')" id="tabBtn-orders" class="admin-nav-btn py-2 px-1.5 rounded-xl text-[11px] sm:text-xs font-bold text-stone-600 hover:bg-stone-50 transition">
-        Orders &amp; Profit
-      </button>
-      <button onclick="switchAdminTab('settings')" id="tabBtn-settings" class="admin-nav-btn py-2 px-1.5 rounded-xl text-[11px] sm:text-xs font-bold text-stone-600 hover:bg-stone-50 transition">
-        Store Settings
-      </button>
-    </div>
-
-    <!-- =================================================================== -->
-    <!-- ADMIN TAB 1: + ADD WEEKLY PRODUCT                                   -->
-    <!-- =================================================================== -->
-    <div id="adminTab-add" class="bg-white rounded-3xl p-4 sm:p-5 border border-stone-200 shadow-2xs space-y-4">
-      <div class="flex items-center justify-between border-b border-stone-100 pb-3">
-        <div>
-          <h3 class="font-serif text-xl font-bold text-espresso">Add Weekly Product</h3>
-          <p class="text-xs text-stone-500">Upload supplier photo, add your profit margin &amp; publish.</p>
-        </div>
-        <span class="text-[10px] font-bold uppercase tracking-wider bg-blush text-terracotta px-2.5 py-1 rounded-full">
-          Auto-Compress
+  <!-- ========================================== -->
+  <!-- PRODUCT DETAIL & SIZE MODAL                -->
+  <!-- ========================================== -->
+  <div id="product-modal" class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="bg-cream w-full max-w-md rounded-t-3xl sm:rounded-3xl overflow-hidden shadow-2xl animate-fade-up max-h-[90vh] flex flex-col">
+      <div class="relative aspect-[4/3] bg-sand overflow-hidden">
+        <img id="modal-img" src="" alt="Product" class="w-full h-full object-cover" />
+        <button onclick="closeProductModal()" class="absolute top-3 right-3 w-9 h-9 rounded-full bg-white/90 text-charcoal flex items-center justify-center shadow-md">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+        <span id="modal-badge" class="absolute top-3 left-3 bg-terracotta text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">
+          New This Week
         </span>
       </div>
 
-      <form id="addProductForm" onsubmit="submitNewProduct(event)" class="space-y-4">
-        <!-- Photo Uploader (Gallery/Camera + URL option) -->
-        <div>
-          <label class="block text-xs font-bold text-espresso mb-1.5">1. Product Photo (Phone Gallery or URL) *</label>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-            <label class="cursor-pointer bg-blush/70 hover:bg-blush border-2 border-dashed border-terracotta/40 rounded-2xl p-3 flex flex-col items-center justify-center text-center transition">
-              <i data-lucide="camera" class="w-6 h-6 text-terracotta mb-1"></i>
-              <span class="text-xs font-bold text-terracotta">Pick Photo from Phone</span>
-              <span class="text-[10px] text-stone-500 mt-0.5">Auto-compressed (~80KB)</span>
-              <input type="file" id="prodFileInput" accept="image/*" onchange="processGalleryImage(event)" class="hidden" />
-            </label>
-            <div class="flex flex-col justify-center">
-              <input
-                type="url"
-                id="prodUrlInput"
-                oninput="previewExternalUrl(this.value)"
-                placeholder="Or paste image link here..."
-                class="w-full bg-cream border border-stone-200 rounded-xl px-3 py-2.5 text-xs outline-none focus:border-terracotta"
-              />
-              <p class="text-[10px] text-stone-400 mt-1">Leave link blank if uploading from gallery.</p>
-            </div>
-          </div>
-
-          <!-- Preview Box -->
-          <div id="imgPreviewCard" class="hidden mt-2.5 flex items-center gap-3 bg-cream p-2.5 rounded-xl border border-stone-200">
-            <img id="imgPreviewThumb" src="" alt="Preview" class="w-14 h-14 rounded-lg object-cover bg-white border border-stone-200" />
-            <div class="flex-1 min-w-0">
-              <p id="imgPreviewLabel" class="text-xs font-semibold text-emerald-700 truncate">Photo compressed &amp; ready!</p>
-              <button type="button" onclick="clearSelectedPhoto()" class="text-[11px] text-red-600 font-semibold mt-0.5">Remove photo</button>
-            </div>
-          </div>
+      <div class="p-5 overflow-y-auto">
+        <p id="modal-category" class="text-[11px] font-semibold text-terracotta uppercase tracking-wider"></p>
+        <h3 id="modal-title" class="font-serif text-2xl font-bold text-charcoal mt-0.5"></h3>
+        <div class="flex items-baseline gap-2 mt-1">
+          <span id="modal-price" class="text-lg font-bold text-charcoal"></span>
+          <span class="text-[11px] text-muted">+ Shipping extra as per location</span>
         </div>
 
-        <!-- Product Title -->
-        <div>
-          <label class="block text-xs font-bold text-espresso mb-1.5">2. Product Title *</label>
+        <p id="modal-desc" class="text-xs text-muted mt-2.5 leading-relaxed"></p>
+
+        <!-- Size Selector -->
+        <div class="mt-4">
+          <label class="block text-xs font-bold text-charcoal mb-2">Select Size / Variant:</label>
+          <div id="modal-sizes" class="flex flex-wrap gap-2"></div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="grid grid-cols-2 gap-2.5 mt-5">
+          <button onclick="addSelectedToCart()" class="py-3 px-4 rounded-xl border border-charcoal text-charcoal font-semibold text-xs flex items-center justify-center gap-1.5 hover:bg-sand transition active:scale-95">
+            <i data-lucide="shopping-bag" class="w-4 h-4"></i> Add to Bag
+          </button>
+          <button onclick="orderSingleOnWhatsApp()" class="py-3 px-4 rounded-xl bg-[#25D366] hover:bg-[#1EBE5D] text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm transition active:scale-95">
+            <i data-lucide="message-circle" class="w-4 h-4"></i> Order on WhatsApp
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- SHOPPING BAG / CART DRAWER                 -->
+  <!-- ========================================== -->
+  <div id="cart-drawer" class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex justify-end">
+    <div class="bg-cream w-full max-w-md h-full flex flex-col shadow-2xl animate-fade-up">
+      <!-- Drawer Header -->
+      <div class="px-4 py-4 bg-white border-b border-stone-200 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <i data-lucide="shopping-bag" class="w-5 h-5 text-terracotta"></i>
+          <h3 class="font-serif text-xl font-bold text-charcoal">Your Shopping Bag</h3>
+        </div>
+        <button onclick="toggleCart(false)" class="w-9 h-9 rounded-full bg-cream text-charcoal flex items-center justify-center">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <!-- Cart Items List -->
+      <div id="cart-items-container" class="flex-1 overflow-y-auto p-4 space-y-3">
+        <!-- Rendered via JS -->
+      </div>
+
+      <!-- Cart Footer & Customer Details -->
+      <div id="cart-footer" class="bg-white border-t border-stone-200 p-4 space-y-3">
+        <!-- Customer Quick Inputs -->
+        <div class="grid grid-cols-2 gap-2">
           <input
+            id="cust-name"
             type="text"
-            id="prodTitleInput"
-            required
-            placeholder="e.g. Rose Gold Minimalist Dial Watch"
-            class="w-full bg-cream border border-stone-200 rounded-xl px-3.5 py-2.5 text-sm outline-none focus:border-terracotta"
+            placeholder="Your Name (optional)"
+            class="bg-cream border border-stone-200 rounded-xl px-3 py-2 text-xs text-charcoal focus:outline-none focus:border-terracotta"
+          />
+          <input
+            id="cust-city"
+            type="text"
+            placeholder="City / Pincode"
+            class="bg-cream border border-stone-200 rounded-xl px-3 py-2 text-xs text-charcoal focus:outline-none focus:border-terracotta"
           />
         </div>
 
-        <!-- Gender & Category -->
-        <div class="grid grid-cols-2 gap-3">
+        <!-- Totals & Shipping Extra Notice -->
+        <div class="bg-sand/70 rounded-xl p-3 space-y-1.5">
+          <div class="flex items-center justify-between text-xs text-muted">
+            <span>Items Subtotal</span>
+            <span id="cart-subtotal" class="font-bold text-charcoal">&#8377;0</span>
+          </div>
+          <div class="flex items-center justify-between text-xs">
+            <span class="text-muted flex items-center gap-1">
+              <i data-lucide="truck" class="w-3.5 h-3.5 text-terracotta"></i> Shipping Charges
+            </span>
+            <span class="font-semibold text-terracotta">Extra (as per delivery location)</span>
+          </div>
+          <div class="border-t border-stone-200/80 pt-1.5 flex items-center justify-between text-sm font-bold text-charcoal">
+            <span>Estimated Total</span>
+            <span><span id="cart-total">&#8377;0</span> <span class="text-[11px] font-normal text-muted">+ Shipping</span></span>
+          </div>
+        </div>
+
+        <button onclick="checkoutOnWhatsApp()" class="w-full py-3.5 px-4 rounded-xl bg-[#25D366] hover:bg-[#1EBE5D] text-white font-bold text-sm flex items-center justify-center gap-2 shadow-md transition active:scale-95">
+          <i data-lucide="message-circle" class="w-5 h-5"></i> Send Order on WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- SECRET RESELLER ADMIN PIN MODAL            -->
+  <!-- ========================================== -->
+  <div id="pin-modal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white w-full max-w-xs rounded-3xl p-6 text-center shadow-2xl animate-fade-up">
+      <div class="w-12 h-12 rounded-full bg-terracotta/15 text-terracotta flex items-center justify-center mx-auto mb-3">
+        <i data-lucide="lock" class="w-5 h-5"></i>
+      </div>
+      <h3 class="font-serif text-2xl font-bold text-charcoal">Reseller Admin</h3>
+      <p class="text-xs text-muted mt-1">Enter your 4-digit PIN to manage weekly drops &amp; margins.</p>
+
+      <input
+        id="pin-input"
+        type="password"
+        inputmode="numeric"
+        maxlength="4"
+        placeholder="&bull; &bull; &bull; &bull;"
+        onkeyup="if(event.key === 'Enter') verifyPin()"
+        class="mt-4 w-full text-center tracking-[0.5em] text-xl font-bold bg-cream border border-stone-300 rounded-2xl py-3 focus:outline-none focus:border-terracotta"
+      />
+      <p id="pin-error" class="hidden text-[11px] text-red-600 font-semibold mt-2">Incorrect PIN. Try again.</p>
+
+      <div class="grid grid-cols-2 gap-2 mt-4">
+        <button onclick="closePinModal()" class="py-2.5 rounded-xl bg-stone-100 text-charcoal text-xs font-semibold">
+          Cancel
+        </button>
+        <button onclick="verifyPin()" class="py-2.5 rounded-xl bg-charcoal text-white text-xs font-semibold">
+          Unlock
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- RESELLER ADMIN DASHBOARD MODAL             -->
+  <!-- ========================================== -->
+  <div id="admin-modal" class="hidden fixed inset-0 z-50 bg-cream overflow-y-auto">
+    <div class="max-w-md mx-auto min-h-screen flex flex-col">
+      <!-- Admin Header -->
+      <div class="sticky top-0 z-20 bg-charcoal text-white px-4 py-3.5 flex items-center justify-between">
+        <div>
+          <h2 class="font-serif text-xl font-bold leading-none">Style For You &bull; Admin</h2>
+          <p class="text-[11px] text-stone-300 mt-1">Manage Weekly Catalog &amp; Profit Margins</p>
+        </div>
+        <button onclick="closeAdminPanel()" class="bg-white/15 hover:bg-white/25 text-white text-xs font-semibold px-3 py-1.5 rounded-full flex items-center gap-1">
+          <i data-lucide="eye" class="w-3.5 h-3.5"></i> View Store
+        </button>
+      </div>
+
+      <!-- Admin Navigation Tabs -->
+      <div class="grid grid-cols-3 bg-white border-b border-stone-200 text-xs font-semibold">
+        <button onclick="switchAdminTab('products')" id="admin-tab-products" class="py-3 border-b-2 border-terracotta text-terracotta">
+          Manage Stock
+        </button>
+        <button onclick="switchAdminTab('add')" id="admin-tab-add" class="py-3 border-b-2 border-transparent text-muted">
+          + Add Drop
+        </button>
+        <button onclick="switchAdminTab('settings')" id="admin-tab-settings" class="py-3 border-b-2 border-transparent text-muted">
+          Settings
+        </button>
+      </div>
+
+      <!-- Tab 1: Manage Stock -->
+      <div id="admin-view-products" class="p-4 space-y-3 flex-1">
+        <div class="flex items-center justify-between">
+          <p class="text-xs font-bold text-charcoal">Active Weekly Drops (<span id="admin-product-count">0</span>)</p>
+          <button onclick="switchAdminTab('add')" class="text-xs font-semibold text-terracotta">+ Add New Item</button>
+        </div>
+        <div id="admin-product-list" class="space-y-2.5"></div>
+      </div>
+
+      <!-- Tab 2: Add New Product -->
+      <div id="admin-view-add" class="hidden p-4 space-y-3.5 flex-1">
+        <h3 class="font-serif text-xl font-bold text-charcoal">Add New Weekly Drop</h3>
+
+        <div>
+          <label class="block text-xs font-semibold text-charcoal mb-1">Product Title *</label>
+          <input id="new-title" type="text" placeholder="e.g., Sage Green Linen Cord Set" class="w-full bg-white border border-stone-200 rounded-xl px-3 py-2.5 text-xs" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-2.5">
           <div>
-            <label class="block text-xs font-bold text-espresso mb-1.5">3. Collection *</label>
-            <select id="prodGenderSelect" onchange="syncCategoryOptions()" class="w-full bg-cream border border-stone-200 rounded-xl px-3 py-2.5 text-sm font-medium outline-none focus:border-terracotta">
-              <option value="Womens">Women's</option>
-              <option value="Mens">Men's</option>
+            <label class="block text-xs font-semibold text-charcoal mb-1">Collection *</label>
+            <select id="new-gender" onchange="updateAdminCategoryOptions()" class="w-full bg-white border border-stone-200 rounded-xl px-3 py-2.5 text-xs">
+              <option value="Women">Women's</option>
+              <option value="Men">Men's</option>
             </select>
           </div>
           <div>
-            <label class="block text-xs font-bold text-espresso mb-1.5">4. Category *</label>
-            <select id="prodCatSelect" onchange="autoSelectDefaultSizes()" class="w-full bg-cream border border-stone-200 rounded-xl px-3 py-2.5 text-sm font-medium outline-none focus:border-terracotta">
+            <label class="block text-xs font-semibold text-charcoal mb-1">Category *</label>
+            <select id="new-category" class="w-full bg-white border border-stone-200 rounded-xl px-3 py-2.5 text-xs">
               <option value="Watch">Watch</option>
               <option value="Dress">Dress</option>
               <option value="Cord set">Cord set</option>
@@ -327,1312 +400,701 @@
           </div>
         </div>
 
-        <!-- Sizes / Variants Checkboxes -->
-        <div>
-          <label class="block text-xs font-bold text-espresso mb-1.5">5. Sizes / Variants</label>
-          <div class="flex flex-wrap gap-2">
-            <label class="cursor-pointer">
-              <input type="checkbox" value="S" class="size-checkbox peer hidden" />
-              <span class="inline-block px-3 py-1.5 rounded-lg text-xs font-bold border border-stone-200 bg-cream text-stone-600 peer-checked:bg-espresso peer-checked:text-white peer-checked:border-espresso transition">S</span>
-            </label>
-            <label class="cursor-pointer">
-              <input type="checkbox" value="M" class="size-checkbox peer hidden" />
-              <span class="inline-block px-3 py-1.5 rounded-lg text-xs font-bold border border-stone-200 bg-cream text-stone-600 peer-checked:bg-espresso peer-checked:text-white peer-checked:border-espresso transition">M</span>
-            </label>
-            <label class="cursor-pointer">
-              <input type="checkbox" value="L" class="size-checkbox peer hidden" />
-              <span class="inline-block px-3 py-1.5 rounded-lg text-xs font-bold border border-stone-200 bg-cream text-stone-600 peer-checked:bg-espresso peer-checked:text-white peer-checked:border-espresso transition">L</span>
-            </label>
-            <label class="cursor-pointer">
-              <input type="checkbox" value="XL" class="size-checkbox peer hidden" />
-              <span class="inline-block px-3 py-1.5 rounded-lg text-xs font-bold border border-stone-200 bg-cream text-stone-600 peer-checked:bg-espresso peer-checked:text-white peer-checked:border-espresso transition">XL</span>
-            </label>
-            <label class="cursor-pointer">
-              <input type="checkbox" value="Free Size" id="freeSizeCheck" onchange="handleFreeSizeToggle(this)" class="size-checkbox peer hidden" checked />
-              <span class="inline-block px-3 py-1.5 rounded-lg text-xs font-bold border border-stone-200 bg-cream text-stone-600 peer-checked:bg-terracotta peer-checked:text-white peer-checked:border-terracotta transition">Free Size / Standard</span>
-            </label>
-          </div>
-        </div>
-
-        <!-- Optional Short Description -->
-        <div>
-          <label class="block text-xs font-bold text-espresso mb-1.5">6. Product Details (Optional)</label>
-          <textarea
-            id="prodDescInput"
-            rows="2"
-            placeholder="Paste fabric, dial size, or key highlights from supplier message..."
-            class="w-full bg-cream border border-stone-200 rounded-xl px-3.5 py-2 text-xs sm:text-sm outline-none focus:border-terracotta"
-          ></textarea>
-        </div>
-
-        <!-- Live Reseller Margin Calculator -->
-        <div class="bg-blush/80 p-3.5 rounded-2xl border border-terracotta/25 space-y-3">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-bold text-espresso flex items-center gap-1.5">
-              <i data-lucide="calculator" class="w-4 h-4 text-terracotta"></i> 7. Reseller Margin Calculator
-            </span>
-            <span class="text-[10px] text-stone-500">Hidden from customers</span>
-          </div>
-
-          <div class="grid grid-cols-2 gap-3">
+        <!-- Supplier Cost + Margin Calculator -->
+        <div class="bg-sand/80 border border-stone-200 rounded-2xl p-3 space-y-2.5">
+          <p class="text-[11px] font-bold uppercase tracking-wider text-terracotta">Margin Calculator (Private)</p>
+          <div class="grid grid-cols-2 gap-2.5">
             <div>
-              <label class="block text-[11px] font-semibold text-stone-600 mb-1">Supplier Price (₹) *</label>
-              <input
-                type="number"
-                id="supplierPriceInput"
-                min="1"
-                required
-                oninput="calculateCustomerPrice()"
-                placeholder="e.g. 500"
-                class="w-full bg-white border border-stone-200 rounded-xl px-3 py-2 text-sm font-bold text-espresso outline-none focus:border-terracotta"
-              />
+              <label class="block text-[11px] font-semibold text-charcoal mb-1">Supplier Cost (&#8377;)</label>
+              <input id="new-cost" type="number" oninput="calculateSellingPrice()" placeholder="850" class="w-full bg-white border border-stone-200 rounded-xl px-3 py-2 text-xs" />
             </div>
             <div>
-              <label class="block text-[11px] font-semibold text-emerald-700 mb-1">Your Profit Margin (₹) *</label>
-              <input
-                type="number"
-                id="profitMarginInput"
-                min="0"
-                required
-                oninput="calculateCustomerPrice()"
-                placeholder="e.g. 200"
-                class="w-full bg-white border border-emerald-300 rounded-xl px-3 py-2 text-sm font-bold text-emerald-700 outline-none focus:border-emerald-500"
-              />
+              <label class="block text-[11px] font-semibold text-charcoal mb-1">Your Profit (&#8377;)</label>
+              <input id="new-margin" type="number" oninput="calculateSellingPrice()" placeholder="449" class="w-full bg-white border border-stone-200 rounded-xl px-3 py-2 text-xs" />
             </div>
           </div>
-
-          <div class="bg-white rounded-xl p-2.5 border border-stone-200/80 flex items-center justify-between">
-            <span class="text-xs font-semibold text-stone-600">Customer Price (₹):</span>
-            <span id="liveCustomerPriceDisplay" class="text-lg font-extrabold text-emerald-600">₹0</span>
-          </div>
-        </div>
-
-        <!-- New This Week Toggle -->
-        <div class="flex items-center justify-between bg-cream px-3.5 py-2.5 rounded-xl border border-stone-200">
           <div>
-            <p class="text-xs font-bold text-espresso">Mark as "NEW THIS WEEK"</p>
-            <p class="text-[10px] text-stone-500">Shows a glowing badge on the product card</p>
-          </div>
-          <input type="checkbox" id="newThisWeekCheck" checked class="w-5 h-5 accent-terracotta rounded cursor-pointer" />
-        </div>
-
-        <button type="submit" class="w-full bg-terracotta hover:bg-terracottaDark text-white font-bold py-3.5 rounded-2xl shadow-md transition active:scale-[0.99] flex items-center justify-center gap-2 text-sm">
-          <i data-lucide="upload-cloud" class="w-4 h-4"></i> Publish Product to Store
-        </button>
-      </form>
-    </div>
-
-    <!-- =================================================================== -->
-    <!-- ADMIN TAB 2: MANAGE STOCK (WEEKLY)                                  -->
-    <!-- =================================================================== -->
-    <div id="adminTab-stock" class="hidden space-y-3">
-      <div class="bg-white p-3.5 rounded-2xl border border-stone-200 flex flex-wrap items-center justify-between gap-2">
-        <div>
-          <h3 class="font-serif text-lg font-bold text-espresso">Weekly Catalog Control</h3>
-          <p class="text-[11px] text-stone-500">Toggle Sold Out or wipe old week items to free storage.</p>
-        </div>
-        <button onclick="clearSampleProducts()" class="bg-stone-100 hover:bg-red-50 text-stone-700 hover:text-red-600 border border-stone-200 text-xs font-semibold px-3 py-1.5 rounded-xl transition">
-          Clear Demo Items
-        </button>
-      </div>
-
-      <div id="manageStockList" class="space-y-2.5">
-        <!-- Rendered dynamically -->
-      </div>
-    </div>
-
-    <!-- =================================================================== -->
-    <!-- ADMIN TAB 3: ORDERS & PROFIT                                        -->
-    <!-- =================================================================== -->
-    <div id="adminTab-orders" class="hidden space-y-3">
-      <!-- 3 Summary Cards -->
-      <div class="grid grid-cols-3 gap-2.5">
-        <div class="bg-white p-3 rounded-2xl border border-stone-200">
-          <p class="text-[10px] uppercase tracking-wider text-stone-400 font-bold">Total Orders</p>
-          <p id="summaryTotalOrders" class="text-lg sm:text-xl font-bold text-espresso mt-0.5">0</p>
-        </div>
-        <div class="bg-white p-3 rounded-2xl border border-stone-200">
-          <p class="text-[10px] uppercase tracking-wider text-stone-400 font-bold">Total Sales</p>
-          <p id="summaryTotalSales" class="text-lg sm:text-xl font-bold text-espresso mt-0.5">₹0</p>
-        </div>
-        <div class="bg-emerald-50 p-3 rounded-2xl border border-emerald-200">
-          <p class="text-[10px] uppercase tracking-wider text-emerald-700 font-bold">Net Profit</p>
-          <p id="summaryNetProfit" class="text-lg sm:text-xl font-extrabold text-emerald-700 mt-0.5">₹0</p>
-        </div>
-      </div>
-
-      <div class="bg-white p-3.5 rounded-2xl border border-stone-200 flex items-center justify-between gap-2">
-        <div>
-          <h3 class="font-serif text-lg font-bold text-espresso">Order History &amp; Dispatch</h3>
-          <p class="text-[11px] text-stone-500">Tap "Copy Address for Supplier" to forward in 2 seconds.</p>
-        </div>
-        <button onclick="downloadCsvReport()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-3 py-2 rounded-xl flex items-center gap-1.5 shrink-0 transition">
-          <i data-lucide="download" class="w-3.5 h-3.5"></i> Download CSV Report
-        </button>
-      </div>
-
-      <div id="ordersHistoryList" class="space-y-3">
-        <!-- Rendered dynamically -->
-      </div>
-    </div>
-
-    <!-- =================================================================== -->
-    <!-- ADMIN TAB 4: STORE SETTINGS (PIN, WHATSAPP NUMBER, BRAND DETAILS)   -->
-    <!-- =================================================================== -->
-    <div id="adminTab-settings" class="hidden space-y-4">
-      <!-- 1. Change WhatsApp Order Number -->
-      <div class="bg-white rounded-3xl p-4 sm:p-5 border border-stone-200 shadow-2xs space-y-3">
-        <div class="flex items-center gap-2.5">
-          <div class="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
-            <i data-lucide="phone" class="w-4 h-4"></i>
-          </div>
-          <div>
-            <h3 class="font-serif text-lg font-bold text-espresso">WhatsApp Order Number</h3>
-            <p class="text-[11px] text-stone-500">All customer orders &amp; chat links will go directly to this number.</p>
+            <label class="block text-[11px] font-semibold text-charcoal mb-1">Final Customer Price (&#8377;) *</label>
+            <input id="new-price" type="number" placeholder="1299" class="w-full bg-white border border-terracotta/50 rounded-xl px-3 py-2 text-sm font-bold text-charcoal" />
           </div>
         </div>
-
-        <form onsubmit="saveWhatsAppSetting(event)" class="space-y-3 pt-1">
-          <div>
-            <label class="block text-xs font-bold text-espresso mb-1">10-Digit Indian Mobile Number *</label>
-            <div class="flex items-center bg-cream border border-stone-200 rounded-xl overflow-hidden focus-within:border-terracotta">
-              <span class="px-3 py-2.5 text-xs font-bold text-stone-500 bg-stone-100 border-r border-stone-200">+91</span>
-              <input
-                type="tel"
-                id="settingsPhoneInput"
-                maxlength="10"
-                pattern="[0-9]{10}"
-                inputmode="numeric"
-                required
-                placeholder="8446079809"
-                class="w-full bg-transparent px-3 py-2.5 text-sm font-bold text-espresso outline-none"
-              />
-            </div>
-          </div>
-          <button type="submit" class="w-full sm:w-auto bg-espresso hover:bg-terracotta text-white font-bold px-5 py-2.5 rounded-xl text-xs transition">
-            Save WhatsApp Number
-          </button>
-        </form>
-      </div>
-
-      <!-- 2. Change Admin PIN -->
-      <div class="bg-white rounded-3xl p-4 sm:p-5 border border-stone-200 shadow-2xs space-y-3">
-        <div class="flex items-center gap-2.5">
-          <div class="w-9 h-9 rounded-xl bg-blush text-terracotta flex items-center justify-center shrink-0">
-            <i data-lucide="lock" class="w-4 h-4"></i>
-          </div>
-          <div>
-            <h3 class="font-serif text-lg font-bold text-espresso">Change Admin PIN</h3>
-            <p class="text-[11px] text-stone-500">Protect your supplier costs &amp; profit margins with your private PIN.</p>
-          </div>
-        </div>
-
-        <form onsubmit="savePinSetting(event)" class="space-y-3 pt-1">
-          <div class="grid grid-cols-2 gap-3">
-            <div>
-              <label class="block text-xs font-bold text-espresso mb-1">New 4-Digit PIN *</label>
-              <input
-                type="password"
-                id="settingsNewPin"
-                maxlength="4"
-                pattern="[0-9]{4}"
-                inputmode="numeric"
-                required
-                placeholder="••••"
-                class="w-full bg-cream border border-stone-200 rounded-xl px-3 py-2.5 text-center tracking-[0.4em] text-base font-bold text-espresso outline-none focus:border-terracotta"
-              />
-            </div>
-            <div>
-              <label class="block text-xs font-bold text-espresso mb-1">Confirm PIN *</label>
-              <input
-                type="password"
-                id="settingsConfirmPin"
-                maxlength="4"
-                pattern="[0-9]{4}"
-                inputmode="numeric"
-                required
-                placeholder="••••"
-                class="w-full bg-cream border border-stone-200 rounded-xl px-3 py-2.5 text-center tracking-[0.4em] text-base font-bold text-espresso outline-none focus:border-terracotta"
-              />
-            </div>
-          </div>
-          <button type="submit" class="w-full sm:w-auto bg-terracotta hover:bg-terracottaDark text-white font-bold px-5 py-2.5 rounded-xl text-xs transition">
-            Update Admin PIN
-          </button>
-        </form>
-      </div>
-
-      <!-- 3. Edit Store Name & Tagline -->
-      <div class="bg-white rounded-3xl p-4 sm:p-5 border border-stone-200 shadow-2xs space-y-3">
-        <div class="flex items-center gap-2.5">
-          <div class="w-9 h-9 rounded-xl bg-sand text-espresso flex items-center justify-center shrink-0">
-            <i data-lucide="sparkles" class="w-4 h-4"></i>
-          </div>
-          <div>
-            <h3 class="font-serif text-lg font-bold text-espresso">Store Name &amp; Tagline</h3>
-            <p class="text-[11px] text-stone-500">Customize how your shop appears to customers.</p>
-          </div>
-        </div>
-
-        <form onsubmit="saveBrandSetting(event)" class="space-y-3 pt-1">
-          <div>
-            <label class="block text-xs font-bold text-espresso mb-1">Store Name *</label>
-            <input
-              type="text"
-              id="settingsBrandInput"
-              required
-              class="w-full bg-cream border border-stone-200 rounded-xl px-3.5 py-2.5 text-sm font-semibold text-espresso outline-none focus:border-terracotta"
-            />
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-espresso mb-1">Tagline / Subtitle *</label>
-            <input
-              type="text"
-              id="settingsTaglineInput"
-              required
-              class="w-full bg-cream border border-stone-200 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-espresso outline-none focus:border-terracotta"
-            />
-          </div>
-          <button type="submit" class="w-full sm:w-auto bg-espresso hover:bg-terracotta text-white font-bold px-5 py-2.5 rounded-xl text-xs transition">
-            Save Store Details
-          </button>
-        </form>
-      </div>
-
-      <!-- 4. Reset to Defaults -->
-      <div class="bg-white rounded-2xl p-4 border border-stone-200 flex items-center justify-between gap-3">
-        <div>
-          <p class="text-xs font-bold text-espresso">Reset Store Settings</p>
-          <p class="text-[11px] text-stone-500">Restore default PIN (1234), number (8446079809) &amp; brand name.</p>
-        </div>
-        <button onclick="resetSettingsToDefault()" class="shrink-0 text-xs font-bold text-red-600 border border-red-200 bg-red-50/60 hover:bg-red-50 px-3.5 py-2 rounded-xl transition">
-          Reset Defaults
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================================================================== -->
-  <!-- FOOTER WITH RESELLER ADMIN LINK                                       -->
-  <!-- ===================================================================== -->
-  <footer class="bg-white border-t border-stone-200/80 py-6 px-4 text-center">
-    <div class="max-w-3xl mx-auto">
-      <p id="footerBrandName" class="font-serif text-lg font-bold text-espresso">Style For You</p>
-      <p id="footerTagline" class="text-xs text-stone-500 mt-0.5">Curated Weekly Drops • Women's &amp; Men's Fashion</p>
-      <div class="mt-4 flex items-center justify-center gap-4 text-xs text-stone-500">
-        <a id="footerWhatsAppLink" href="https://wa.me/918446079809" target="_blank" rel="noopener" class="hover:text-terracotta flex items-center gap-1.5 font-medium transition">
-          <i data-lucide="message-circle" class="w-4 h-4 text-emerald-600"></i> WhatsApp Support
-        </a>
-        <span>•</span>
-        <button onclick="openPinLoginModal()" class="hover:text-espresso flex items-center gap-1.5 font-medium py-1 px-2 rounded-lg transition">
-          <i data-lucide="lock" class="w-3.5 h-3.5"></i> Reseller Admin
-        </button>
-      </div>
-    </div>
-  </footer>
-
-  <!-- ===================================================================== -->
-  <!-- MODAL 1: QUICK VIEW / SELECT SIZE MODAL                               -->
-  <!-- ===================================================================== -->
-  <div id="quickViewModal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-end sm:items-center justify-center p-0 sm:p-4">
-    <div class="bg-white w-full max-w-lg rounded-t-3xl sm:rounded-3xl overflow-hidden shadow-2xl animate-slide-up max-h-[92vh] flex flex-col">
-      <div class="relative bg-cream h-72 sm:h-80 shrink-0">
-        <img id="qvImage" src="" alt="" class="w-full h-full object-cover" />
-        <button onclick="closeQuickViewModal()" class="absolute top-3.5 right-3.5 w-9 h-9 rounded-full bg-white/95 text-espresso flex items-center justify-center shadow-md hover:bg-espresso hover:text-white transition">
-          <i data-lucide="x" class="w-4 h-4"></i>
-        </button>
-        <span id="qvNewBadge" class="hidden absolute top-3.5 left-3.5 bg-terracotta text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow">
-          New This Week
-        </span>
-      </div>
-
-      <div class="p-5 overflow-y-auto space-y-4">
-        <div>
-          <span id="qvCategory" class="text-[11px] font-bold uppercase tracking-wider text-terracotta">Women's • Watch</span>
-          <h3 id="qvTitle" class="font-serif text-2xl font-bold text-espresso mt-0.5">Product Title</h3>
-          <p id="qvPrice" class="text-xl font-extrabold text-espresso mt-1">₹999</p>
-        </div>
-
-        <p id="qvDescription" class="text-xs sm:text-sm text-stone-600 leading-relaxed"></p>
 
         <div>
-          <div class="flex items-center justify-between mb-2">
-            <span class="text-xs font-bold text-espresso">Select Size / Variant:</span>
-            <span id="qvSelectedSizeText" class="text-xs font-bold text-terracotta">Free Size</span>
-          </div>
-          <div id="qvSizesContainer" class="flex flex-wrap gap-2">
-            <!-- Size pills -->
-          </div>
+          <label class="block text-xs font-semibold text-charcoal mb-1">Available Sizes (comma separated)</label>
+          <input id="new-sizes" type="text" value="S, M, L, XL" placeholder="e.g., S, M, L, XL or Free Size" class="w-full bg-white border border-stone-200 rounded-xl px-3 py-2.5 text-xs" />
         </div>
 
-        <div class="grid grid-cols-2 gap-2.5 pt-2">
-          <button onclick="addFromQuickView(false)" class="bg-cream hover:bg-blush text-espresso border border-stone-300 font-bold py-3.5 rounded-2xl text-xs sm:text-sm transition flex items-center justify-center gap-1.5 active:scale-95">
-            <i data-lucide="shopping-bag" class="w-4 h-4"></i> Add to Bag
+        <div>
+          <label class="block text-xs font-semibold text-charcoal mb-1">Product Photo (Upload from Gallery or Paste URL)</label>
+          <input id="new-image-file" type="file" accept="image/*" onchange="handleImageUpload(event)" class="w-full bg-white border border-stone-200 rounded-xl px-3 py-2 text-xs mb-2" />
+          <input id="new-image-url" type="url" placeholder="Or paste image link (https://...)" class="w-full bg-white border border-stone-200 rounded-xl px-3 py-2 text-xs" />
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-charcoal mb-1">Short Description</label>
+          <textarea id="new-desc" rows="2" placeholder="Fabric, fit, or dial details..." class="w-full bg-white border border-stone-200 rounded-xl px-3 py-2 text-xs"></textarea>
+        </div>
+
+        <button onclick="saveNewProduct()" class="w-full py-3.5 rounded-xl bg-terracotta hover:bg-terracottaDark text-white font-bold text-xs shadow-md transition">
+          Publish to Storefront
+        </button>
+      </div>
+
+      <!-- Tab 3: Store Settings -->
+      <div id="admin-view-settings" class="hidden p-4 space-y-4 flex-1">
+        <div class="bg-white border border-stone-200 rounded-2xl p-4 space-y-3">
+          <h3 class="font-serif text-lg font-bold text-charcoal">WhatsApp &amp; Security Settings</h3>
+          <div>
+            <label class="block text-xs font-semibold text-charcoal mb-1">Order Receiving WhatsApp Number (with 91)</label>
+            <input id="setting-whatsapp" type="tel" class="w-full bg-cream border border-stone-200 rounded-xl px-3 py-2.5 text-xs font-semibold" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-charcoal mb-1">Admin 4-Digit PIN</label>
+            <input id="setting-pin" type="text" maxlength="4" inputmode="numeric" class="w-full bg-cream border border-stone-200 rounded-xl px-3 py-2.5 text-xs font-semibold" />
+          </div>
+          <button onclick="saveStoreSettings()" class="w-full py-2.5 rounded-xl bg-charcoal text-white font-semibold text-xs">
+            Save Settings
           </button>
-          <button onclick="addFromQuickView(true)" class="bg-espresso hover:bg-terracotta text-white font-bold py-3.5 rounded-2xl text-xs sm:text-sm transition flex items-center justify-center gap-1.5 shadow-md active:scale-95">
-            <i data-lucide="message-circle" class="w-4 h-4 text-emerald-400"></i> Order Now
-          </button>
+        </div>
+
+        <!-- Secret Admin Access Info Box -->
+        <div class="bg-sand/80 border border-stone-200 rounded-2xl p-4 space-y-2">
+          <h4 class="text-xs font-bold text-charcoal flex items-center gap-1.5">
+            <i data-lucide="shield-check" class="w-4 h-4 text-terracotta"></i> Hidden Admin Access
+          </h4>
+          <p class="text-[11px] text-muted leading-relaxed">
+            The Admin button is hidden from customers. Open this dashboard anytime by:
+          </p>
+          <ul class="text-[11px] text-charcoal space-y-1 list-disc pl-4">
+            <li>Tapping the <strong>"Style For You"</strong> title <strong>5 times quickly</strong></li>
+            <li>Or opening your secret link: <span id="secret-admin-url" class="font-mono text-[10px] text-terracotta break-all"></span></li>
+          </ul>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ===================================================================== -->
-  <!-- MODAL 2: SLIDE-OVER SHOPPING BAG & WHATSAPP CHECKOUT                  -->
-  <!-- ===================================================================== -->
-  <div id="cartDrawerModal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-end sm:items-center justify-center p-0 sm:p-4">
-    <div class="bg-white w-full max-w-lg rounded-t-3xl sm:rounded-3xl shadow-2xl animate-slide-up max-h-[92vh] flex flex-col overflow-hidden">
-      <!-- Drawer Header -->
-      <div class="px-5 py-4 border-b border-stone-100 flex items-center justify-between bg-cream">
-        <div class="flex items-center gap-2">
-          <i data-lucide="shopping-bag" class="w-5 h-5 text-terracotta"></i>
-          <h3 class="font-serif text-xl font-bold text-espresso">Your Shopping Bag</h3>
-        </div>
-        <button onclick="closeCartDrawer()" class="w-8 h-8 rounded-full bg-white text-espresso flex items-center justify-center border border-stone-200">
+  <!-- ========================================== -->
+  <!-- ADD TO HOME SCREEN GUIDE MODAL             -->
+  <!-- ========================================== -->
+  <div id="install-modal" class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-end sm:items-center justify-center p-4">
+    <div class="bg-white w-full max-w-sm rounded-3xl p-5 shadow-2xl animate-fade-up">
+      <div class="flex items-center justify-between mb-3">
+        <h3 class="font-serif text-xl font-bold text-charcoal">Save App Shortcut</h3>
+        <button onclick="closeInstallGuide()" class="w-8 h-8 rounded-full bg-cream flex items-center justify-center">
           <i data-lucide="x" class="w-4 h-4"></i>
         </button>
       </div>
-
-      <!-- Bag Contents & Checkout Form -->
-      <div class="p-5 overflow-y-auto space-y-4 flex-1">
-        <div id="bagItemsContainer" class="space-y-3">
-          <!-- Bag items -->
-        </div>
-
-        <div id="bagEmptyState" class="hidden text-center py-8">
-          <i data-lucide="shopping-bag" class="w-10 h-10 text-stone-300 mx-auto mb-2"></i>
-          <p class="text-sm font-bold text-stone-700">Your bag is empty</p>
-          <p class="text-xs text-stone-400 mt-1">Explore this week's drops and add items to order.</p>
-        </div>
-
-        <form id="whatsappCheckoutForm" onsubmit="processWhatsAppCheckout(event)" class="hidden space-y-3 pt-3 border-t border-stone-100">
-          <div class="flex items-center justify-between">
-            <h4 class="text-xs font-bold uppercase tracking-wider text-espresso">Delivery Address</h4>
-            <span class="text-[11px] text-stone-400">Direct Doorstep Shipping</span>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-            <input type="text" id="chkName" required placeholder="Customer Name *" class="w-full bg-cream border border-stone-200 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm outline-none focus:border-terracotta" />
-            <input type="tel" id="chkPhone" required placeholder="Mobile Number *" class="w-full bg-cream border border-stone-200 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm outline-none focus:border-terracotta" />
-          </div>
-
-          <textarea id="chkAddress" rows="2" required placeholder="Full Delivery Address + Landmark + Pincode *" class="w-full bg-cream border border-stone-200 rounded-xl px-3.5 py-2 text-xs sm:text-sm outline-none focus:border-terracotta"></textarea>
-
-          <div>
-            <label class="block text-[11px] font-semibold text-stone-500 mb-1">Payment Preference</label>
-            <select id="chkPayment" class="w-full bg-cream border border-stone-200 rounded-xl px-3 py-2.5 text-xs sm:text-sm outline-none focus:border-terracotta font-medium">
-              <option value="UPI / GPay before dispatch">UPI / GPay before dispatch</option>
-              <option value="PhonePe / Paytm before dispatch">PhonePe / Paytm before dispatch</option>
-              <option value="Bank Transfer before dispatch">Bank Transfer before dispatch</option>
-            </select>
-          </div>
-
-          <div class="bg-blush p-3.5 rounded-2xl border border-terracotta/25 flex items-center justify-between">
-            <div>
-              <span class="text-xs font-semibold text-stone-600 block">Total Payable</span>
-              <span class="text-[10px] text-stone-500">Order summary sent on WhatsApp</span>
-            </div>
-            <span id="bagTotalDisplay" class="text-xl font-extrabold text-espresso">₹0</span>
-          </div>
-
-          <button type="submit" class="w-full bg-[#25D366] hover:bg-[#1EBE5D] text-white font-bold py-3.5 rounded-2xl shadow-lg transition flex items-center justify-center gap-2 text-sm active:scale-[0.99]">
-            <i data-lucide="message-circle" class="w-5 h-5"></i> Place Order on WhatsApp
-          </button>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <!-- ===================================================================== -->
-  <!-- MODAL 3: PIN LOGIN MODAL                                              -->
-  <!-- ===================================================================== -->
-  <div id="pinLoginModal" class="hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-xs flex items-center justify-center p-4">
-    <div class="bg-white w-full max-w-xs rounded-3xl p-6 text-center shadow-2xl animate-fade-in">
-      <div class="w-12 h-12 rounded-2xl bg-blush text-terracotta flex items-center justify-center mx-auto mb-3">
-        <i data-lucide="lock" class="w-6 h-6"></i>
-      </div>
-      <h3 class="font-serif text-2xl font-bold text-espresso">Reseller Admin</h3>
-      <p class="text-xs text-stone-500 mt-1">Enter your 4-digit PIN to manage products, profits &amp; settings.</p>
-
-      <!-- Hint shown only until default PIN (1234) is changed -->
-      <p id="defaultPinHint" class="text-[11px] text-terracotta font-semibold mt-2 bg-blush py-1 px-3 rounded-full inline-block">
-        Default PIN: 1234
+      <p class="text-xs text-muted leading-relaxed">
+        Install <strong>Style For You</strong> on your phone home screen for 1-tap weekly shopping:
       </p>
-
-      <form onsubmit="checkAdminPin(event)" class="mt-4 space-y-3">
-        <input
-          type="password"
-          id="adminPinInput"
-          maxlength="4"
-          inputmode="numeric"
-          pattern="[0-9]*"
-          required
-          placeholder="••••"
-          class="w-full text-center tracking-[0.6em] text-2xl font-bold bg-cream border border-stone-200 rounded-2xl py-3 outline-none focus:border-terracotta"
-        />
-        <p id="pinErrorText" class="hidden text-xs text-red-600 font-semibold">Incorrect PIN. Please try again.</p>
-        <div class="grid grid-cols-2 gap-2 pt-1">
-          <button type="button" onclick="closePinLoginModal()" class="py-2.5 rounded-xl text-xs font-bold bg-stone-100 text-stone-600 hover:bg-stone-200">
-            Cancel
-          </button>
-          <button type="submit" class="py-2.5 rounded-xl text-xs font-bold bg-espresso text-white hover:bg-terracotta">
-            Unlock
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- ===================================================================== -->
-  <!-- MODAL 4: COPY WHATSAPP STATUS / BROADCAST POST MODAL                  -->
-  <!-- ===================================================================== -->
-  <div id="broadcastShareModal" class="hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-xs flex items-center justify-center p-4">
-    <div class="bg-white w-full max-w-md rounded-3xl p-5 shadow-2xl animate-fade-in space-y-4">
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
-          <i data-lucide="check-circle-2" class="w-5 h-5"></i>
-        </div>
-        <div>
-          <h3 class="font-serif text-xl font-bold text-espresso">Published to Store!</h3>
-          <p class="text-xs text-stone-500">Copy this promotional post for your WhatsApp Status &amp; Groups:</p>
-        </div>
+      <div class="mt-3 space-y-2.5 text-xs text-charcoal bg-cream p-3.5 rounded-2xl">
+        <p><strong>Android (Chrome):</strong> Tap the <strong>3 dots (&vellip;)</strong> at the top right &rarr; tap <strong>Add to Home screen</strong>.</p>
+        <p><strong>iPhone (Safari):</strong> Tap the <strong>Share</strong> icon at the bottom &rarr; tap <strong>Add to Home Screen</strong>.</p>
       </div>
-
-      <textarea id="broadcastCaptionArea" rows="6" readonly class="w-full bg-cream border border-stone-200 rounded-2xl p-3 text-xs text-espresso leading-relaxed outline-none"></textarea>
-
-      <div class="grid grid-cols-2 gap-2.5">
-        <button onclick="copyBroadcastCaption()" class="bg-espresso hover:bg-terracotta text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 transition">
-          <i data-lucide="copy" class="w-4 h-4"></i> Copy Post
-        </button>
-        <button onclick="shareBroadcastWhatsApp()" class="bg-[#25D366] hover:bg-[#1EBE5D] text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-1.5 transition">
-          <i data-lucide="share-2" class="w-4 h-4"></i> Share on WhatsApp
-        </button>
-      </div>
-
-      <button onclick="closeBroadcastModal()" class="w-full text-center text-xs font-semibold text-stone-400 hover:text-espresso pt-1">
-        Close
-      </button>
-    </div>
-  </div>
-
-  <!-- ===================================================================== -->
-  <!-- MODAL 5: ANDROID & IPHONE HOME SCREEN SHORTCUT GUIDE                  -->
-  <!-- ===================================================================== -->
-  <div id="installGuideModal" class="hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-xs flex items-end sm:items-center justify-center p-0 sm:p-4">
-    <div class="bg-white w-full max-w-md rounded-t-3xl sm:rounded-3xl p-5 shadow-2xl animate-slide-up space-y-4">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center gap-2.5">
-          <div class="w-10 h-10 rounded-2xl bg-terracotta text-white font-serif font-bold text-base flex items-center justify-center">
-            SFY
-          </div>
-          <div>
-            <h3 class="font-serif text-xl font-bold text-espresso">Add to Home Screen</h3>
-            <p class="text-xs text-stone-500">2-step shortcut for instant shopping</p>
-          </div>
-        </div>
-        <button onclick="closeInstallModal()" class="w-8 h-8 rounded-full bg-cream flex items-center justify-center">
-          <i data-lucide="x" class="w-4 h-4"></i>
-        </button>
-      </div>
-
-      <div class="space-y-3 text-xs">
-        <div class="bg-cream p-3.5 rounded-2xl border border-stone-200">
-          <p class="font-bold text-espresso mb-1">Step 1 &amp; 2 on Android (Chrome):</p>
-          <p class="text-stone-600 leading-relaxed">
-            1. Tap the <strong>3 dots (⋮)</strong> at the top-right of your browser.<br />
-            2. Tap <strong>"Add to Home screen"</strong> or <strong>"Install app"</strong>.
-          </p>
-        </div>
-
-        <div class="bg-cream p-3.5 rounded-2xl border border-stone-200">
-          <p class="font-bold text-espresso mb-1">Step 1 &amp; 2 on iPhone (Safari):</p>
-          <p class="text-stone-600 leading-relaxed">
-            1. Tap the <strong>Share icon (↑)</strong> at the bottom of Safari.<br />
-            2. Scroll down and tap <strong>"Add to Home Screen"</strong>.
-          </p>
-        </div>
-      </div>
-
-      <button onclick="closeInstallModal()" class="w-full bg-espresso text-white font-bold py-3 rounded-2xl text-xs">
+      <button onclick="closeInstallGuide()" class="mt-4 w-full py-2.5 rounded-xl bg-charcoal text-white text-xs font-semibold">
         Got It
       </button>
     </div>
   </div>
 
-  <!-- ===================================================================== -->
-  <!-- TOAST NOTIFICATION                                                    -->
-  <!-- ===================================================================== -->
-  <div id="toastBanner" class="hidden fixed bottom-5 left-1/2 -translate-x-1/2 z-50 bg-espresso text-white text-xs font-semibold px-4 py-3 rounded-full shadow-xl flex items-center gap-2 whitespace-nowrap">
-    <i data-lucide="check-circle" class="w-4 h-4 text-emerald-400"></i>
-    <span id="toastText">Saved!</span>
+  <!-- Custom Toast Notification -->
+  <div id="toast" class="hidden fixed bottom-5 left-1/2 -translate-x-1/2 z-50 bg-charcoal text-white text-xs font-medium px-4 py-2.5 rounded-full shadow-lg flex items-center gap-2 whitespace-nowrap">
+    <i data-lucide="check-circle-2" class="w-4 h-4 text-[#25D366]"></i>
+    <span id="toast-msg">Added to bag</span>
   </div>
 
-  <!-- ===================================================================== -->
-  <!-- APPLICATION JAVASCRIPT                                                -->
-  <!-- ===================================================================== -->
+  <!-- ========================================== -->
+  <!-- APPLICATION LOGIC                          -->
+  <!-- ========================================== -->
   <script>
-    // =========================================================================
-    // 1. STORAGE KEYS & DEFAULT SETTINGS
-    // =========================================================================
-    const KEYS = {
+    const STORAGE_KEYS = {
       PRODUCTS: 'sfy_products_v2',
-      ORDERS: 'sfy_orders_v2',
-      SETTINGS: 'sfy_settings_v2'
+      CART: 'sfy_cart_v2',
+      SETTINGS: 'sfy_settings_v2',
     };
 
     const DEFAULT_SETTINGS = {
-      pin: '1234',
-      pinChanged: false,
-      whatsappPhone: '8446079809',
-      brandName: 'Style For You',
-      tagline: "Curated Weekly Drops • Women's & Men's Fashion"
+      whatsappNumber: '918446079809',
+      adminPin: '1234',
     };
 
-    const SAMPLE_PRODUCTS = [
+    const DEFAULT_PRODUCTS = [
       {
-        id: 'sample_1',
-        isSample: true,
-        gender: 'Womens',
+        id: 'p1',
+        title: 'Champagne Satin Cord Set',
+        gender: 'Women',
         category: 'Cord set',
-        title: 'Champagne Satin Pleated Co-ord Set',
-        description: 'Soft breathable satin-crepe 2-piece relaxed collar shirt & wide-leg trouser cord set. Effortless luxury fit.',
+        cost: 1150,
+        price: 1899,
+        sizes: ['S', 'M', 'L', 'XL'],
         image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=80',
-        supplierCost: 650,
-        margin: 249,
-        sizes: ['S', 'M', 'L', 'XL'],
-        isNew: true,
-        inStock: true
+        desc: 'Relaxed-fit luxe satin shirt and wide-leg trouser set. Lightweight, breathable drape ideal for brunches and evening outings.',
       },
       {
-        id: 'sample_2',
-        isSample: true,
-        gender: 'Womens',
+        id: 'p2',
+        title: 'Rose-Gold Petite Watch',
+        gender: 'Women',
         category: 'Watch',
-        title: 'Rose-Gold Petite Mesh Dial Watch',
-        description: 'Minimalist sunray dial with adjustable stainless steel mesh strap and splash-resistant casing.',
+        cost: 950,
+        price: 1699,
+        sizes: ['Free Size'],
         image: 'https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=700&q=80',
-        supplierCost: 480,
-        margin: 219,
-        sizes: ['Free Size'],
-        isNew: true,
-        inStock: true
+        desc: 'Minimalist mother-of-pearl dial with brushed rose-gold mesh strap and splash-resistant casing.',
       },
       {
-        id: 'sample_3',
-        isSample: true,
-        gender: 'Womens',
+        id: 'p3',
+        title: 'Terracotta Pleated Midi Dress',
+        gender: 'Women',
         category: 'Dress',
-        title: 'Terracotta Floral Georgette Midi Dress',
-        description: 'Flowy lined georgette wrap midi dress with flutter sleeves and adjustable waist tie.',
-        image: 'https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=700&q=80',
-        supplierCost: 590,
-        margin: 259,
-        sizes: ['S', 'M', 'L', 'XL'],
-        isNew: true,
-        inStock: true
+        cost: 1050,
+        price: 1749,
+        sizes: ['XS', 'S', 'M', 'L'],
+        image: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=700&q=80',
+        desc: 'Flattering cinched-waist A-line midi dress with soft flowy pleats and concealed side zip.',
       },
       {
-        id: 'sample_4',
-        isSample: true,
-        gender: 'Womens',
+        id: 'p4',
+        title: 'Tortoiseshell Cat-Eye Sunglasses',
+        gender: 'Women',
         category: 'Sunglasses',
-        title: 'Tortoiseshell Cat-Eye UV400 Shades',
-        description: 'Lightweight acetate frame with gradient brown UV400 polarized lenses and protective hard case.',
+        cost: 520,
+        price: 999,
+        sizes: ['Standard'],
         image: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=700&q=80',
-        supplierCost: 320,
-        margin: 179,
-        sizes: ['Free Size'],
-        isNew: false,
-        inStock: true
+        desc: 'UV400 polarized lenses in a hand-polished Italian acetate cat-eye frame. Includes hard protective case.',
       },
       {
-        id: 'sample_5',
-        isSample: true,
-        gender: 'Mens',
+        id: 'p5',
+        title: 'Obsidian Chronograph Watch',
+        gender: 'Men',
         category: 'Watch',
-        title: 'Espresso Chronograph Leather Watch',
-        description: 'Matte dial precision quartz chronograph with stitched genuine leather strap and luminous hands.',
-        image: 'https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=700&q=80',
-        supplierCost: 620,
-        margin: 279,
+        cost: 1350,
+        price: 2299,
         sizes: ['Free Size'],
-        isNew: true,
-        inStock: true
+        image: 'https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=700&q=80',
+        desc: 'Matte black stainless steel chronograph with date window and genuine stitched leather strap.',
       },
       {
-        id: 'sample_6',
-        isSample: true,
-        gender: 'Mens',
+        id: 'p6',
+        title: 'Classic Aviator Polarized Shades',
+        gender: 'Men',
         category: 'Sunglasses',
-        title: 'Classic Gold-Bridge Aviator Sunglasses',
-        description: 'Featherlight metal double-bridge aviator frame with anti-glare green-tint UV400 protection.',
+        cost: 600,
+        price: 1149,
+        sizes: ['Standard'],
         image: 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=700&q=80',
-        supplierCost: 350,
-        margin: 199,
-        sizes: ['Free Size'],
-        isNew: false,
-        inStock: true
-      }
+        desc: 'Ultra-light gunmetal frame with anti-glare polarized tint for everyday driving and outdoor wear.',
+      },
     ];
 
-    let appSettings = { ...DEFAULT_SETTINGS };
+    // App State
     let products = [];
-    let orders = [];
     let cart = [];
-
-    let selectedPrimaryCat = 'All';
-    let selectedSubCat = 'All';
+    let settings = { ...DEFAULT_SETTINGS };
+    let selectedGender = 'All';
+    let selectedCategory = 'All';
     let searchQuery = '';
-    let activeQvProduct = null;
-    let activeQvSize = '';
-    let uploadedCompressedImg = '';
+    let activeModalProduct = null;
+    let activeModalSize = '';
+    let uploadedBase64Image = '';
 
-    // =========================================================================
-    // 2. DYNAMIC PWA MANIFEST WITH SVG-TO-PNG DATA URL ICON ("SFY")
-    // =========================================================================
-    function initDynamicPwaManifest() {
+    // Secret 5-tap state
+    let brandTapCount = 0;
+    let brandTapTimer = null;
+
+    // Initialize App
+    function initApp() {
       try {
-        const canvas = document.createElement('canvas');
-        canvas.width = 512;
-        canvas.height = 512;
-        const ctx = canvas.getContext('2d');
+        const savedProducts = localStorage.getItem(STORAGE_KEYS.PRODUCTS);
+        products = savedProducts ? JSON.parse(savedProducts) : [...DEFAULT_PRODUCTS];
+        if (!savedProducts) localStorage.setItem(STORAGE_KEYS.PRODUCTS, JSON.stringify(products));
 
-        // Rounded boutique terracotta icon background
-        ctx.fillStyle = '#C86D51';
-        ctx.beginPath();
-        ctx.roundRect(0, 0, 512, 512, 110);
-        ctx.fill();
+        const savedCart = localStorage.getItem(STORAGE_KEYS.CART);
+        cart = savedCart ? JSON.parse(savedCart) : [];
 
-        // Subtle inner border
-        ctx.strokeStyle = 'rgba(255,255,255,0.28)';
-        ctx.lineWidth = 12;
-        ctx.beginPath();
-        ctx.roundRect(24, 24, 464, 464, 92);
-        ctx.stroke();
-
-        // "SFY" Serif Monogram
-        ctx.fillStyle = '#FFFFFF';
-        ctx.font = 'bold 170px Georgia, serif';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText('SFY', 256, 268);
-
-        const pngDataUrl = canvas.toDataURL('image/png');
-
-        const manifestObj = {
-          name: appSettings.brandName,
-          short_name: appSettings.brandName,
-          start_url: '.',
-          display: 'standalone',
-          background_color: '#FAF8F5',
-          theme_color: '#C86D51',
-          icons: [
-            { src: pngDataUrl, sizes: '192x192', type: 'image/png', purpose: 'any maskable' },
-            { src: pngDataUrl, sizes: '512x512', type: 'image/png', purpose: 'any maskable' }
-          ]
-        };
-
-        const existingLink = document.getElementById('dynamicManifestLink');
-        if (existingLink) existingLink.remove();
-
-        const blob = new Blob([JSON.stringify(manifestObj)], { type: 'application/manifest+json' });
-        const link = document.createElement('link');
-        link.id = 'dynamicManifestLink';
-        link.rel = 'manifest';
-        link.href = URL.createObjectURL(blob);
-        document.head.appendChild(link);
-      } catch (err) {
-        console.warn('PWA manifest generation note:', err);
-      }
-    }
-
-    let deferredInstallPrompt = null;
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredInstallPrompt = e;
-      document.getElementById('pwaBanner').classList.remove('hidden');
-    });
-
-    async function handleInstallShortcut() {
-      if (deferredInstallPrompt) {
-        deferredInstallPrompt.prompt();
-        const { outcome } = await deferredInstallPrompt.userChoice;
-        if (outcome === 'accepted') {
-          showToast('Shortcut added to your Home Screen!');
-          dismissPwaBanner();
-        }
-        deferredInstallPrompt = null;
-      } else {
-        openInstallModal();
-      }
-    }
-
-    function dismissPwaBanner() {
-      document.getElementById('pwaBanner').classList.add('hidden');
-    }
-
-    function openInstallModal() {
-      document.getElementById('installGuideModal').classList.remove('hidden');
-    }
-
-    function closeInstallModal() {
-      document.getElementById('installGuideModal').classList.add('hidden');
-    }
-
-    // =========================================================================
-    // 3. LOAD & PERSIST DATA IN LOCALSTORAGE
-    // =========================================================================
-    function loadAllData() {
-      try {
-        const savedSettings = localStorage.getItem(KEYS.SETTINGS);
-        if (savedSettings) {
-          appSettings = { ...DEFAULT_SETTINGS, ...JSON.parse(savedSettings) };
-        } else {
-          localStorage.setItem(KEYS.SETTINGS, JSON.stringify(appSettings));
-        }
-
-        const savedProducts = localStorage.getItem(KEYS.PRODUCTS);
-        if (savedProducts) {
-          products = JSON.parse(savedProducts);
-        } else {
-          products = [...SAMPLE_PRODUCTS];
-          localStorage.setItem(KEYS.PRODUCTS, JSON.stringify(products));
-        }
-
-        const savedOrders = localStorage.getItem(KEYS.ORDERS);
-        orders = savedOrders ? JSON.parse(savedOrders) : [];
+        const savedSettings = localStorage.getItem(STORAGE_KEYS.SETTINGS);
+        settings = savedSettings ? { ...DEFAULT_SETTINGS, ...JSON.parse(savedSettings) } : { ...DEFAULT_SETTINGS };
       } catch (e) {
-        console.error('Error loading storage:', e);
-        products = [...SAMPLE_PRODUCTS];
+        products = [...DEFAULT_PRODUCTS];
+        cart = [];
+        settings = { ...DEFAULT_SETTINGS };
+      }
+
+      renderCategoryPills();
+      renderProducts();
+      updateCartUI();
+      lucide.createIcons();
+
+      // Check for ?admin=1 secret query parameter
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('admin') === '1') {
+        openPinModal();
       }
     }
 
-    function persistProducts() {
-      try {
-        localStorage.setItem(KEYS.PRODUCTS, JSON.stringify(products));
-      } catch (e) {
-        showToast('Storage limit reached! Delete old week items.');
+    // Secret 5-Tap Trigger on "Style For You" Header
+    function handleSecretTitleTap() {
+      brandTapCount += 1;
+      clearTimeout(brandTapTimer);
+
+      if (brandTapCount >= 5) {
+        brandTapCount = 0;
+        openPinModal();
+        return;
       }
+
+      brandTapTimer = setTimeout(() => {
+        brandTapCount = 0;
+      }, 1500);
     }
 
-    function persistOrders() {
-      try {
-        localStorage.setItem(KEYS.ORDERS, JSON.stringify(orders));
-      } catch (e) {
-        console.error('Order save error:', e);
-      }
+    // Categories Logic
+    function getCategoriesForGender(gender) {
+      if (gender === 'Women') return ['All', 'Watch', 'Dress', 'Cord set', 'Sunglasses'];
+      if (gender === 'Men') return ['All', 'Watch', 'Sunglasses'];
+      return ['All', 'Watch', 'Dress', 'Cord set', 'Sunglasses'];
     }
 
-    function persistSettings() {
-      try {
-        localStorage.setItem(KEYS.SETTINGS, JSON.stringify(appSettings));
-      } catch (e) {
-        console.error('Settings save error:', e);
-      }
-    }
+    function setGenderFilter(gender) {
+      selectedGender = gender;
+      selectedCategory = 'All';
 
-    function applyBrandSettingsToUI() {
-      document.title = `${appSettings.brandName} | ${appSettings.tagline}`;
-      document.getElementById('headerBrandName').textContent = appSettings.brandName;
-      document.getElementById('headerTagline').textContent = appSettings.tagline;
-      document.getElementById('footerBrandName').textContent = appSettings.brandName;
-      document.getElementById('footerTagline').textContent = appSettings.tagline;
-      document.getElementById('bannerTitleText').textContent = `Get the ${appSettings.brandName} App Icon on your Home Screen`;
-      document.getElementById('adminHeaderTitle').textContent = `${appSettings.brandName} — Admin`;
-
-      const cleanDigits = (appSettings.whatsappPhone || '8446079809').replace(/\D/g, '').slice(-10);
-      document.getElementById('footerWhatsAppLink').href = `https://wa.me/91${cleanDigits}`;
-    }
-
-    // Fallback SVG image if an external photo link is offline
-    function getFallbackImage(title, cat) {
-      const safeTitle = (title || 'Style For You').slice(0, 20);
-      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="750" viewBox="0 0 600 750">
-        <rect width="600" height="750" fill="#F3ECE4"/>
-        <circle cx="300" cy="300" r="105" fill="#C86D51" opacity="0.14"/>
-        <text x="300" y="318" text-anchor="middle" fill="#C86D51" font-family="Georgia, serif" font-size="60" font-weight="bold">SFY</text>
-        <text x="300" y="455" text-anchor="middle" fill="#231F20" font-family="Georgia, serif" font-size="26" font-weight="bold">${safeTitle}</text>
-        <text x="300" y="495" text-anchor="middle" fill="#C86D51" font-family="sans-serif" font-size="16" letter-spacing="3">${(cat || 'FASHION').toUpperCase()}</text>
-      </svg>`;
-      return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
-    }
-
-    // =========================================================================
-    // 4. STOREFRONT FILTERING & PRODUCT GRID
-    // =========================================================================
-    const SUB_FILTER_MAP = {
-      All: ['All', 'Watch', 'Dress', 'Cord set', 'Sunglasses'],
-      Womens: ["All Women's", 'Watch', 'Dress', 'Cord set', 'Sunglasses'],
-      Mens: ["All Men's", 'Watch', 'Sunglasses']
-    };
-
-    function selectPrimaryCategory(cat) {
-      selectedPrimaryCat = cat;
-      selectedSubCat = 'All';
-
-      document.querySelectorAll('.primary-cat-btn').forEach((btn) => {
-        btn.className = 'primary-cat-btn flex-1 py-2 px-3 rounded-xl text-xs sm:text-sm font-semibold transition bg-white text-espresso border border-stone-200 hover:border-terracotta';
+      document.querySelectorAll('.gender-btn').forEach((btn) => {
+        btn.className = 'gender-btn py-1.5 px-3 rounded-full text-xs font-semibold bg-white text-charcoal border border-stone-200 transition';
       });
-      const active = document.getElementById(`catBtn-${cat}`);
-      if (active) {
-        active.className = 'primary-cat-btn flex-1 py-2 px-3 rounded-xl text-xs sm:text-sm font-semibold transition bg-espresso text-white shadow-2xs';
+      const activeBtn = document.getElementById(`gender-${gender}`);
+      if (activeBtn) {
+        activeBtn.className = 'gender-btn py-1.5 px-3 rounded-full text-xs font-semibold bg-charcoal text-white transition';
       }
 
-      renderSubFilterPills();
-      renderProductGrid();
+      renderCategoryPills();
+      renderProducts();
     }
 
-    function renderSubFilterPills() {
-      const container = document.getElementById('subFilterContainer');
-      const items = SUB_FILTER_MAP[selectedPrimaryCat] || SUB_FILTER_MAP.All;
+    function setCategoryFilter(category) {
+      selectedCategory = category;
+      renderCategoryPills();
+      renderProducts();
+    }
 
-      container.innerHTML = items
-        .map((label) => {
-          const val = label.startsWith('All') ? 'All' : label;
-          const isActive = selectedSubCat === val;
-          const cls = isActive
-            ? 'bg-terracotta text-white border-terracotta shadow-2xs'
-            : 'bg-white text-stone-600 border-stone-200 hover:border-terracotta';
-          return `<button onclick="selectSubCategory('${val}')" class="shrink-0 px-3.5 py-1.5 rounded-full text-xs font-semibold border transition ${cls}">
-            ${label}
-          </button>`;
+    function renderCategoryPills() {
+      const container = document.getElementById('category-pills');
+      const categories = getCategoriesForGender(selectedGender);
+
+      container.innerHTML = categories
+        .map((cat) => {
+          const isActive = selectedCategory === cat;
+          const classes = isActive
+            ? 'bg-terracotta text-white border-terracotta'
+            : 'bg-white text-charcoal border-stone-200 hover:bg-sand';
+          return `
+            <button
+              onclick="setCategoryFilter('${cat}')"
+              class="shrink-0 px-3.5 py-1.5 rounded-full text-xs font-semibold border transition ${classes}"
+            >
+              ${cat}
+            </button>
+          `;
         })
         .join('');
     }
 
-    function selectSubCategory(sub) {
-      selectedSubCat = sub;
-      renderSubFilterPills();
-      renderProductGrid();
-    }
-
-    function onSearchInput(val) {
+    function handleSearch(val) {
       searchQuery = val.trim().toLowerCase();
-      const btn = document.getElementById('clearSearchBtn');
-      if (searchQuery.length > 0) btn.classList.remove('hidden');
-      else btn.classList.add('hidden');
-      renderProductGrid();
+      const clearBtn = document.getElementById('clear-search-btn');
+      if (searchQuery.length > 0) {
+        clearBtn.classList.remove('hidden');
+      } else {
+        clearBtn.classList.add('hidden');
+      }
+      renderProducts();
     }
 
-    function clearSearchInput() {
-      document.getElementById('searchInput').value = '';
-      onSearchInput('');
+    function clearSearch() {
+      document.getElementById('search-input').value = '';
+      handleSearch('');
     }
 
-    function resetAllFilters() {
-      clearSearchInput();
-      selectPrimaryCategory('All');
+    function resetFilters() {
+      clearSearch();
+      setGenderFilter('All');
     }
 
-    function renderProductGrid() {
-      const grid = document.getElementById('productGrid');
-      const emptyBox = document.getElementById('emptyCatalogState');
-      const countBadge = document.getElementById('itemCountBadge');
+    // Render Product Grid
+    function renderProducts() {
+      const grid = document.getElementById('product-grid');
+      const emptyState = document.getElementById('empty-state');
+      const countEl = document.getElementById('item-count');
 
-      const visibleProducts = products.filter((p) => {
-        if (!p.inStock) return false;
-        if (selectedPrimaryCat !== 'All' && p.gender !== selectedPrimaryCat) return false;
-        if (selectedSubCat !== 'All' && p.category.toLowerCase() !== selectedSubCat.toLowerCase()) return false;
-        if (searchQuery) {
-          const blob = `${p.title} ${p.category} ${p.gender} ${p.description || ''}`.toLowerCase();
-          if (!blob.includes(searchQuery)) return false;
-        }
-        return true;
+      const filtered = products.filter((p) => {
+        const matchGender = selectedGender === 'All' || p.gender === selectedGender;
+        const matchCat = selectedCategory === 'All' || p.category.toLowerCase() === selectedCategory.toLowerCase();
+        const matchQuery =
+          !searchQuery ||
+          p.title.toLowerCase().includes(searchQuery) ||
+          p.category.toLowerCase().includes(searchQuery) ||
+          p.gender.toLowerCase().includes(searchQuery);
+        return matchGender && matchCat && matchQuery;
       });
 
-      countBadge.textContent = `${visibleProducts.length} ${visibleProducts.length === 1 ? 'Item' : 'Items'}`;
+      countEl.textContent = filtered.length;
 
-      if (visibleProducts.length === 0) {
+      if (filtered.length === 0) {
         grid.innerHTML = '';
-        emptyBox.classList.remove('hidden');
+        emptyState.classList.remove('hidden');
         return;
       }
 
-      emptyBox.classList.add('hidden');
-
-      grid.innerHTML = visibleProducts
-        .map((p) => {
-          const customerPrice = Number(p.supplierCost) + Number(p.margin);
-          const fallback = getFallbackImage(p.title, p.category);
-          const genderLabel = p.gender === 'Womens' ? "Women's" : "Men's";
-
-          return `
-          <article class="bg-white rounded-2xl overflow-hidden border border-stone-200/85 shadow-2xs hover:shadow-md transition flex flex-col justify-between">
-            <div onclick="openQuickViewModal('${p.id}')" class="cursor-pointer">
-              <div class="relative aspect-[4/5] bg-cream overflow-hidden">
-                <img
-                  src="${p.image || fallback}"
-                  alt="${p.title}"
-                  onerror="this.onerror=null;this.src='${fallback}';"
-                  class="w-full h-full object-cover hover:scale-105 transition duration-500"
-                />
-                ${
-                  p.isNew
-                    ? `<span class="absolute top-2.5 left-2.5 bg-terracotta text-white text-[9px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full shadow">
-                        NEW THIS WEEK
-                      </span>`
-                    : ''
-                }
-                <span class="absolute bottom-2 left-2 bg-white/95 text-espresso text-[10px] font-semibold px-2 py-0.5 rounded-md shadow-2xs">
-                  ${genderLabel} • ${p.category}
-                </span>
-              </div>
-
-              <div class="p-3 pb-1.5">
-                <h3 class="font-serif text-base sm:text-lg font-bold text-espresso leading-snug line-clamp-1">
+      emptyState.classList.add('hidden');
+      grid.innerHTML = filtered
+        .map(
+          (p) => `
+          <div onclick="openProductModal('${p.id}')" class="bg-white rounded-2xl overflow-hidden border border-stone-200/80 shadow-2xs flex flex-col cursor-pointer group active:scale-[0.99] transition">
+            <div class="relative aspect-[4/5] bg-sand overflow-hidden">
+              <img
+                src="${p.image}"
+                alt="${p.title}"
+                onerror="this.src='https://placehold.co/600x750/F2ECE1/1F1D1A?text=Style+For+You'"
+                class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+              />
+              <span class="absolute top-2.5 left-2.5 bg-terracotta text-white text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full shadow-2xs">
+                New This Week
+              </span>
+              <span class="absolute bottom-2.5 left-2.5 bg-white/95 backdrop-blur-xs text-charcoal text-[10px] font-semibold px-2.5 py-0.5 rounded-full shadow-2xs">
+                ${p.gender}'s &bull; ${p.category}
+              </span>
+            </div>
+            <div class="p-3 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 class="font-serif text-[17px] font-bold text-charcoal leading-snug line-clamp-1">
                   ${p.title}
                 </h3>
-                <p class="text-[11px] text-stone-500 mt-0.5 truncate">
+                <p class="text-[11px] text-muted mt-0.5 truncate">
                   Sizes: ${p.sizes.join(', ')}
                 </p>
-                <p class="text-base font-extrabold text-espresso mt-1.5">
-                  ₹${customerPrice.toLocaleString('en-IN')}
-                </p>
+              </div>
+              <div class="mt-2.5 flex items-center justify-between gap-1">
+                <span class="text-sm font-bold text-charcoal">&#8377;${p.price.toLocaleString('en-IN')}</span>
+                <button
+                  onclick="event.stopPropagation(); quickAddToCart('${p.id}')"
+                  class="bg-charcoal hover:bg-terracotta text-white text-[11px] font-semibold px-2.5 py-1.5 rounded-full transition"
+                >
+                  + Add
+                </button>
               </div>
             </div>
-
-            <div class="p-3 pt-1.5 grid grid-cols-2 gap-1.5">
-              <button onclick="openQuickViewModal('${p.id}')" class="py-2 px-2 rounded-xl text-[11px] font-bold bg-cream hover:bg-sand text-espresso border border-stone-200 transition">
-                Select Size
-              </button>
-              <button onclick="quickAddDefaultSize('${p.id}')" class="py-2 px-2 rounded-xl text-[11px] font-bold bg-espresso hover:bg-terracotta text-white transition">
-                + Add to Bag
-              </button>
-            </div>
-          </article>`;
-        })
+          </div>
+        `
+        )
         .join('');
     }
 
-    // =========================================================================
-    // 5. QUICK VIEW MODAL & SHOPPING BAG LOGIC
-    // =========================================================================
-    function openQuickViewModal(prodId) {
-      const item = products.find((p) => p.id === prodId);
-      if (!item) return;
+    // Product Detail Modal
+    function openProductModal(productId) {
+      const product = products.find((p) => p.id === productId);
+      if (!product) return;
 
-      activeQvProduct = item;
-      activeQvSize = item.sizes[0] || 'Free Size';
+      activeModalProduct = product;
+      activeModalSize = product.sizes[0] || 'Free Size';
 
-      const customerPrice = Number(item.supplierCost) + Number(item.margin);
-      const fallback = getFallbackImage(item.title, item.category);
-      const genderText = item.gender === 'Womens' ? "Women's" : "Men's";
+      document.getElementById('modal-img').src = product.image;
+      document.getElementById('modal-category').textContent = `${product.gender}'s \u2022 ${product.category}`;
+      document.getElementById('modal-title').textContent = product.title;
+      document.getElementById('modal-price').innerHTML = `&#8377;${product.price.toLocaleString('en-IN')}`;
+      document.getElementById('modal-desc').textContent = product.desc || 'Handpicked weekly drop from Style For You.';
 
-      const img = document.getElementById('qvImage');
-      img.src = item.image || fallback;
-      img.onerror = function () {
-        this.onerror = null;
-        this.src = fallback;
-      };
-
-      document.getElementById('qvCategory').textContent = `${genderText} • ${item.category}`;
-      document.getElementById('qvTitle').textContent = item.title;
-      document.getElementById('qvPrice').textContent = `₹${customerPrice.toLocaleString('en-IN')}`;
-      document.getElementById('qvDescription').textContent =
-        item.description || 'Curated boutique piece, quality checked and shipped directly to your doorstep.';
-
-      const badge = document.getElementById('qvNewBadge');
-      if (item.isNew) badge.classList.remove('hidden');
-      else badge.classList.add('hidden');
-
-      renderQvSizes();
-      document.getElementById('quickViewModal').classList.remove('hidden');
+      renderModalSizes();
+      document.getElementById('product-modal').classList.remove('hidden');
+      lucide.createIcons();
     }
 
-    function renderQvSizes() {
-      if (!activeQvProduct) return;
-      document.getElementById('qvSelectedSizeText').textContent = activeQvSize;
-      const box = document.getElementById('qvSizesContainer');
-      box.innerHTML = activeQvProduct.sizes
+    function renderModalSizes() {
+      if (!activeModalProduct) return;
+      const container = document.getElementById('modal-sizes');
+      container.innerHTML = activeModalProduct.sizes
         .map((sz) => {
-          const active = sz === activeQvSize;
-          const cls = active
-            ? 'bg-espresso text-white border-espresso shadow-2xs'
-            : 'bg-cream text-espresso border-stone-200 hover:border-terracotta';
-          return `<button type="button" onclick="pickQvSize('${sz}')" class="px-4 py-2 rounded-xl text-xs font-bold border transition ${cls}">
-            ${sz}
-          </button>`;
+          const isSelected = activeModalSize === sz;
+          return `
+            <button
+              onclick="selectModalSize('${sz}')"
+              class="px-3.5 py-1.5 rounded-xl text-xs font-semibold border transition ${
+                isSelected
+                  ? 'bg-charcoal text-white border-charcoal'
+                  : 'bg-white text-charcoal border-stone-200 hover:bg-sand'
+              }"
+            >
+              ${sz}
+            </button>
+          `;
         })
         .join('');
     }
 
-    function pickQvSize(sz) {
-      activeQvSize = sz;
-      renderQvSizes();
+    function selectModalSize(size) {
+      activeModalSize = size;
+      renderModalSizes();
     }
 
-    function closeQuickViewModal() {
-      document.getElementById('quickViewModal').classList.add('hidden');
-      activeQvProduct = null;
+    function closeProductModal() {
+      document.getElementById('product-modal').classList.add('hidden');
+      activeModalProduct = null;
     }
 
-    function addFromQuickView(openCartImmediately) {
-      if (!activeQvProduct) return;
-      addItemToBag(activeQvProduct, activeQvSize);
-      closeQuickViewModal();
-      if (openCartImmediately) {
-        openCartDrawer();
-      } else {
-        showToast('Added to Shopping Bag!');
-      }
+    // Cart Management
+    function quickAddToCart(productId) {
+      const product = products.find((p) => p.id === productId);
+      if (!product) return;
+      addToCart(product, product.sizes[0] || 'Free Size');
     }
 
-    function quickAddDefaultSize(prodId) {
-      const item = products.find((p) => p.id === prodId);
-      if (!item) return;
-      if (item.sizes.length > 1) {
-        openQuickViewModal(prodId);
-        return;
-      }
-      addItemToBag(item, item.sizes[0] || 'Free Size');
-      showToast('Added to Shopping Bag!');
+    function addSelectedToCart() {
+      if (!activeModalProduct) return;
+      addToCart(activeModalProduct, activeModalSize);
+      closeProductModal();
     }
 
-    function addItemToBag(product, size) {
-      const existing = cart.find((c) => c.productId === product.id && c.size === size);
-      if (existing) {
-        existing.qty += 1;
+    function addToCart(product, size) {
+      const existingIndex = cart.findIndex((item) => item.id === product.id && item.size === size);
+      if (existingIndex > -1) {
+        cart[existingIndex].qty += 1;
       } else {
         cart.push({
-          productId: product.id,
+          id: product.id,
           title: product.title,
+          price: product.price,
+          image: product.image,
           gender: product.gender,
           category: product.category,
           size: size,
           qty: 1,
-          retailPrice: Number(product.supplierCost) + Number(product.margin),
-          supplierCost: Number(product.supplierCost),
-          margin: Number(product.margin),
-          image: product.image
         });
       }
-      refreshCartBadge();
+      saveCart();
+      updateCartUI();
+      showToast(`Added ${product.title} (${size})`);
     }
 
-    function refreshCartBadge() {
-      const badge = document.getElementById('cartBadge');
-      const totalQty = cart.reduce((acc, item) => acc + item.qty, 0);
-      if (totalQty > 0) {
-        badge.textContent = totalQty;
+    function updateCartQty(index, delta) {
+      if (!cart[index]) return;
+      cart[index].qty += delta;
+      if (cart[index].qty <= 0) {
+        cart.splice(index, 1);
+      }
+      saveCart();
+      updateCartUI();
+    }
+
+    function saveCart() {
+      localStorage.setItem(STORAGE_KEYS.CART, JSON.stringify(cart));
+    }
+
+    function updateCartUI() {
+      const badge = document.getElementById('cart-badge');
+      const container = document.getElementById('cart-items-container');
+      const footer = document.getElementById('cart-footer');
+      const subtotalEl = document.getElementById('cart-subtotal');
+      const totalEl = document.getElementById('cart-total');
+
+      const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
+      const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+
+      if (totalCount > 0) {
+        badge.textContent = totalCount;
         badge.classList.remove('hidden');
       } else {
         badge.classList.add('hidden');
       }
-    }
-
-    function openCartDrawer() {
-      renderCartDrawer();
-      document.getElementById('cartDrawerModal').classList.remove('hidden');
-    }
-
-    function closeCartDrawer() {
-      document.getElementById('cartDrawerModal').classList.add('hidden');
-    }
-
-    function renderCartDrawer() {
-      const list = document.getElementById('bagItemsContainer');
-      const empty = document.getElementById('bagEmptyState');
-      const form = document.getElementById('whatsappCheckoutForm');
-      const totalDisplay = document.getElementById('bagTotalDisplay');
 
       if (cart.length === 0) {
-        list.innerHTML = '';
-        empty.classList.remove('hidden');
-        form.classList.add('hidden');
+        footer.classList.add('hidden');
+        container.innerHTML = `
+          <div class="text-center py-16 px-4">
+            <div class="w-12 h-12 rounded-full bg-sand text-terracotta flex items-center justify-center mx-auto mb-3">
+              <i data-lucide="shopping-bag" class="w-6 h-6"></i>
+            </div>
+            <h4 class="font-serif text-xl font-bold text-charcoal">Your bag is empty</h4>
+            <p class="text-xs text-muted mt-1">Explore our weekly drop and add your favourite styles.</p>
+          </div>
+        `;
+        lucide.createIcons();
         return;
       }
 
-      empty.classList.add('hidden');
-      form.classList.remove('hidden');
+      footer.classList.remove('hidden');
+      subtotalEl.innerHTML = `&#8377;${subtotal.toLocaleString('en-IN')}`;
+      totalEl.innerHTML = `&#8377;${subtotal.toLocaleString('en-IN')}`;
 
-      let grandTotal = 0;
-
-      list.innerHTML = cart
-        .map((item, idx) => {
-          const lineTotal = item.retailPrice * item.qty;
-          grandTotal += lineTotal;
-          const fallback = getFallbackImage(item.title, item.category);
-
-          return `
-          <div class="flex items-center gap-3 bg-cream p-2.5 rounded-2xl border border-stone-200">
-            <img src="${item.image || fallback}" onerror="this.onerror=null;this.src='${fallback}';" class="w-14 h-16 rounded-xl object-cover bg-white shrink-0" />
+      container.innerHTML = cart
+        .map(
+          (item, idx) => `
+          <div class="bg-white border border-stone-200/80 rounded-2xl p-3 flex items-center gap-3">
+            <img src="${item.image}" alt="${item.title}" class="w-16 h-20 rounded-xl object-cover bg-sand shrink-0" />
             <div class="flex-1 min-w-0">
-              <h4 class="font-serif font-bold text-sm text-espresso truncate">${item.title}</h4>
-              <p class="text-[11px] text-stone-500">Size: <strong class="text-espresso">${item.size}</strong> • ₹${item.retailPrice}</p>
-              <div class="flex items-center gap-2 mt-1.5">
-                <button type="button" onclick="adjustBagQty(${idx}, -1)" class="w-6 h-6 rounded-lg bg-white border border-stone-200 text-xs font-bold flex items-center justify-center">-</button>
-                <span class="text-xs font-bold w-4 text-center">${item.qty}</span>
-                <button type="button" onclick="adjustBagQty(${idx}, 1)" class="w-6 h-6 rounded-lg bg-white border border-stone-200 text-xs font-bold flex items-center justify-center">+</button>
+              <p class="text-[10px] font-semibold text-terracotta uppercase">${item.gender}'s &bull; ${item.category}</p>
+              <h4 class="font-serif text-base font-bold text-charcoal truncate">${item.title}</h4>
+              <p class="text-[11px] text-muted">Size: <strong class="text-charcoal">${item.size}</strong></p>
+              <div class="flex items-center justify-between mt-2">
+                <span class="text-xs font-bold text-charcoal">&#8377;${(item.price * item.qty).toLocaleString('en-IN')}</span>
+                <div class="flex items-center gap-2 bg-cream border border-stone-200 rounded-full px-2 py-0.5">
+                  <button onclick="updateCartQty(${idx}, -1)" class="text-charcoal font-bold text-xs px-1">&minus;</button>
+                  <span class="text-xs font-bold text-charcoal">${item.qty}</span>
+                  <button onclick="updateCartQty(${idx}, 1)" class="text-charcoal font-bold text-xs px-1">+</button>
+                </div>
               </div>
             </div>
-            <div class="text-right">
-              <p class="text-sm font-extrabold text-espresso">₹${lineTotal.toLocaleString('en-IN')}</p>
-              <button type="button" onclick="removeBagItem(${idx})" class="text-[11px] text-red-600 mt-1 font-medium">Remove</button>
-            </div>
-          </div>`;
-        })
+          </div>
+        `
+        )
         .join('');
-
-      totalDisplay.textContent = `₹${grandTotal.toLocaleString('en-IN')}`;
+      lucide.createIcons();
     }
 
-    function adjustBagQty(idx, delta) {
-      if (!cart[idx]) return;
-      cart[idx].qty += delta;
-      if (cart[idx].qty <= 0) cart.splice(idx, 1);
-      refreshCartBadge();
-      renderCartDrawer();
+    function toggleCart(open) {
+      const drawer = document.getElementById('cart-drawer');
+      if (open) {
+        updateCartUI();
+        drawer.classList.remove('hidden');
+      } else {
+        drawer.classList.add('hidden');
+      }
     }
 
-    function removeBagItem(idx) {
-      cart.splice(idx, 1);
-      refreshCartBadge();
-      renderCartDrawer();
+    // WhatsApp Order Generation (With Automatic "Shipping: Extra (as per delivery location)")
+    function orderSingleOnWhatsApp() {
+      if (!activeModalProduct) return;
+      const p = activeModalProduct;
+      const lines = [
+        `*New Order Inquiry - Style For You*`,
+        ``,
+        `1. *${p.title}* (${p.gender}'s ${p.category})`,
+        `   Size: ${activeModalSize} | Qty: 1 | Price: Rs.${p.price}`,
+        ``,
+        `*Items Subtotal:* Rs.${p.price}`,
+        `*Shipping:* Extra (as per delivery location)`,
+        ``,
+        `Please confirm availability & total amount with shipping!`,
+      ];
+      sendWhatsAppMessage(lines.join('\n'));
     }
 
-    // =========================================================================
-    // 6. DIRECT WHATSAPP CHECKOUT (USES SAVED WHATSAPP NUMBER)
-    // =========================================================================
-    function processWhatsAppCheckout(e) {
-      e.preventDefault();
+    function checkoutOnWhatsApp() {
       if (cart.length === 0) return;
 
-      const custName = document.getElementById('chkName').value.trim();
-      const custPhone = document.getElementById('chkPhone').value.trim();
-      const custAddress = document.getElementById('chkAddress').value.trim();
-      const paymentPref = document.getElementById('chkPayment').value;
+      const custName = document.getElementById('cust-name').value.trim();
+      const custCity = document.getElementById('cust-city').value.trim();
+      const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
 
-      const orderId = 'SFY-' + Math.floor(1000 + Math.random() * 9000);
-      let totalCustomer = 0;
-      let totalSupplier = 0;
-      let totalProfit = 0;
+      const itemLines = cart.map(
+        (item, idx) =>
+          `${idx + 1}. *${item.title}* (${item.gender}'s ${item.category})\n   Size: ${item.size} | Qty: ${item.qty} | Rs.${item.price * item.qty}`
+      );
 
-      const lines = cart.map((item, i) => {
-        const lineRetail = item.retailPrice * item.qty;
-        const lineSupplier = item.supplierCost * item.qty;
-        const lineProfit = item.margin * item.qty;
+      const lines = [
+        `*New Order - Style For You*`,
+        custName ? `Customer: ${custName}` : null,
+        custCity ? `Delivery Location: ${custCity}` : null,
+        ``,
+        ...itemLines,
+        ``,
+        `*Items Subtotal:* Rs.${subtotal}`,
+        `*Shipping:* Extra (as per delivery location)`,
+        ``,
+        `Please share shipping charges for my location and payment details!`,
+      ].filter((line) => line !== null);
 
-        totalCustomer += lineRetail;
-        totalSupplier += lineSupplier;
-        totalProfit += lineProfit;
-
-        return `${i + 1}. *${item.title}* (${item.gender === 'Womens' ? "Women's" : "Men's"} - ${item.category})\n   Size: ${item.size} | Qty: ${item.qty} | ₹${lineRetail}`;
-      });
-
-      // Record order in Admin History
-      orders.unshift({
-        id: orderId,
-        date: new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' }),
-        customerName: custName,
-        customerPhone: custPhone,
-        address: custAddress,
-        paymentPref,
-        itemsText: cart.map((c) => `${c.title} (${c.size} x${c.qty})`).join(', '),
-        totalCustomer,
-        totalSupplier,
-        totalProfit
-      });
-      persistOrders();
-
-      const waText =
-        `✨ *NEW ORDER — ${appSettings.brandName.toUpperCase()}* ✨\n` +
-        `Order ID: *${orderId}*\n\n` +
-        `*Items Ordered:*\n` +
-        `${lines.join('\n')}\n\n` +
-        `💰 *Total Payable:* ₹${totalCustomer}\n` +
-        `💳 *Payment:* ${paymentPref}\n\n` +
-        `📍 *Shipping Address:*\n` +
-        `Name: ${custName}\n` +
-        `Phone: ${custPhone}\n` +
-        `Address: ${custAddress}\n\n` +
-        `Please share payment details to confirm dispatch!`;
-
-      const cleanDigits = (appSettings.whatsappPhone || '8446079809').replace(/\D/g, '').slice(-10);
-      const waLink = `https://wa.me/91${cleanDigits}?text=${encodeURIComponent(waText)}`;
-
-      cart = [];
-      refreshCartBadge();
-      closeCartDrawer();
-      showToast('Redirecting to WhatsApp...');
-
-      window.open(waLink, '_blank');
+      sendWhatsAppMessage(lines.join('\n'));
     }
 
-    // =========================================================================
-    // 7. PIN LOGIN & ADMIN DASHBOARD TABS
-    // =========================================================================
-    function openPinLoginModal() {
-      document.getElementById('adminPinInput').value = '';
-      document.getElementById('pinErrorText').classList.add('hidden');
+    function sendWhatsAppMessage(message) {
+      const cleanNumber = (settings.whatsappNumber || '918446079809').replace(/\D/g, '');
+      const url = `https://wa.me/${cleanNumber}?text=${encodeURIComponent(message)}`;
+      window.open(url, '_blank');
+    }
 
-      // Show "Default PIN: 1234" hint only until changed
-      const hintEl = document.getElementById('defaultPinHint');
-      if (appSettings.pinChanged) {
-        hintEl.classList.add('hidden');
+    // ==========================================
+    // SECRET RESELLER ADMIN LOGIC
+    // ==========================================
+    function openPinModal() {
+      document.getElementById('pin-input').value = '';
+      document.getElementById('pin-error').classList.add('hidden');
+      document.getElementById('pin-modal').classList.remove('hidden');
+      setTimeout(() => document.getElementById('pin-input').focus(), 100);
+    }
+
+    function closePinModal() {
+      document.getElementById('pin-modal').classList.add('hidden');
+    }
+
+    function verifyPin() {
+      const entered = document.getElementById('pin-input').value.trim();
+      if (entered === settings.adminPin) {
+        closePinModal();
+        openAdminPanel();
       } else {
-        hintEl.classList.remove('hidden');
-      }
-
-      document.getElementById('pinLoginModal').classList.remove('hidden');
-      setTimeout(() => document.getElementById('adminPinInput').focus(), 100);
-    }
-
-    function closePinLoginModal() {
-      document.getElementById('pinLoginModal').classList.add('hidden');
-    }
-
-    function checkAdminPin(e) {
-      e.preventDefault();
-      const entered = document.getElementById('adminPinInput').value.trim();
-      if (entered === appSettings.pin) {
-        closePinLoginModal();
-        enterAdminDashboard();
-      } else {
-        document.getElementById('pinErrorText').classList.remove('hidden');
+        document.getElementById('pin-error').classList.remove('hidden');
       }
     }
 
-    function enterAdminDashboard() {
-      document.getElementById('storeHeader').classList.add('hidden');
-      document.getElementById('storefrontView').classList.add('hidden');
-      document.getElementById('adminDashboardView').classList.remove('hidden');
-      switchAdminTab('add');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    function openAdminPanel() {
+      document.getElementById('admin-modal').classList.remove('hidden');
+      document.getElementById('setting-whatsapp').value = settings.whatsappNumber;
+      document.getElementById('setting-pin').value = settings.adminPin;
+
+      const baseUrl = window.location.origin + window.location.pathname;
+      document.getElementById('secret-admin-url').textContent = `${baseUrl}?admin=1`;
+
+      switchAdminTab('products');
+      renderAdminProductList();
+      lucide.createIcons();
     }
 
-    function exitAdminDashboard() {
-      document.getElementById('adminDashboardView').classList.add('hidden');
-      document.getElementById('storeHeader').classList.remove('hidden');
-      document.getElementById('storefrontView').classList.remove('hidden');
-      renderProductGrid();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    function closeAdminPanel() {
+      document.getElementById('admin-modal').classList.add('hidden');
+      renderProducts();
     }
 
-    function switchAdminTab(tabName) {
-      ['add', 'stock', 'orders', 'settings'].forEach((t) => {
-        const panel = document.getElementById(`adminTab-${t}`);
-        const btn = document.getElementById(`tabBtn-${t}`);
-        if (t === tabName) {
-          panel.classList.remove('hidden');
-          btn.className = 'admin-nav-btn py-2 px-1.5 rounded-xl text-[11px] sm:text-xs font-bold bg-terracotta text-white transition';
-        } else {
-          panel.classList.add('hidden');
-          btn.className = 'admin-nav-btn py-2 px-1.5 rounded-xl text-[11px] sm:text-xs font-bold text-stone-600 hover:bg-stone-50 transition';
-        }
+    function switchAdminTab(tab) {
+      ['products', 'add', 'settings'].forEach((t) => {
+        document.getElementById(`admin-view-${t}`).classList.add('hidden');
+        document.getElementById(`admin-tab-${t}`).className = 'py-3 border-b-2 border-transparent text-muted';
       });
-
-      if (tabName === 'stock') renderManageStockList();
-      if (tabName === 'orders') renderOrdersHistoryTab();
-      if (tabName === 'settings') populateSettingsForm();
+      document.getElementById(`admin-view-${tab}`).classList.remove('hidden');
+      document.getElementById(`admin-tab-${tab}`).className = 'py-3 border-b-2 border-terracotta text-terracotta';
     }
 
-    // =========================================================================
-    // 8. TAB 1: ADD WEEKLY PRODUCT + CANVAS IMAGE COMPRESSION
-    // =========================================================================
-    function syncCategoryOptions() {
-      const gender = document.getElementById('prodGenderSelect').value;
-      const catSelect = document.getElementById('prodCatSelect');
-      if (gender === 'Mens') {
+    function renderAdminProductList() {
+      const list = document.getElementById('admin-product-list');
+      document.getElementById('admin-product-count').textContent = products.length;
+
+      list.innerHTML = products
+        .map((p) => {
+          const profit = p.cost ? p.price - p.cost : null;
+          return `
+            <div class="bg-white border border-stone-200 rounded-2xl p-3 flex items-center gap-3">
+              <img src="${p.image}" alt="${p.title}" class="w-14 h-16 rounded-xl object-cover bg-sand shrink-0" />
+              <div class="flex-1 min-w-0">
+                <p class="text-[10px] font-semibold text-terracotta uppercase">${p.gender}'s &bull; ${p.category}</p>
+                <h4 class="font-serif text-base font-bold text-charcoal truncate">${p.title}</h4>
+                <p class="text-[11px] text-charcoal font-bold">
+                  Sell: &#8377;${p.price}
+                  ${profit !== null ? `<span class="text-emerald-700 font-semibold ml-1">(Profit: &#8377;${profit})</span>` : ''}
+                </p>
+              </div>
+              <button onclick="deleteProduct('${p.id}')" title="Remove Drop" class="p-2 text-red-500 hover:bg-red-50 rounded-xl">
+                <i data-lucide="trash-2" class="w-4 h-4"></i>
+              </button>
+            </div>
+          `;
+        })
+        .join('');
+      lucide.createIcons();
+    }
+
+    function updateAdminCategoryOptions() {
+      const gender = document.getElementById('new-gender').value;
+      const catSelect = document.getElementById('new-category');
+      if (gender === 'Men') {
         catSelect.innerHTML = `
           <option value="Watch">Watch</option>
           <option value="Sunglasses">Sunglasses</option>
@@ -1645,38 +1107,17 @@
           <option value="Sunglasses">Sunglasses</option>
         `;
       }
-      autoSelectDefaultSizes();
     }
 
-    function autoSelectDefaultSizes() {
-      const cat = document.getElementById('prodCatSelect').value;
-      const isAccessory = cat === 'Watch' || cat === 'Sunglasses';
-      document.querySelectorAll('.size-checkbox').forEach((cb) => {
-        if (cb.value === 'Free Size') {
-          cb.checked = isAccessory;
-        } else {
-          cb.checked = !isAccessory;
-        }
-      });
-    }
-
-    function handleFreeSizeToggle(cb) {
-      if (cb.checked) {
-        document.querySelectorAll('.size-checkbox').forEach((box) => {
-          if (box.value !== 'Free Size') box.checked = false;
-        });
+    function calculateSellingPrice() {
+      const cost = parseFloat(document.getElementById('new-cost').value) || 0;
+      const margin = parseFloat(document.getElementById('new-margin').value) || 0;
+      if (cost > 0 || margin > 0) {
+        document.getElementById('new-price').value = Math.round(cost + margin);
       }
     }
 
-    function calculateCustomerPrice() {
-      const cost = Number(document.getElementById('supplierPriceInput').value) || 0;
-      const margin = Number(document.getElementById('profitMarginInput').value) || 0;
-      const total = cost + margin;
-      document.getElementById('liveCustomerPriceDisplay').textContent = `₹${total.toLocaleString('en-IN')}`;
-    }
-
-    // Compress image via HTML5 Canvas to max width 600px (~80KB)
-    function processGalleryImage(event) {
+    function handleImageUpload(event) {
       const file = event.target.files[0];
       if (!file) return;
 
@@ -1685,387 +1126,112 @@
         const img = new Image();
         img.onload = function () {
           const canvas = document.createElement('canvas');
-          const MAX_W = 600;
-          const scale = Math.min(1, MAX_W / img.width);
+          const maxW = 600;
+          const scale = Math.min(1, maxW / img.width);
           canvas.width = img.width * scale;
           canvas.height = img.height * scale;
-
           const ctx = canvas.getContext('2d');
           ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-          uploadedCompressedImg = canvas.toDataURL('image/jpeg', 0.72);
-          document.getElementById('prodUrlInput').value = '';
-          document.getElementById('imgPreviewThumb').src = uploadedCompressedImg;
-          document.getElementById('imgPreviewLabel').textContent = 'Photo compressed (~80KB) & ready!';
-          document.getElementById('imgPreviewCard').classList.remove('hidden');
+          uploadedBase64Image = canvas.toDataURL('image/jpeg', 0.78);
+          showToast('Photo ready to publish');
         };
         img.src = e.target.result;
       };
       reader.readAsDataURL(file);
     }
 
-    function previewExternalUrl(url) {
-      if (!url.trim()) {
-        if (!uploadedCompressedImg) document.getElementById('imgPreviewCard').classList.add('hidden');
+    function saveNewProduct() {
+      const title = document.getElementById('new-title').value.trim();
+      const gender = document.getElementById('new-gender').value;
+      const category = document.getElementById('new-category').value;
+      const cost = parseFloat(document.getElementById('new-cost').value) || 0;
+      const price = parseFloat(document.getElementById('new-price').value) || 0;
+      const sizesRaw = document.getElementById('new-sizes').value.trim();
+      const imageUrl = document.getElementById('new-image-url').value.trim();
+      const desc = document.getElementById('new-desc').value.trim();
+
+      if (!title || price <= 0) {
+        showToast('Please enter a title & selling price');
         return;
       }
-      uploadedCompressedImg = '';
-      document.getElementById('imgPreviewThumb').src = url.trim();
-      document.getElementById('imgPreviewLabel').textContent = 'Image URL preview ready!';
-      document.getElementById('imgPreviewCard').classList.remove('hidden');
-    }
 
-    function clearSelectedPhoto() {
-      uploadedCompressedImg = '';
-      document.getElementById('prodFileInput').value = '';
-      document.getElementById('prodUrlInput').value = '';
-      document.getElementById('imgPreviewCard').classList.add('hidden');
-    }
-
-    function submitNewProduct(e) {
-      e.preventDefault();
-
-      const title = document.getElementById('prodTitleInput').value.trim();
-      const gender = document.getElementById('prodGenderSelect').value;
-      const category = document.getElementById('prodCatSelect').value;
-      const description = document.getElementById('prodDescInput').value.trim();
-      const supplierCost = Number(document.getElementById('supplierPriceInput').value) || 0;
-      const margin = Number(document.getElementById('profitMarginInput').value) || 0;
-      const isNew = document.getElementById('newThisWeekCheck').checked;
-      const urlVal = document.getElementById('prodUrlInput').value.trim();
-
-      const finalImg = uploadedCompressedImg || urlVal || getFallbackImage(title, category);
-
-      const sizes = [];
-      document.querySelectorAll('.size-checkbox:checked').forEach((cb) => sizes.push(cb.value));
-      if (sizes.length === 0) sizes.push('Free Size');
+      const finalImage =
+        uploadedBase64Image ||
+        imageUrl ||
+        'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=700&q=80';
 
       const newProduct = {
-        id: 'prod_' + Date.now(),
-        isSample: false,
+        id: 'p_' + Date.now(),
+        title,
         gender,
         category,
-        title,
-        description: description || `Curated ${category.toLowerCase()} from our weekly drop.`,
-        image: finalImg,
-        supplierCost,
-        margin,
-        sizes,
-        isNew,
-        inStock: true
+        cost,
+        price,
+        sizes: sizesRaw ? sizesRaw.split(',').map((s) => s.trim()).filter(Boolean) : ['Free Size'],
+        image: finalImage,
+        desc: desc || 'New weekly drop curated by Style For You.',
       };
 
       products.unshift(newProduct);
-      persistProducts();
+      localStorage.setItem(STORAGE_KEYS.PRODUCTS, JSON.stringify(products));
 
-      const retailPrice = supplierCost + margin;
-      const genderText = gender === 'Womens' ? "Women's" : "Men's";
-      const promoCaption =
-        `✨ *NEW THIS WEEK AT ${appSettings.brandName.toUpperCase()}* ✨\n\n` +
-        `🛍️ *${title}* (${genderText} ${category})\n` +
-        `💰 *Price:* ₹${retailPrice}\n` +
-        `📏 *Sizes:* ${sizes.join(', ')}\n` +
-        `${description ? `📝 ${description}\n` : ''}\n` +
-        `👇 *Tap link to view & order directly:*\n` +
-        `${window.location.href}`;
+      // Reset form
+      document.getElementById('new-title').value = '';
+      document.getElementById('new-cost').value = '';
+      document.getElementById('new-margin').value = '';
+      document.getElementById('new-price').value = '';
+      document.getElementById('new-image-url').value = '';
+      document.getElementById('new-image-file').value = '';
+      document.getElementById('new-desc').value = '';
+      uploadedBase64Image = '';
 
-      document.getElementById('broadcastCaptionArea').value = promoCaption;
-      document.getElementById('broadcastShareModal').classList.remove('hidden');
-
-      document.getElementById('addProductForm').reset();
-      clearSelectedPhoto();
-      syncCategoryOptions();
-      calculateCustomerPrice();
+      renderAdminProductList();
+      switchAdminTab('products');
+      showToast('New drop published!');
     }
 
-    function copyBroadcastCaption() {
-      const area = document.getElementById('broadcastCaptionArea');
-      area.select();
-      document.execCommand('copy');
-      showToast('WhatsApp Status post copied!');
-    }
-
-    function shareBroadcastWhatsApp() {
-      const txt = document.getElementById('broadcastCaptionArea').value;
-      window.open(`https://wa.me/?text=${encodeURIComponent(txt)}`, '_blank');
-    }
-
-    function closeBroadcastModal() {
-      document.getElementById('broadcastShareModal').classList.add('hidden');
-    }
-
-    // =========================================================================
-    // 9. TAB 2: MANAGE STOCK (WEEKLY)
-    // =========================================================================
-    function renderManageStockList() {
-      const box = document.getElementById('manageStockList');
-      if (products.length === 0) {
-        box.innerHTML = `<div class="bg-white p-8 rounded-2xl border border-stone-200 text-center text-xs text-stone-500">No products in your store yet.</div>`;
-        return;
-      }
-
-      box.innerHTML = products
-        .map((p) => {
-          const customerPrice = Number(p.supplierCost) + Number(p.margin);
-          const fallback = getFallbackImage(p.title, p.category);
-          const genderLabel = p.gender === 'Womens' ? "Women's" : "Men's";
-
-          return `
-          <div class="bg-white p-3 rounded-2xl border border-stone-200 flex items-center gap-3 ${!p.inStock ? 'opacity-65' : ''}">
-            <img src="${p.image || fallback}" onerror="this.onerror=null;this.src='${fallback}';" class="w-16 h-16 rounded-xl object-cover bg-cream shrink-0" />
-            <div class="flex-1 min-w-0">
-              <div class="flex items-center gap-1.5">
-                <span class="text-[10px] font-bold uppercase text-terracotta">${genderLabel} • ${p.category}</span>
-                ${!p.inStock ? '<span class="text-[9px] bg-stone-200 text-stone-700 font-bold px-1.5 py-0.5 rounded">SOLD OUT</span>' : ''}
-              </div>
-              <h4 class="font-serif font-bold text-base text-espresso truncate">${p.title}</h4>
-              <div class="flex flex-wrap items-center gap-x-2.5 gap-y-0.5 text-[11px] mt-0.5">
-                <span class="text-stone-500">Cost: ₹${p.supplierCost}</span>
-                <span class="text-espresso font-bold">Price: ₹${customerPrice}</span>
-                <span class="bg-emerald-50 text-emerald-700 font-bold px-1.5 py-0.2 rounded">Profit: +₹${p.margin}</span>
-              </div>
-            </div>
-            <div class="flex flex-col items-end gap-1.5 shrink-0">
-              <button onclick="toggleStockStatus('${p.id}')" class="px-2.5 py-1 rounded-lg text-[11px] font-bold transition ${
-                p.inStock
-                  ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-                  : 'bg-stone-100 text-stone-600 border border-stone-200'
-              }">
-                ${p.inStock ? 'In Stock' : 'Sold Out'}
-              </button>
-              <button onclick="deleteCatalogItem('${p.id}')" class="text-[11px] text-red-600 hover:underline font-semibold">
-                Delete
-              </button>
-            </div>
-          </div>`;
-        })
-        .join('');
-    }
-
-    function toggleStockStatus(id) {
-      const item = products.find((p) => p.id === id);
-      if (!item) return;
-      item.inStock = !item.inStock;
-      persistProducts();
-      renderManageStockList();
-      showToast(item.inStock ? 'Marked In Stock & visible!' : 'Marked Sold Out & hidden.');
-    }
-
-    function deleteCatalogItem(id) {
+    function deleteProduct(id) {
       products = products.filter((p) => p.id !== id);
-      persistProducts();
-      renderManageStockList();
-      showToast('Item deleted & storage freed!');
+      localStorage.setItem(STORAGE_KEYS.PRODUCTS, JSON.stringify(products));
+      renderAdminProductList();
+      showToast('Item removed from store');
     }
 
-    function clearSampleProducts() {
-      const before = products.length;
-      products = products.filter((p) => !p.isSample);
-      if (products.length === before) {
-        showToast('No demo items remaining.');
-        return;
-      }
-      persistProducts();
-      renderManageStockList();
-      showToast('All demo items cleared!');
+    function saveStoreSettings() {
+      const wa = document.getElementById('setting-whatsapp').value.trim();
+      const pin = document.getElementById('setting-pin').value.trim();
+
+      if (wa) settings.whatsappNumber = wa;
+      if (pin && pin.length === 4) settings.adminPin = pin;
+
+      localStorage.setItem(STORAGE_KEYS.SETTINGS, JSON.stringify(settings));
+      showToast('Store settings saved');
     }
 
-    // =========================================================================
-    // 10. TAB 3: ORDERS & PROFIT + CSV EXPORT
-    // =========================================================================
-    function renderOrdersHistoryTab() {
-      const totalOrders = orders.length;
-      const totalSales = orders.reduce((s, o) => s + Number(o.totalCustomer || 0), 0);
-      const totalProfit = orders.reduce((s, o) => s + Number(o.totalProfit || 0), 0);
-
-      document.getElementById('summaryTotalOrders').textContent = totalOrders;
-      document.getElementById('summaryTotalSales').textContent = `₹${totalSales.toLocaleString('en-IN')}`;
-      document.getElementById('summaryNetProfit').textContent = `₹${totalProfit.toLocaleString('en-IN')}`;
-
-      const listEl = document.getElementById('ordersHistoryList');
-      if (orders.length === 0) {
-        listEl.innerHTML = `
-          <div class="bg-white p-8 rounded-2xl border border-stone-200 text-center">
-            <p class="text-xs font-bold text-espresso">No orders recorded yet</p>
-            <p class="text-[11px] text-stone-500 mt-1">Orders placed through WhatsApp checkout will automatically appear here with profit breakdown.</p>
-          </div>`;
-        return;
-      }
-
-      listEl.innerHTML = orders
-        .map((ord, idx) => {
-          return `
-          <div class="bg-white p-4 rounded-2xl border border-stone-200 space-y-2.5 shadow-2xs">
-            <div class="flex items-center justify-between border-b border-stone-100 pb-2">
-              <div>
-                <span class="text-xs font-bold text-terracotta">${ord.id}</span>
-                <span class="text-[11px] text-stone-400 ml-2">${ord.date}</span>
-              </div>
-              <span class="bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-bold px-2.5 py-0.5 rounded-full">
-                Profit: +₹${ord.totalProfit}
-              </span>
-            </div>
-
-            <div class="text-xs space-y-1">
-              <p class="font-bold text-espresso">${ord.customerName} <span class="font-normal text-stone-500">(${ord.customerPhone})</span></p>
-              <p class="text-stone-600 leading-relaxed">${ord.address}</p>
-              <p class="text-espresso bg-cream p-2 rounded-xl border border-stone-100 mt-1.5 font-medium">
-                ${ord.itemsText}
-              </p>
-            </div>
-
-            <div class="flex items-center justify-between pt-1 text-[11px]">
-              <span class="text-stone-500">Paid: <strong class="text-espresso">₹${ord.totalCustomer}</strong> • Cost: <strong>₹${ord.totalSupplier}</strong></span>
-              <button onclick="copyAddressForSupplier(${idx})" class="bg-espresso hover:bg-terracotta text-white font-semibold px-3 py-1.5 rounded-lg transition">
-                Copy Address for Supplier
-              </button>
-            </div>
-          </div>`;
-        })
-        .join('');
+    // Banner & Toast Helpers
+    function dismissBanner() {
+      document.getElementById('install-banner').classList.add('hidden');
     }
 
-    function copyAddressForSupplier(idx) {
-      const ord = orders[idx];
-      if (!ord) return;
-      const text =
-        `*SHIPPING ADDRESS*\n` +
-        `Name: ${ord.customerName}\n` +
-        `Phone: ${ord.customerPhone}\n` +
-        `Address: ${ord.address}\n` +
-        `Item: ${ord.itemsText}`;
-
-      const temp = document.createElement('textarea');
-      temp.value = text;
-      document.body.appendChild(temp);
-      temp.select();
-      document.execCommand('copy');
-      document.body.removeChild(temp);
-      showToast('Address copied! Ready to paste to supplier.');
+    function openInstallGuide() {
+      document.getElementById('install-modal').classList.remove('hidden');
     }
 
-    function downloadCsvReport() {
-      if (orders.length === 0) {
-        showToast('No orders to export yet.');
-        return;
-      }
-      const headers = ['Order ID', 'Date', 'Customer Name', 'Phone', 'Address', 'Items', 'Customer Price', 'Supplier Cost', 'Net Profit'];
-      const rows = orders.map((o) => [
-        o.id,
-        o.date,
-        `"${o.customerName}"`,
-        o.customerPhone,
-        `"${o.address}"`,
-        `"${o.itemsText}"`,
-        o.totalCustomer,
-        o.totalSupplier,
-        o.totalProfit
-      ]);
-
-      const csv = [headers.join(','), ...rows.map((r) => r.join(','))].join('\n');
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = `StyleForYou_Orders_Profit_${new Date().toISOString().slice(0, 10)}.csv`;
-      a.click();
-      showToast('CSV Report downloaded!');
+    function closeInstallGuide() {
+      document.getElementById('install-modal').classList.add('hidden');
     }
 
-    // =========================================================================
-    // 11. TAB 4: STORE SETTINGS (CHANGE PIN, WHATSAPP NUMBER, BRAND DETAILS)
-    // =========================================================================
-    function populateSettingsForm() {
-      document.getElementById('settingsPhoneInput').value = appSettings.whatsappPhone || '8446079809';
-      document.getElementById('settingsNewPin').value = '';
-      document.getElementById('settingsConfirmPin').value = '';
-      document.getElementById('settingsBrandInput').value = appSettings.brandName || 'Style For You';
-      document.getElementById('settingsTaglineInput').value =
-        appSettings.tagline || "Curated Weekly Drops • Women's & Men's Fashion";
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-msg').textContent = msg;
+      toast.classList.remove('hidden');
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 2400);
     }
 
-    function saveWhatsAppSetting(e) {
-      e.preventDefault();
-      const raw = document.getElementById('settingsPhoneInput').value.replace(/\D/g, '');
-      if (raw.length !== 10) {
-        showToast('Please enter a valid 10-digit mobile number.');
-        return;
-      }
-      appSettings.whatsappPhone = raw;
-      persistSettings();
-      applyBrandSettingsToUI();
-      showToast(`WhatsApp order number updated to +91 ${raw}!`);
-    }
-
-    function savePinSetting(e) {
-      e.preventDefault();
-      const newPin = document.getElementById('settingsNewPin').value.trim();
-      const confirmPin = document.getElementById('settingsConfirmPin').value.trim();
-
-      if (!/^\d{4}$/.test(newPin)) {
-        showToast('PIN must be exactly 4 digits.');
-        return;
-      }
-      if (newPin !== confirmPin) {
-        showToast('PINs do not match. Please re-enter.');
-        return;
-      }
-
-      appSettings.pin = newPin;
-      appSettings.pinChanged = true;
-      persistSettings();
-
-      document.getElementById('settingsNewPin').value = '';
-      document.getElementById('settingsConfirmPin').value = '';
-      showToast('Admin PIN updated successfully!');
-    }
-
-    function saveBrandSetting(e) {
-      e.preventDefault();
-      const brand = document.getElementById('settingsBrandInput').value.trim();
-      const tag = document.getElementById('settingsTaglineInput').value.trim();
-      if (!brand) return;
-
-      appSettings.brandName = brand;
-      appSettings.tagline = tag || "Curated Weekly Drops • Women's & Men's Fashion";
-      persistSettings();
-      applyBrandSettingsToUI();
-      initDynamicPwaManifest();
-      showToast('Store name & tagline saved!');
-    }
-
-    function resetSettingsToDefault() {
-      appSettings = { ...DEFAULT_SETTINGS };
-      persistSettings();
-      applyBrandSettingsToUI();
-      populateSettingsForm();
-      initDynamicPwaManifest();
-      showToast('Settings restored to defaults (PIN: 1234).');
-    }
-
-    // =========================================================================
-    // 12. TOAST HELPER & INITIALIZATION
-    // =========================================================================
-    let toastTimeout = null;
-    function showToast(message) {
-      const box = document.getElementById('toastBanner');
-      document.getElementById('toastText').textContent = message;
-      box.classList.remove('hidden');
-      clearTimeout(toastTimeout);
-      toastTimeout = setTimeout(() => {
-        box.classList.add('hidden');
-      }, 2800);
-    }
-
-    window.addEventListener('DOMContentLoaded', () => {
-      loadAllData();
-      applyBrandSettingsToUI();
-      initDynamicPwaManifest();
-      renderSubFilterPills();
-      renderProductGrid();
-      if (window.lucide) {
-        lucide.createIcons();
-      }
-    });
+    window.addEventListener('DOMContentLoaded', initApp);
   </script>
 </body>
 </html>
