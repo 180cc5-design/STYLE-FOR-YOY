@@ -25,13 +25,14 @@
       backdrop-filter: blur(8px); border-bottom: 1px solid rgba(30,27,24,0.1); padding: 12px 16px 10px;
     }
     .top-row { display: flex; align-items: center; justify-content: space-between; }
+    .brand { touch-action: manipulation; cursor: pointer; user-select: none; -webkit-user-select: none; }
     .brand h1 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 700; line-height: 1; }
     .brand p { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--terra); margin-top: 4px; }
     .icon-btns { display: flex; gap: 8px; }
     .circle-btn {
       width: 38px; height: 38px; border-radius: 50%; border: 1px solid rgba(30,27,24,0.12);
       background: var(--sand); color: var(--ink); display: flex; align-items: center; justify-content: center;
-      cursor: pointer; position: relative; font-size: 16px;
+      cursor: pointer; position: relative; font-size: 16px; touch-action: manipulation;
     }
     .circle-btn.dark { background: var(--ink); color: var(--cream); border: none; }
     .badge-dot {
@@ -48,7 +49,7 @@
     .tabs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 10px; }
     .tab {
       padding: 6px 4px; border-radius: 99px; font-size: 11px; font-weight: 600;
-      background: #fff; color: var(--ink); border: 1px solid rgba(30,27,24,0.12); cursor: pointer;
+      background: #fff; color: var(--ink); border: 1px solid rgba(30,27,24,0.12); cursor: pointer; touch-action: manipulation;
     }
     .tab.active { background: var(--ink); color: var(--cream); border-color: var(--ink); }
     .tab.partner-tab { color: var(--partner); border-color: rgba(43,91,132,0.3); }
@@ -57,7 +58,7 @@
     .pills::-webkit-scrollbar { display: none; }
     .pill {
       padding: 5px 12px; border-radius: 99px; font-size: 11px; font-weight: 500; white-space: nowrap;
-      background: #fff; color: var(--muted); border: 1px solid rgba(30,27,24,0.1); cursor: pointer;
+      background: #fff; color: var(--muted); border: 1px solid rgba(30,27,24,0.1); cursor: pointer; touch-action: manipulation;
     }
     .pill.active { background: var(--terra); color: #fff; border-color: var(--terra); }
     main { flex: 1; padding: 14px 16px 90px; }
@@ -135,7 +136,7 @@
 <div class="app">
   <header>
     <div class="top-row">
-      <div id="brandHeader" class="brand" style="cursor:pointer; user-select:none;">
+      <div id="brandHeader" class="brand">
         <h1>Style For You</h1>
         <p>Curated Weekly Drops • Women's &amp; Men's</p>
       </div>
@@ -275,4 +276,271 @@
       </div>
       <div id="ownFields">
         <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px;">
-          <input id="fCost" type="number" class
+          <input id="fCost" type="number" class="input" placeholder="Cost ₹" oninput="calcPrice()" />
+          <input id="fMargin" type="number" class="input" placeholder="Profit ₹" oninput="calcPrice()" />
+          <input id="fPrice" type="number" class="input" placeholder="Sell ₹" />
+        </div>
+        <input id="fSizes" class="input" value="S, M, L, XL" placeholder="Sizes (comma separated)" />
+      </div>
+      <div id="partnerFields" class="hidden">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+          <input id="fPPrice" type="number" class="input" placeholder="Price ₹" />
+          <input id="fPStore" class="input" value="Amazon" placeholder="Store (Amazon/Myntra)" />
+        </div>
+        <input id="fPUrl" type="url" class="input" placeholder="Paste Affiliate Link (https://...)" />
+      </div>
+      <input id="fImg" class="input" placeholder="Image URL (or upload below)" />
+      <input type="file" accept="image/*" onchange="uploadImg(event)" style="font-size:11px; margin-top:6px;" />
+      <textarea id="fDesc" rows="2" class="input" placeholder="Short description"></textarea>
+      <button class="btn btn-terra" style="width:100%; margin-top:10px;" onclick="saveItem()">Save Item</button>
+    </div>
+
+    <div style="margin-top:16px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+        <strong style="font-size:12px;">Current Items</strong>
+        <button onclick="restoreDemo()" style="background:none; border:none; color:var(--terra); font-size:11px; text-decoration:underline; cursor:pointer;">Restore Samples</button>
+      </div>
+      <div id="adminList"></div>
+    </div>
+
+    <div style="background:#fff; border:1px solid rgba(30,27,24,0.1); border-radius:16px; padding:14px; margin-top:16px;">
+      <strong style="font-size:12px;">Settings</strong>
+      <input id="sWa" class="input" placeholder="WhatsApp Number (91...)" />
+      <input id="sPin" class="input" maxlength="4" placeholder="4-Digit PIN" />
+      <button class="btn btn-dark" style="width:100%; margin-top:10px;" onclick="saveSettings()">Update Settings</button>
+    </div>
+  </div>
+</div>
+
+<!-- Install Modal -->
+<div id="installModal" class="modal-bg center hidden">
+  <div class="box">
+    <h3 style="font-family:'Cormorant Garamond',serif; font-size:24px;">Save to Home Screen</h3>
+    <p style="font-size:12px; color:var(--muted); margin:8px 0 12px; line-height:1.5;">Tap Chrome's <strong>⋮</strong> menu (top right) → <strong>Add to Home screen</strong> to use Style For You like an app.</p>
+    <button class="btn btn-dark" style="width:100%;" onclick="toggleModal('installModal',false)">Got It</button>
+  </div>
+</div>
+
+<script>
+const K_PROD = 'sfy_p_v4', K_SET = 'sfy_s_v4', K_BAG = 'sfy_b_v4';
+const DEFAULTS = [
+  { id:'1', type:'own', name:'Champagne Satin Lounge Co-ord Set', gender:'Women', category:'Cord set', price:899, sizes:['S','M','L','XL'], inStock:true, image:'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600&q=80', desc:'Fluid satin-finish shirt & wide-leg trouser set.' },
+  { id:'2', type:'own', name:'Rose-Gold Petite Mesh Watch', gender:'Women', category:'Watch', price:749, sizes:['Free Size'], inStock:true, image:'https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=600&q=80', desc:'Minimalist mother-of-pearl dial with adjustable mesh strap.' },
+  { id:'3', type:'own', name:'Terracotta Pleated Midi Dress', gender:'Women', category:'Dress', price:999, sizes:['S','M','L'], inStock:true, image:'https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=600&q=80', desc:'Flattering A-line silhouette with soft pleats & waist tie.' },
+  { id:'4', type:'own', name:'Obsidian Chronograph Leather Watch', gender:'Men', category:'Watch', price:899, sizes:['Free Size'], inStock:true, image:'https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=600&q=80', desc:'Matte black dial with tan leather strap and date window.' },
+  { id:'5', type:'partner', partnerStore:'Amazon', partnerUrl:'https://www.amazon.in', name:'Structured Tan Crossbody Sling Bag', gender:'Women', category:'Bag', price:699, sizes:['Standard'], inStock:true, image:'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=600&q=80', desc:'Partner Deal: Gold-tone clasp & detachable shoulder strap.' },
+  { id:'6', type:'partner', partnerStore:'Myntra', partnerUrl:'https://www.myntra.com', name:'Classic Polarized Wayfarer Sunglasses', gender:'Men', category:'Sunglasses', price:599, sizes:['Standard'], inStock:true, image:'https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=600&q=80', desc:'Partner Deal: UV400 polarized lenses with matte frame.' }
+];
+let products = JSON.parse(localStorage.getItem(K_PROD)) || DEFAULTS;
+let settings = JSON.parse(localStorage.getItem(K_SET)) || { whatsapp:'918446079809', pin:'1234' };
+let bag = JSON.parse(localStorage.getItem(K_BAG)) || [];
+let curTab = 'All', curCat = 'All', curProd = null, curSize = '', taps = 0, tapT = null, holdT = null;
+
+const bh = document.getElementById('brandHeader');
+bh.addEventListener('pointerup', () => {
+  taps++; clearTimeout(tapT);
+  if (taps >= 5) { taps = 0; toggleModal('pinModal', true); }
+  else tapT = setTimeout(() => taps = 0, 3500);
+});
+bh.addEventListener('pointerdown', () => {
+  holdT = setTimeout(() => { taps = 0; toggleModal('pinModal', true); }, 2000);
+});
+bh.addEventListener('pointerleave', () => clearTimeout(holdT));
+bh.addEventListener('pointercancel', () => clearTimeout(holdT));
+
+if (new URLSearchParams(location.search).get('admin') === '1') toggleModal('pinModal', true);
+
+function saveAll() {
+  localStorage.setItem(K_PROD, JSON.stringify(products));
+  localStorage.setItem(K_SET, JSON.stringify(settings));
+  localStorage.setItem(K_BAG, JSON.stringify(bag));
+}
+function toggleModal(id, show) { document.getElementById(id).classList.toggle('hidden', !show); }
+function setTab(t) {
+  curTab = t; curCat = 'All';
+  ['All','Women','Men','Partner'].forEach(x => document.getElementById('tab-'+x).classList.toggle('active', x === t));
+  document.getElementById('bTag').textContent = t === 'Partner' ? '★ Curated Partner Deals' : '✨ Fresh Weekly Drop';
+  document.getElementById('bTitle').textContent = t === 'Partner' ? 'Top Partner Picks & Discounts' : 'Handpicked Styles, Direct to You';
+  document.getElementById('bSub').textContent = t === 'Partner' ? 'Shop directly on our trusted partner stores.' : 'Pick your size & tap Order on WhatsApp for instant confirmation.';
+  render();
+}
+function setCat(c) { curCat = c; render(); }
+function resetFilters() { document.getElementById('searchInput').value = ''; setTab('All'); }
+
+function render() {
+  const cats = curTab === 'Men' ? ['All','Watch','Sunglasses','Bag'] : ['All','Watch','Dress','Cord set','Sunglasses','Bag'];
+  document.getElementById('pills').innerHTML = cats.map(c => `<button class="pill ${curCat===c?'active':''}" onclick="setCat('${c}')">${c}</button>`).join('');
+  const q = document.getElementById('searchInput').value.trim().toLowerCase();
+  const list = products.filter(p => {
+    const isP = p.type === 'partner';
+    const mTab = curTab === 'All' ? true : (curTab === 'Partner' ? isP : (p.gender === curTab || p.gender === 'Unisex'));
+    const mCat = curCat === 'All' || p.category.toLowerCase() === curCat.toLowerCase();
+    const mQ = !q || p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q);
+    return mTab && mCat && mQ;
+  });
+  document.getElementById('countLabel').textContent = list.length + (list.length === 1 ? ' Item' : ' Items');
+  document.getElementById('empty').classList.toggle('hidden', list.length > 0);
+  document.getElementById('grid').innerHTML = list.map(p => {
+    const isP = p.type === 'partner';
+    return `<div class="card ${isP?'partner':''}" onclick="openProd('${p.id}')">
+      <div class="card-img">
+        <img src="${p.image}" alt="${p.name}" loading="lazy" />
+        <span class="tag-top ${isP?'partner':(!p.inStock?'sold':'')}">${isP?'★ Partner Deal':(p.inStock?'New This Week':'Sold Out')}</span>
+        <span class="tag-bot">${isP?(p.partnerStore||'Partner'):p.gender+"'s"} • ${p.category}</span>
+      </div>
+      <div class="card-body">
+        <div>
+          <div class="card-title">${p.name}</div>
+          <div class="card-sub">${isP?'Via '+(p.partnerStore||'Partner'):'Sizes: '+p.sizes.join(', ')}</div>
+        </div>
+        <div class="card-foot">
+          <span class="price">₹${p.price}</span>
+          <span class="cta-txt ${isP?'partner':''}">${isP?'View Deal ↗':'Select →'}</span>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+  updateBagBar();
+}
+
+function openProd(id) {
+  curProd = products.find(p => p.id === id);
+  if (!curProd) return;
+  const isP = curProd.type === 'partner';
+  document.getElementById('mImg').src = curProd.image;
+  document.getElementById('mCat').textContent = isP ? `Partner Pick • ${curProd.category}` : `${curProd.gender}'s ${curProd.category}`;
+  document.getElementById('mTitle').textContent = curProd.name;
+  document.getElementById('mPrice').textContent = '₹' + curProd.price;
+  document.getElementById('mDesc').textContent = curProd.desc;
+  document.getElementById('ownControls').classList.toggle('hidden', isP);
+  document.getElementById('partnerControls').classList.toggle('hidden', !isP);
+  if (isP) {
+    document.getElementById('partnerLink').textContent = `Buy on ${curProd.partnerStore || 'Partner Store'} ↗`;
+    document.getElementById('partnerLink').href = curProd.partnerUrl || '#';
+  } else {
+    curSize = curProd.sizes.length === 1 ? curProd.sizes[0] : '';
+    document.getElementById('sizeErr').classList.add('hidden');
+    document.getElementById('mNote').value = '';
+    renderSizes();
+  }
+  toggleModal('prodModal', true);
+}
+function renderSizes() {
+  document.getElementById('mSizes').innerHTML = curProd.sizes.map(s => `<button class="size-chip ${curSize===s?'active':''}" onclick="curSize='${s}';document.getElementById('sizeErr').classList.add('hidden');renderSizes();">${s}</button>`).join('');
+}
+function addToBag() {
+  if (!curProd.inStock) return alert('Sold out for this week.');
+  if (!curSize) return document.getElementById('sizeErr').classList.remove('hidden');
+  bag.push({ name: curProd.name, size: curSize, price: curProd.price, note: document.getElementById('mNote').value.trim() });
+  saveAll(); updateBagBar(); toggleModal('prodModal', false);
+}
+function orderWhatsApp() {
+  if (!curProd.inStock) return alert('Sold out for this week.');
+  if (!curSize) return document.getElementById('sizeErr').classList.remove('hidden');
+  const note = document.getElementById('mNote').value.trim();
+  const msg = `Hello *Style For You*! I want to order:\n\n• *Item:* ${curProd.name}\n• *Size:* ${curSize}\n• *Price:* ₹${curProd.price}\n• *Shipping:* Extra (as per delivery location)${note?'\n• *Note:* '+note:''}\n\nPlease share total with shipping & payment details!`;
+  window.open(`https://wa.me/${settings.whatsapp}?text=${encodeURIComponent(msg)}`, '_blank');
+}
+function updateBagBar() {
+  const b = document.getElementById('bagBadge'), f = document.getElementById('floatBar');
+  if (!bag.length) { b.classList.add('hidden'); f.classList.add('hidden'); return; }
+  const tot = bag.reduce((s, i) => s + Number(i.price), 0);
+  b.textContent = bag.length; b.classList.remove('hidden');
+  document.getElementById('floatCount').textContent = bag.length + (bag.length===1?' item':' items');
+  document.getElementById('floatTotal').textContent = '₹' + tot + ' →';
+  f.classList.remove('hidden');
+}
+function openBag() {
+  const list = document.getElementById('bagList'), foot = document.getElementById('bagFoot');
+  if (!bag.length) { list.innerHTML = '<p style="text-align:center;color:var(--muted);padding:30px 0;font-size:13px;">Your bag is empty.</p>'; foot.classList.add('hidden'); }
+  else {
+    foot.classList.remove('hidden');
+    list.innerHTML = bag.map((x, i) => `<div style="display:flex;justify-content:space-between;align-items:center;background:#fff;padding:10px;border-radius:12px;margin-bottom:8px;border:1px solid rgba(30,27,24,0.1);"><div><div style="font-size:12px;font-weight:700;">${x.name}</div><div style="font-size:11px;color:var(--muted);">Size: ${x.size} • ₹${x.price}</div></div><button onclick="bag.splice(${i},1);saveAll();openBag();updateBagBar();" style="color:#c00;background:none;border:none;font-size:11px;font-weight:700;cursor:pointer;">Remove</button></div>`).join('');
+    document.getElementById('bagSub').textContent = '₹' + bag.reduce((s, i) => s + Number(i.price), 0);
+  }
+  toggleModal('bagModal', true);
+}
+function checkoutBag() {
+  const tot = bag.reduce((s, i) => s + Number(i.price), 0);
+  const cust = document.getElementById('custInfo').value.trim();
+  const items = bag.map((x, i) => `${i+1}. *${x.name}* (${x.size}) — ₹${x.price}`).join('\n');
+  const msg = `Hello *Style For You*! Order details:\n\n${items}\n\n*Subtotal:* ₹${tot}\n*Shipping:* Extra (as per delivery location)${cust?'\n*Customer:* '+cust:''}\n\nPlease share final bill with shipping!`;
+  window.open(`https://wa.me/${settings.whatsapp}?text=${encodeURIComponent(msg)}`, '_blank');
+}
+function checkPin() {
+  if (document.getElementById('pinInput').value === settings.pin) {
+    toggleModal('pinModal', false);
+    document.getElementById('sWa').value = settings.whatsapp;
+    document.getElementById('sPin').value = settings.pin;
+    renderAdmin(); toggleModal('adminModal', true);
+  } else document.getElementById('pinErr').classList.remove('hidden');
+}
+function toggleAdminFields() {
+  const isP = document.getElementById('fType').value === 'partner';
+  document.getElementById('ownFields').classList.toggle('hidden', isP);
+  document.getElementById('partnerFields').classList.toggle('hidden', !isP);
+}
+function calcPrice() {
+  const c = Number(document.getElementById('fCost').value)||0, m = Number(document.getElementById('fMargin').value)||0;
+  if (c || m) document.getElementById('fPrice').value = c + m;
+}
+function uploadImg(e) {
+  const f = e.target.files[0]; if (!f) return;
+  const r = new FileReader();
+  r.onload = ev => {
+    const img = new Image();
+    img.onload = () => {
+      const c = document.createElement('canvas'), s = Math.min(1, 500/img.width);
+      c.width = img.width*s; c.height = img.height*s;
+      c.getContext('2d').drawImage(img,0,0,c.width,c.height);
+      document.getElementById('fImg').value = c.toDataURL('image/jpeg', 0.75);
+    };
+    img.src = ev.target.result;
+  };
+  r.readAsDataURL(f);
+}
+function saveItem() {
+  const type = document.getElementById('fType').value, name = document.getElementById('fName').value.trim();
+  const gender = document.getElementById('fGender').value, category = document.getElementById('fCat').value;
+  const image = document.getElementById('fImg').value.trim() || 'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=600&q=80';
+  const desc = document.getElementById('fDesc').value.trim() || 'Curated weekly drop piece.';
+  if (!name) return alert('Enter product name');
+  let item = { id: 'p_'+Date.now(), type, name, gender, category, image, desc, inStock: true };
+  if (type === 'partner') {
+    item.price = Number(document.getElementById('fPPrice').value)||0;
+    item.partnerStore = document.getElementById('fPStore').value.trim()||'Amazon';
+    item.partnerUrl = document.getElementById('fPUrl').value.trim();
+    item.sizes = ['Standard'];
+    if (!item.price || !item.partnerUrl) return alert('Enter price and affiliate link');
+  } else {
+    item.price = Number(document.getElementById('fPrice').value)||0;
+    item.sizes = document.getElementById('fSizes').value.split(',').map(s=>s.trim()).filter(Boolean);
+    if (!item.price) return alert('Enter selling price');
+  }
+  products.unshift(item); saveAll(); renderAdmin(); render();
+  document.getElementById('fName').value = ''; document.getElementById('fImg').value = ''; document.getElementById('fDesc').value = '';
+}
+function renderAdmin() {
+  document.getElementById('adminList').innerHTML = products.map((p, i) => `
+    <div style="display:flex;align-items:center;gap:10px;background:#fff;padding:8px;border-radius:12px;margin-bottom:8px;border:1px solid rgba(30,27,24,0.1);">
+      <img src="${p.image}" style="width:44px;height:50px;object-fit:cover;border-radius:8px;" />
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${p.name}</div>
+        <div style="font-size:11px;color:var(--muted);">${p.type==='partner'?'★ Partner':'Own'} • ₹${p.price}</div>
+      </div>
+      ${p.type!=='partner'?`<button onclick="products[${i}].inStock=!products[${i}].inStock;saveAll();renderAdmin();render();" style="font-size:10px;padding:4px 8px;border-radius:99px;border:none;background:${p.inStock?'#dcfce7':'#fee2e2'};">${p.inStock?'In Stock':'Sold Out'}</button>`:''}
+      <button onclick="products.splice(${i},1);saveAll();renderAdmin();render();" style="color:#c00;background:none;border:none;font-size:11px;font-weight:700;">Del</button>
+    </div>
+  `).join('');
+}
+function restoreDemo() { products = [...DEFAULTS]; saveAll(); renderAdmin(); render(); }
+function saveSettings() {
+  const w = document.getElementById('sWa').value.replace(/\D/g,''), p = document.getElementById('sPin').value.trim();
+  if (w.length >= 10) settings.whatsapp = w;
+  if (p.length === 4) settings.pin = p;
+  saveAll(); alert('Saved!');
+}
+render();
+</script>
+</body>
+</html>
