@@ -1,11 +1,10 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Style For You &bull; Curated Weekly Drops</title>
-  <meta name="theme-color" content="#FAF7F2" />
+  <meta name="theme-color" content="#FAF8F5" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="Style For You" />
@@ -18,1222 +17,843 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            cream: '#FAF7F2',
-            sand: '#F2ECE1',
-            terracotta: '#C46D4E',
-            terracottaDark: '#A8573B',
-            charcoal: '#1F1D1A',
-            muted: '#6E685F',
+            cream: '#FAF8F5',
+            sand: '#F3EFEA',
+            ink: '#1E1B18',
+            muted: '#6E655F',
+            terracotta: '#B85D3B',
+            terracottaDark: '#9A4A2C',
+            whatsapp: '#25D366',
+            whatsappDark: '#1EBE5D',
           },
           fontFamily: {
             serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
-            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
-          },
-        },
-      },
-    };
+            sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+          }
+        }
+      }
+    }
   </script>
 
   <style>
     body {
-      background-color: #FAF7F2;
-      color: #1F1D1A;
+      background-color: #FAF8F5;
+      color: #1E1B18;
       font-family: 'Plus Jakarta Sans', sans-serif;
       -webkit-tap-highlight-color: transparent;
+      overscroll-behavior-y: none;
     }
-    .no-scrollbar::-webkit-scrollbar {
-      display: none;
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    @keyframes slideUp {
+      from { transform: translateY(100%); opacity: 0.5; }
+      to { transform: translateY(0); opacity: 1; }
     }
-    .no-scrollbar {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .animate-fade-up {
-      animation: fadeUp 0.25s ease-out forwards;
-    }
+    .animate-slide-up { animation: slideUp 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
   </style>
 </head>
-<body class="min-h-screen flex flex-col max-w-md mx-auto bg-cream shadow-sm relative selection:bg-terracotta/20">
-
-  <!-- Top Install / Shortcut Banner -->
-  <div id="install-banner" class="bg-charcoal text-cream px-3.5 py-2.5 flex items-center justify-between gap-2 text-xs">
-    <div class="flex items-center gap-2.5 min-w-0">
-      <div class="w-8 h-8 rounded-full bg-terracotta text-white font-serif font-bold text-sm flex items-center justify-center shrink-0">
-        SFY
-      </div>
-      <div class="truncate">
-        <p class="font-semibold text-white truncate">Get the Style For You App</p>
-        <p class="text-stone-300 text-[11px] truncate">1-tap access to weekly drops</p>
-      </div>
-    </div>
-    <div class="flex items-center gap-1.5 shrink-0">
-      <button onclick="openInstallGuide()" class="bg-terracotta hover:bg-terracottaDark text-white font-semibold px-3 py-1.5 rounded-full text-[11px] transition active:scale-95">
-        Add Shortcut
-      </button>
-      <button onclick="dismissBanner()" aria-label="Close banner" class="p-1 text-stone-400 hover:text-white">
-        <i data-lucide="x" class="w-4 h-4"></i>
-      </button>
-    </div>
-  </div>
+<body class="min-h-screen flex flex-col max-w-md mx-auto bg-cream shadow-xl relative">
 
   <!-- Sticky Header -->
-  <header class="sticky top-0 z-30 bg-cream/95 backdrop-blur-md border-b border-stone-200/80 px-4 pt-3.5 pb-3">
-    <div class="flex items-center justify-between gap-2">
-      <!-- Secret 5-tap trigger on Brand Title for Reseller Admin -->
-      <div id="secret-brand-trigger" onclick="handleSecretTitleTap()" class="cursor-pointer select-none">
-        <h1 class="font-serif text-[28px] leading-none font-bold tracking-tight text-charcoal">
-          Style For You
-        </h1>
-        <p class="text-[11px] font-medium text-terracotta mt-1">
-          Curated Weekly Drops &bull; Women's &amp; Men's
-        </p>
+  <header class="sticky top-0 z-30 bg-cream/95 backdrop-blur-md border-b border-ink/10 px-4 pt-3 pb-2.5">
+    <div class="flex items-center justify-between">
+      <div id="brandHeader" class="select-none cursor-pointer">
+        <h1 class="font-serif text-3xl font-bold tracking-tight text-ink leading-none">Style For You</h1>
+        <p class="text-[11px] font-medium tracking-wider uppercase text-terracotta mt-1">Curated Weekly Drops &bull; Women's &amp; Men's</p>
       </div>
-
       <div class="flex items-center gap-2">
-        <button onclick="openInstallGuide()" title="Save App Shortcut" class="w-10 h-10 rounded-full bg-white border border-stone-200 flex items-center justify-center text-charcoal hover:bg-sand transition active:scale-95">
-          <i data-lucide="smartphone" class="w-4 h-4"></i>
+        <button id="installBtn" onclick="openInstallModal()" title="Save App Shortcut" class="w-9 h-9 rounded-full bg-sand border border-ink/10 flex items-center justify-center text-ink hover:bg-ink/5 transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
         </button>
-
-        <button onclick="toggleCart(true)" aria-label="Open Bag" class="relative w-10 h-10 rounded-full bg-charcoal text-white flex items-center justify-center shadow-sm hover:bg-stone-800 transition active:scale-95">
-          <i data-lucide="shopping-bag" class="w-4 h-4"></i>
-          <span id="cart-badge" class="hidden absolute -top-1 -right-1 w-5 h-5 rounded-full bg-terracotta text-white text-[10px] font-bold flex items-center justify-center border-2 border-cream">
-            0
-          </span>
+        <button onclick="openBagModal()" class="relative w-10 h-10 rounded-full bg-ink text-cream flex items-center justify-center shadow-sm active:scale-95 transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+          <span id="bagCountBadge" class="hidden absolute -top-1 -right-1 w-5 h-5 rounded-full bg-terracotta text-white text-[11px] font-bold flex items-center justify-center shadow">0</span>
         </button>
       </div>
     </div>
 
     <!-- Search Bar -->
     <div class="mt-3 relative">
-      <i data-lucide="search" class="w-4 h-4 text-muted absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none"></i>
-      <input
-        id="search-input"
-        type="text"
-        oninput="handleSearch(this.value)"
-        placeholder="Search watches, dresses, cord sets, sunglasses..."
-        class="w-full bg-white border border-stone-200/90 rounded-full pl-10 pr-9 py-2 text-xs text-charcoal placeholder:text-stone-400 focus:outline-none focus:border-terracotta transition"
-      />
-      <button id="clear-search-btn" onclick="clearSearch()" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-stone-400 hover:text-charcoal">
-        <i data-lucide="x-circle" class="w-4 h-4"></i>
-      </button>
+      <svg class="w-4 h-4 text-muted absolute left-3.5 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z"/></svg>
+      <input id="searchInput" type="text" oninput="renderProducts()" placeholder="Search watches, dresses, cord sets, sunglasses..." class="w-full bg-white border border-ink/10 rounded-full pl-9 pr-4 py-2 text-xs text-ink placeholder:text-muted focus:outline-none focus:border-terracotta" />
     </div>
 
     <!-- Gender Tabs -->
     <div class="grid grid-cols-3 gap-2 mt-3">
-      <button onclick="setGenderFilter('All')" id="gender-All" class="gender-btn py-1.5 px-3 rounded-full text-xs font-semibold bg-charcoal text-white transition">
-        All Drops
-      </button>
-      <button onclick="setGenderFilter('Women')" id="gender-Women" class="gender-btn py-1.5 px-3 rounded-full text-xs font-semibold bg-white text-charcoal border border-stone-200 transition">
-        Women's
-      </button>
-      <button onclick="setGenderFilter('Men')" id="gender-Men" class="gender-btn py-1.5 px-3 rounded-full text-xs font-semibold bg-white text-charcoal border border-stone-200 transition">
-        Men's
-      </button>
+      <button onclick="setGender('All')" id="tab-All" class="gender-tab py-1.5 rounded-full text-xs font-semibold bg-ink text-cream transition">All Drops</button>
+      <button onclick="setGender('Women')" id="tab-Women" class="gender-tab py-1.5 rounded-full text-xs font-semibold bg-white text-ink border border-ink/10 transition">Women's</button>
+      <button onclick="setGender('Men')" id="tab-Men" class="gender-tab py-1.5 rounded-full text-xs font-semibold bg-white text-ink border border-ink/10 transition">Men's</button>
     </div>
 
     <!-- Category Pills -->
-    <div id="category-pills" class="flex items-center gap-2 overflow-x-auto no-scrollbar mt-2.5 pb-0.5">
-      <!-- Populated dynamically via JS -->
-    </div>
+    <div id="categoryPills" class="flex items-center gap-1.5 overflow-x-auto no-scrollbar mt-2.5 pb-0.5"></div>
   </header>
 
-  <!-- Main Storefront Content -->
-  <main class="flex-1 px-4 pt-3.5 pb-12">
-    <!-- Weekly Drop Hero Banner -->
-    <div class="bg-sand/90 border border-stone-200/70 rounded-2xl p-4 mb-4 flex items-center justify-between gap-3">
+  <!-- Main Catalog -->
+  <main class="flex-1 px-4 pt-3 pb-24">
+    <!-- Weekly Drop Banner -->
+    <div class="bg-gradient-to-r from-[#EFE6DD] to-[#F7F1EB] border border-terracotta/20 rounded-2xl p-3.5 mb-4 flex items-center justify-between">
       <div>
-        <span class="inline-flex items-center gap-1 bg-white text-terracotta text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full shadow-2xs">
-          <i data-lucide="sparkles" class="w-3 h-3"></i> Fresh Weekly Drop
-        </span>
-        <h2 class="font-serif text-xl font-bold text-charcoal mt-1.5 leading-snug">
-          Handpicked Styles, Direct to You
-        </h2>
-        <p class="text-[11px] text-muted mt-0.5 leading-relaxed">
-          Select your size &amp; tap Order on WhatsApp for instant confirmation.
-        </p>
+        <span class="inline-block text-[10px] font-bold uppercase tracking-widest text-terracotta bg-white/80 px-2 py-0.5 rounded-full mb-1">&#10024; Fresh Weekly Drop</span>
+        <h2 class="font-serif text-xl font-bold text-ink leading-tight">Handpicked Styles, Direct to You</h2>
+        <p class="text-[11px] text-muted mt-0.5">Select your size &amp; tap Order on WhatsApp for instant confirmation.</p>
       </div>
-      <div class="shrink-0 bg-white border border-stone-200/80 rounded-full px-3 py-1.5 text-xs font-bold text-charcoal shadow-2xs">
-        <span id="item-count">0</span> Items
+      <div class="text-right shrink-0 ml-2">
+        <span id="dropCountLabel" class="text-xs font-bold text-ink bg-white px-2.5 py-1 rounded-xl border border-ink/10 shadow-sm">0 Items</span>
       </div>
     </div>
 
     <!-- Product Grid -->
-    <div id="product-grid" class="grid grid-cols-2 gap-3.5">
-      <!-- Product Cards Rendered via JS -->
-    </div>
+    <div id="productGrid" class="grid grid-cols-2 gap-3"></div>
 
     <!-- Empty State -->
-    <div id="empty-state" class="hidden text-center py-12 px-4">
-      <div class="w-12 h-12 rounded-full bg-sand text-terracotta flex items-center justify-center mx-auto mb-3">
-        <i data-lucide="search-x" class="w-6 h-6"></i>
-      </div>
-      <h3 class="font-serif text-xl font-bold text-charcoal">No matching styles found</h3>
-      <p class="text-xs text-muted mt-1">Try switching category tabs or clearing your search.</p>
-      <button onclick="resetFilters()" class="mt-4 bg-charcoal text-white text-xs font-semibold px-4 py-2 rounded-full">
-        Show All Styles
-      </button>
+    <div id="emptyState" class="hidden text-center py-12">
+      <p class="font-serif text-2xl font-bold text-ink">No styles found</p>
+      <p class="text-xs text-muted mt-1">Try switching the category or clearing your search.</p>
+      <button onclick="resetFilters()" class="mt-4 px-4 py-2 rounded-full bg-ink text-cream text-xs font-semibold">Show All Styles</button>
     </div>
   </main>
 
-  <!-- Clean Customer Footer (No Visible Admin Button) -->
-  <footer class="border-t border-stone-200/80 bg-white/60 px-4 py-5 text-center text-[11px] text-muted">
-    <p class="font-serif text-base font-bold text-charcoal">Style For You</p>
-    <p class="mt-0.5">Curated Women's &amp; Men's Fashion &bull; Direct WhatsApp Orders</p>
-    <p class="mt-1 text-[10px] text-stone-400">Shipping charges calculated extra as per delivery location</p>
+  <!-- Subtle Footer (No visible admin button) -->
+  <footer class="border-t border-ink/10 bg-sand/70 px-4 py-4 text-center">
+    <p class="text-[11px] text-muted">&copy; Style For You &bull; Curated Fashion &amp; Accessories</p>
   </footer>
 
-  <!-- ========================================== -->
-  <!-- PRODUCT DETAIL & SIZE MODAL                -->
-  <!-- ========================================== -->
-  <div id="product-modal" class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-end sm:items-center justify-center p-0 sm:p-4">
-    <div class="bg-cream w-full max-w-md rounded-t-3xl sm:rounded-3xl overflow-hidden shadow-2xl animate-fade-up max-h-[90vh] flex flex-col">
-      <div class="relative aspect-[4/3] bg-sand overflow-hidden">
-        <img id="modal-img" src="" alt="Product" class="w-full h-full object-cover" />
-        <button onclick="closeProductModal()" class="absolute top-3 right-3 w-9 h-9 rounded-full bg-white/90 text-charcoal flex items-center justify-center shadow-md">
-          <i data-lucide="x" class="w-4 h-4"></i>
-        </button>
-        <span id="modal-badge" class="absolute top-3 left-3 bg-terracotta text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">
-          New This Week
-        </span>
+  <!-- Floating Bag Bar -->
+  <div id="floatingBagBar" class="hidden fixed bottom-4 left-4 right-4 max-w-md mx-auto z-30">
+    <button onclick="openBagModal()" class="w-full bg-ink text-cream rounded-2xl px-4 py-3.5 shadow-xl flex items-center justify-between active:scale-[0.99] transition">
+      <div class="flex items-center gap-2.5">
+        <span id="floatingBagCount" class="bg-terracotta text-white text-xs font-bold px-2.5 py-0.5 rounded-full">1 item</span>
+        <span class="text-xs font-semibold">View Shopping Bag</span>
       </div>
+      <div class="flex items-center gap-1.5 font-bold text-sm">
+        <span id="floatingBagTotal">&#8377;0</span>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+      </div>
+    </button>
+  </div>
 
-      <div class="p-5 overflow-y-auto">
-        <p id="modal-category" class="text-[11px] font-semibold text-terracotta uppercase tracking-wider"></p>
-        <h3 id="modal-title" class="font-serif text-2xl font-bold text-charcoal mt-0.5"></h3>
-        <div class="flex items-baseline gap-2 mt-1">
-          <span id="modal-price" class="text-lg font-bold text-charcoal"></span>
-          <span class="text-[11px] text-muted">+ Shipping extra as per location</span>
+  <!-- Product Quick-View & Order Modal -->
+  <div id="productModal" class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-end justify-center">
+    <div class="bg-cream w-full max-w-md rounded-t-3xl max-h-[92vh] overflow-y-auto animate-slide-up shadow-2xl">
+      <div class="relative">
+        <img id="modalImg" src="" alt="" class="w-full h-72 object-cover bg-sand" />
+        <button onclick="closeProductModal()" class="absolute top-3 right-3 w-9 h-9 rounded-full bg-white/90 text-ink flex items-center justify-center shadow">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+        <span id="modalBadge" class="absolute bottom-3 left-3 bg-ink/85 text-cream text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full"></span>
+      </div>
+      <div class="p-5">
+        <div class="flex items-start justify-between gap-2">
+          <div>
+            <p id="modalCategory" class="text-[11px] font-semibold uppercase tracking-wider text-terracotta"></p>
+            <h3 id="modalTitle" class="font-serif text-2xl font-bold text-ink mt-0.5"></h3>
+          </div>
+          <p id="modalPrice" class="text-xl font-bold text-ink shrink-0"></p>
         </div>
-
-        <p id="modal-desc" class="text-xs text-muted mt-2.5 leading-relaxed"></p>
+        <p id="modalDesc" class="text-xs text-muted leading-relaxed mt-2"></p>
 
         <!-- Size Selector -->
         <div class="mt-4">
-          <label class="block text-xs font-bold text-charcoal mb-2">Select Size / Variant:</label>
-          <div id="modal-sizes" class="flex flex-wrap gap-2"></div>
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-ink">Select Size / Variant</span>
+            <span id="sizeError" class="hidden text-[11px] font-semibold text-red-600">Please pick a size</span>
+          </div>
+          <div id="modalSizes" class="flex flex-wrap gap-2 mt-2"></div>
+        </div>
+
+        <!-- Customer Note -->
+        <div class="mt-4">
+          <label class="text-xs font-bold text-ink block">Optional Note (Color preference / Pincode)</label>
+          <input id="modalNote" type="text" placeholder="e.g. Need delivery in Nashik 422001" class="mt-1.5 w-full bg-white border border-ink/15 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-terracotta" />
         </div>
 
         <!-- Action Buttons -->
         <div class="grid grid-cols-2 gap-2.5 mt-5">
-          <button onclick="addSelectedToCart()" class="py-3 px-4 rounded-xl border border-charcoal text-charcoal font-semibold text-xs flex items-center justify-center gap-1.5 hover:bg-sand transition active:scale-95">
-            <i data-lucide="shopping-bag" class="w-4 h-4"></i> Add to Bag
+          <button onclick="addCurrentToBag()" class="py-3 rounded-xl border-2 border-ink text-ink text-xs font-bold hover:bg-ink/5 active:scale-98 transition">
+            Add to Bag
           </button>
-          <button onclick="orderSingleOnWhatsApp()" class="py-3 px-4 rounded-xl bg-[#25D366] hover:bg-[#1EBE5D] text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm transition active:scale-95">
-            <i data-lucide="message-circle" class="w-4 h-4"></i> Order on WhatsApp
+          <button onclick="orderSingleOnWhatsApp()" class="py-3 rounded-xl bg-whatsapp hover:bg-whatsappDark text-white text-xs font-bold shadow-md flex items-center justify-center gap-1.5 active:scale-98 transition">
+            <span>Order on WhatsApp</span>
           </button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ========================================== -->
-  <!-- SHOPPING BAG / CART DRAWER                 -->
-  <!-- ========================================== -->
-  <div id="cart-drawer" class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex justify-end">
-    <div class="bg-cream w-full max-w-md h-full flex flex-col shadow-2xl animate-fade-up">
-      <!-- Drawer Header -->
-      <div class="px-4 py-4 bg-white border-b border-stone-200 flex items-center justify-between">
-        <div class="flex items-center gap-2">
-          <i data-lucide="shopping-bag" class="w-5 h-5 text-terracotta"></i>
-          <h3 class="font-serif text-xl font-bold text-charcoal">Your Shopping Bag</h3>
-        </div>
-        <button onclick="toggleCart(false)" class="w-9 h-9 rounded-full bg-cream text-charcoal flex items-center justify-center">
-          <i data-lucide="x" class="w-4 h-4"></i>
+  <!-- Shopping Bag Drawer Modal -->
+  <div id="bagModal" class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-end justify-center">
+    <div class="bg-cream w-full max-w-md rounded-t-3xl max-h-[90vh] flex flex-col animate-slide-up shadow-2xl">
+      <div class="px-5 py-4 border-b border-ink/10 flex items-center justify-between">
+        <h3 class="font-serif text-2xl font-bold text-ink">Your Shopping Bag</h3>
+        <button onclick="closeBagModal()" class="w-8 h-8 rounded-full bg-sand flex items-center justify-center text-ink">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
         </button>
       </div>
-
-      <!-- Cart Items List -->
-      <div id="cart-items-container" class="flex-1 overflow-y-auto p-4 space-y-3">
-        <!-- Rendered via JS -->
-      </div>
-
-      <!-- Cart Footer & Customer Details -->
-      <div id="cart-footer" class="bg-white border-t border-stone-200 p-4 space-y-3">
-        <!-- Customer Quick Inputs -->
-        <div class="grid grid-cols-2 gap-2">
-          <input
-            id="cust-name"
-            type="text"
-            placeholder="Your Name (optional)"
-            class="bg-cream border border-stone-200 rounded-xl px-3 py-2 text-xs text-charcoal focus:outline-none focus:border-terracotta"
-          />
-          <input
-            id="cust-city"
-            type="text"
-            placeholder="City / Pincode"
-            class="bg-cream border border-stone-200 rounded-xl px-3 py-2 text-xs text-charcoal focus:outline-none focus:border-terracotta"
-          />
+      <div id="bagItemsContainer" class="p-5 overflow-y-auto flex-1 space-y-3"></div>
+      <div id="bagFooter" class="p-5 border-t border-ink/10 bg-white">
+        <div class="flex items-center justify-between text-xs text-muted mb-1">
+          <span>Shipping Charges</span>
+          <span class="font-semibold text-terracotta">Extra (as per location)</span>
         </div>
-
-        <!-- Totals & Shipping Extra Notice -->
-        <div class="bg-sand/70 rounded-xl p-3 space-y-1.5">
-          <div class="flex items-center justify-between text-xs text-muted">
-            <span>Items Subtotal</span>
-            <span id="cart-subtotal" class="font-bold text-charcoal">&#8377;0</span>
-          </div>
-          <div class="flex items-center justify-between text-xs">
-            <span class="text-muted flex items-center gap-1">
-              <i data-lucide="truck" class="w-3.5 h-3.5 text-terracotta"></i> Shipping Charges
-            </span>
-            <span class="font-semibold text-terracotta">Extra (as per delivery location)</span>
-          </div>
-          <div class="border-t border-stone-200/80 pt-1.5 flex items-center justify-between text-sm font-bold text-charcoal">
-            <span>Estimated Total</span>
-            <span><span id="cart-total">&#8377;0</span> <span class="text-[11px] font-normal text-muted">+ Shipping</span></span>
-          </div>
+        <div class="flex items-center justify-between text-sm font-bold text-ink mb-3">
+          <span>Products Subtotal</span>
+          <span id="bagSubtotal">&#8377;0</span>
         </div>
-
-        <button onclick="checkoutOnWhatsApp()" class="w-full py-3.5 px-4 rounded-xl bg-[#25D366] hover:bg-[#1EBE5D] text-white font-bold text-sm flex items-center justify-center gap-2 shadow-md transition active:scale-95">
-          <i data-lucide="message-circle" class="w-5 h-5"></i> Send Order on WhatsApp
+        <input id="bagCustomerName" type="text" placeholder="Your Name & City / Pincode" class="w-full bg-cream border border-ink/15 rounded-xl px-3 py-2.5 text-xs mb-3 focus:outline-none focus:border-terracotta" />
+        <button onclick="checkoutBagOnWhatsApp()" class="w-full py-3.5 rounded-xl bg-whatsapp hover:bg-whatsappDark text-white text-xs font-bold shadow-md flex items-center justify-center gap-2">
+          <span>Send Full Order on WhatsApp</span>
         </button>
       </div>
     </div>
   </div>
 
-  <!-- ========================================== -->
-  <!-- SECRET RESELLER ADMIN PIN MODAL            -->
-  <!-- ========================================== -->
-  <div id="pin-modal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
-    <div class="bg-white w-full max-w-xs rounded-3xl p-6 text-center shadow-2xl animate-fade-up">
-      <div class="w-12 h-12 rounded-full bg-terracotta/15 text-terracotta flex items-center justify-center mx-auto mb-3">
-        <i data-lucide="lock" class="w-5 h-5"></i>
-      </div>
-      <h3 class="font-serif text-2xl font-bold text-charcoal">Reseller Admin</h3>
-      <p class="text-xs text-muted mt-1">Enter your 4-digit PIN to manage weekly drops &amp; margins.</p>
-
-      <input
-        id="pin-input"
-        type="password"
-        inputmode="numeric"
-        maxlength="4"
-        placeholder="&bull; &bull; &bull; &bull;"
-        onkeyup="if(event.key === 'Enter') verifyPin()"
-        class="mt-4 w-full text-center tracking-[0.5em] text-xl font-bold bg-cream border border-stone-300 rounded-2xl py-3 focus:outline-none focus:border-terracotta"
-      />
-      <p id="pin-error" class="hidden text-[11px] text-red-600 font-semibold mt-2">Incorrect PIN. Try again.</p>
-
-      <div class="grid grid-cols-2 gap-2 mt-4">
-        <button onclick="closePinModal()" class="py-2.5 rounded-xl bg-stone-100 text-charcoal text-xs font-semibold">
-          Cancel
-        </button>
-        <button onclick="verifyPin()" class="py-2.5 rounded-xl bg-charcoal text-white text-xs font-semibold">
-          Unlock
-        </button>
+  <!-- Hidden Admin PIN Modal -->
+  <div id="pinModal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-cream w-full max-w-xs rounded-3xl p-6 text-center shadow-2xl">
+      <span class="inline-block text-[10px] font-bold uppercase tracking-widest text-terracotta bg-terracotta/10 px-2.5 py-0.5 rounded-full">Owner Access</span>
+      <h3 class="font-serif text-2xl font-bold text-ink mt-1">Reseller Admin</h3>
+      <p class="text-xs text-muted mt-1">Enter your 4-digit PIN (Default: 1234)</p>
+      <input id="pinInput" type="password" inputmode="numeric" maxlength="4" placeholder="&bull;&bull;&bull;&bull;" class="mt-4 w-36 text-center tracking-[0.5em] text-xl font-bold bg-white border border-ink/20 rounded-xl py-2.5 focus:outline-none focus:border-terracotta" />
+      <p id="pinError" class="hidden text-xs text-red-600 font-semibold mt-2">Incorrect PIN. Try again.</p>
+      <div class="grid grid-cols-2 gap-2 mt-5">
+        <button onclick="closePinModal()" class="py-2.5 rounded-xl border border-ink/15 text-xs font-semibold text-muted">Cancel</button>
+        <button onclick="verifyPin()" class="py-2.5 rounded-xl bg-ink text-cream text-xs font-bold">Unlock</button>
       </div>
     </div>
   </div>
 
-  <!-- ========================================== -->
-  <!-- RESELLER ADMIN DASHBOARD MODAL             -->
-  <!-- ========================================== -->
-  <div id="admin-modal" class="hidden fixed inset-0 z-50 bg-cream overflow-y-auto">
-    <div class="max-w-md mx-auto min-h-screen flex flex-col">
-      <!-- Admin Header -->
-      <div class="sticky top-0 z-20 bg-charcoal text-white px-4 py-3.5 flex items-center justify-between">
-        <div>
-          <h2 class="font-serif text-xl font-bold leading-none">Style For You &bull; Admin</h2>
-          <p class="text-[11px] text-stone-300 mt-1">Manage Weekly Catalog &amp; Profit Margins</p>
-        </div>
-        <button onclick="closeAdminPanel()" class="bg-white/15 hover:bg-white/25 text-white text-xs font-semibold px-3 py-1.5 rounded-full flex items-center gap-1">
-          <i data-lucide="eye" class="w-3.5 h-3.5"></i> View Store
-        </button>
+  <!-- Reseller Admin Dashboard Modal -->
+  <div id="adminModal" class="hidden fixed inset-0 z-50 bg-cream flex flex-col max-w-md mx-auto">
+    <div class="px-4 py-3.5 border-b border-ink/10 bg-white flex items-center justify-between">
+      <div>
+        <h3 class="font-serif text-xl font-bold text-ink">Weekly Drop Manager</h3>
+        <p class="text-[11px] text-muted">Add, edit, or hide products for this week</p>
       </div>
+      <button onclick="closeAdminModal()" class="px-3 py-1.5 rounded-full bg-ink text-cream text-xs font-semibold">Done</button>
+    </div>
 
-      <!-- Admin Navigation Tabs -->
-      <div class="grid grid-cols-3 bg-white border-b border-stone-200 text-xs font-semibold">
-        <button onclick="switchAdminTab('products')" id="admin-tab-products" class="py-3 border-b-2 border-terracotta text-terracotta">
-          Manage Stock
-        </button>
-        <button onclick="switchAdminTab('add')" id="admin-tab-add" class="py-3 border-b-2 border-transparent text-muted">
-          + Add Drop
-        </button>
-        <button onclick="switchAdminTab('settings')" id="admin-tab-settings" class="py-3 border-b-2 border-transparent text-muted">
-          Settings
-        </button>
-      </div>
+    <div class="flex-1 overflow-y-auto p-4 space-y-5">
+      <!-- Add / Edit Product Form -->
+      <div class="bg-white border border-ink/10 rounded-2xl p-4 shadow-xs">
+        <h4 id="formHeading" class="text-xs font-bold uppercase tracking-wider text-terracotta mb-3">+ Add New Weekly Item</h4>
+        <input type="hidden" id="editProductId" value="" />
 
-      <!-- Tab 1: Manage Stock -->
-      <div id="admin-view-products" class="p-4 space-y-3 flex-1">
-        <div class="flex items-center justify-between">
-          <p class="text-xs font-bold text-charcoal">Active Weekly Drops (<span id="admin-product-count">0</span>)</p>
-          <button onclick="switchAdminTab('add')" class="text-xs font-semibold text-terracotta">+ Add New Item</button>
-        </div>
-        <div id="admin-product-list" class="space-y-2.5"></div>
-      </div>
+        <div class="space-y-2.5">
+          <input id="prodName" type="text" placeholder="Product Name (e.g. Emerald Satin Co-ord Set)" class="w-full bg-cream border border-ink/15 rounded-xl px-3 py-2 text-xs" />
 
-      <!-- Tab 2: Add New Product -->
-      <div id="admin-view-add" class="hidden p-4 space-y-3.5 flex-1">
-        <h3 class="font-serif text-xl font-bold text-charcoal">Add New Weekly Drop</h3>
-
-        <div>
-          <label class="block text-xs font-semibold text-charcoal mb-1">Product Title *</label>
-          <input id="new-title" type="text" placeholder="e.g., Sage Green Linen Cord Set" class="w-full bg-white border border-stone-200 rounded-xl px-3 py-2.5 text-xs" />
-        </div>
-
-        <div class="grid grid-cols-2 gap-2.5">
-          <div>
-            <label class="block text-xs font-semibold text-charcoal mb-1">Collection *</label>
-            <select id="new-gender" onchange="updateAdminCategoryOptions()" class="w-full bg-white border border-stone-200 rounded-xl px-3 py-2.5 text-xs">
+          <div class="grid grid-cols-2 gap-2">
+            <select id="prodGender" class="bg-cream border border-ink/15 rounded-xl px-3 py-2 text-xs">
               <option value="Women">Women's</option>
               <option value="Men">Men's</option>
             </select>
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-charcoal mb-1">Category *</label>
-            <select id="new-category" class="w-full bg-white border border-stone-200 rounded-xl px-3 py-2.5 text-xs">
+            <select id="prodCategory" class="bg-cream border border-ink/15 rounded-xl px-3 py-2 text-xs">
               <option value="Watch">Watch</option>
               <option value="Dress">Dress</option>
               <option value="Cord set">Cord set</option>
               <option value="Sunglasses">Sunglasses</option>
             </select>
           </div>
-        </div>
 
-        <!-- Supplier Cost + Margin Calculator -->
-        <div class="bg-sand/80 border border-stone-200 rounded-2xl p-3 space-y-2.5">
-          <p class="text-[11px] font-bold uppercase tracking-wider text-terracotta">Margin Calculator (Private)</p>
-          <div class="grid grid-cols-2 gap-2.5">
-            <div>
-              <label class="block text-[11px] font-semibold text-charcoal mb-1">Supplier Cost (&#8377;)</label>
-              <input id="new-cost" type="number" oninput="calculateSellingPrice()" placeholder="850" class="w-full bg-white border border-stone-200 rounded-xl px-3 py-2 text-xs" />
+          <!-- Margin Calculator -->
+          <div class="bg-sand/70 rounded-xl p-3 border border-ink/10">
+            <p class="text-[11px] font-bold text-ink mb-2">Profit &amp; Selling Price Calculator</p>
+            <div class="grid grid-cols-2 gap-2">
+              <div>
+                <label class="text-[10px] text-muted block">Supplier Cost (&#8377;)</label>
+                <input id="prodCost" type="number" oninput="calcSellingPrice()" placeholder="e.g. 550" class="w-full bg-white border border-ink/15 rounded-lg px-2.5 py-1.5 text-xs mt-0.5" />
+              </div>
+              <div>
+                <label class="text-[10px] text-muted block">Your Profit Margin (&#8377;)</label>
+                <input id="prodMargin" type="number" oninput="calcSellingPrice()" placeholder="e.g. 250" class="w-full bg-white border border-ink/15 rounded-lg px-2.5 py-1.5 text-xs mt-0.5" />
+              </div>
             </div>
-            <div>
-              <label class="block text-[11px] font-semibold text-charcoal mb-1">Your Profit (&#8377;)</label>
-              <input id="new-margin" type="number" oninput="calculateSellingPrice()" placeholder="449" class="w-full bg-white border border-stone-200 rounded-xl px-3 py-2 text-xs" />
+            <div class="mt-2 flex items-center justify-between pt-2 border-t border-ink/10">
+              <span class="text-[11px] font-semibold text-muted">Customer Price:</span>
+              <input id="prodPrice" type="number" placeholder="800" class="w-24 text-right font-bold text-sm text-terracotta bg-white border border-ink/15 rounded-lg px-2 py-1" />
             </div>
           </div>
+
+          <input id="prodSizes" type="text" value="S, M, L, XL" placeholder="Sizes (e.g. S, M, L, XL or Free Size)" class="w-full bg-cream border border-ink/15 rounded-xl px-3 py-2 text-xs" />
+
+          <!-- Photo Upload or URL -->
           <div>
-            <label class="block text-[11px] font-semibold text-charcoal mb-1">Final Customer Price (&#8377;) *</label>
-            <input id="new-price" type="number" placeholder="1299" class="w-full bg-white border border-terracotta/50 rounded-xl px-3 py-2 text-sm font-bold text-charcoal" />
+            <label class="text-[11px] font-semibold text-ink block mb-1">Product Photo (Upload from Gallery or Paste Link)</label>
+            <input id="prodImageFile" type="file" accept="image/*" onchange="handleImageUpload(event)" class="w-full text-xs text-muted file:mr-2 file:py-1.5 file:px-3 file:rounded-full file:border-0 file:text-xs file:font-semibold file:bg-ink file:text-cream" />
+            <input id="prodImageUrl" type="text" placeholder="Or paste image link..." class="mt-1.5 w-full bg-cream border border-ink/15 rounded-xl px-3 py-2 text-xs" />
+          </div>
+
+          <textarea id="prodDesc" rows="2" placeholder="Short description (fabric, dial size, UV protection, etc.)" class="w-full bg-cream border border-ink/15 rounded-xl px-3 py-2 text-xs"></textarea>
+
+          <div class="flex gap-2 pt-1">
+            <button id="cancelEditBtn" onclick="resetAdminForm()" class="hidden flex-1 py-2.5 rounded-xl border border-ink/15 text-xs font-semibold">Cancel</button>
+            <button onclick="saveProduct()" class="flex-1 py-2.5 rounded-xl bg-terracotta text-white text-xs font-bold shadow">Save Item to Store</button>
           </div>
         </div>
-
-        <div>
-          <label class="block text-xs font-semibold text-charcoal mb-1">Available Sizes (comma separated)</label>
-          <input id="new-sizes" type="text" value="S, M, L, XL" placeholder="e.g., S, M, L, XL or Free Size" class="w-full bg-white border border-stone-200 rounded-xl px-3 py-2.5 text-xs" />
-        </div>
-
-        <div>
-          <label class="block text-xs font-semibold text-charcoal mb-1">Product Photo (Upload from Gallery or Paste URL)</label>
-          <input id="new-image-file" type="file" accept="image/*" onchange="handleImageUpload(event)" class="w-full bg-white border border-stone-200 rounded-xl px-3 py-2 text-xs mb-2" />
-          <input id="new-image-url" type="url" placeholder="Or paste image link (https://...)" class="w-full bg-white border border-stone-200 rounded-xl px-3 py-2 text-xs" />
-        </div>
-
-        <div>
-          <label class="block text-xs font-semibold text-charcoal mb-1">Short Description</label>
-          <textarea id="new-desc" rows="2" placeholder="Fabric, fit, or dial details..." class="w-full bg-white border border-stone-200 rounded-xl px-3 py-2 text-xs"></textarea>
-        </div>
-
-        <button onclick="saveNewProduct()" class="w-full py-3.5 rounded-xl bg-terracotta hover:bg-terracottaDark text-white font-bold text-xs shadow-md transition">
-          Publish to Storefront
-        </button>
       </div>
 
-      <!-- Tab 3: Store Settings -->
-      <div id="admin-view-settings" class="hidden p-4 space-y-4 flex-1">
-        <div class="bg-white border border-stone-200 rounded-2xl p-4 space-y-3">
-          <h3 class="font-serif text-lg font-bold text-charcoal">WhatsApp &amp; Security Settings</h3>
-          <div>
-            <label class="block text-xs font-semibold text-charcoal mb-1">Order Receiving WhatsApp Number (with 91)</label>
-            <input id="setting-whatsapp" type="tel" class="w-full bg-cream border border-stone-200 rounded-xl px-3 py-2.5 text-xs font-semibold" />
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-charcoal mb-1">Admin 4-Digit PIN</label>
-            <input id="setting-pin" type="text" maxlength="4" inputmode="numeric" class="w-full bg-cream border border-stone-200 rounded-xl px-3 py-2.5 text-xs font-semibold" />
-          </div>
-          <button onclick="saveStoreSettings()" class="w-full py-2.5 rounded-xl bg-charcoal text-white font-semibold text-xs">
-            Save Settings
-          </button>
+      <!-- Current Inventory List -->
+      <div>
+        <div class="flex items-center justify-between mb-2">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-ink">Current Store Items</h4>
+          <button onclick="resetDemoCatalog()" class="text-[11px] text-terracotta underline">Restore Sample Items</button>
         </div>
+        <div id="adminProductList" class="space-y-2.5"></div>
+      </div>
 
-        <!-- Secret Admin Access Info Box -->
-        <div class="bg-sand/80 border border-stone-200 rounded-2xl p-4 space-y-2">
-          <h4 class="text-xs font-bold text-charcoal flex items-center gap-1.5">
-            <i data-lucide="shield-check" class="w-4 h-4 text-terracotta"></i> Hidden Admin Access
-          </h4>
-          <p class="text-[11px] text-muted leading-relaxed">
-            The Admin button is hidden from customers. Open this dashboard anytime by:
-          </p>
-          <ul class="text-[11px] text-charcoal space-y-1 list-disc pl-4">
-            <li>Tapping the <strong>"Style For You"</strong> title <strong>5 times quickly</strong></li>
-            <li>Or opening your secret link: <span id="secret-admin-url" class="font-mono text-[10px] text-terracotta break-all"></span></li>
-          </ul>
-        </div>
+      <!-- Store Settings -->
+      <div class="bg-white border border-ink/10 rounded-2xl p-4">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-ink mb-2">Store &amp; Security Settings</h4>
+        <label class="text-[11px] text-muted block">WhatsApp Order Number (with 91)</label>
+        <input id="settingWhatsapp" type="text" class="w-full bg-cream border border-ink/15 rounded-xl px-3 py-2 text-xs mt-1 mb-2.5" />
+        <label class="text-[11px] text-muted block">Admin 4-Digit PIN</label>
+        <input id="settingPin" type="text" maxlength="4" class="w-full bg-cream border border-ink/15 rounded-xl px-3 py-2 text-xs mt-1 mb-3" />
+        <button onclick="saveStoreSettings()" class="w-full py-2 rounded-xl bg-ink text-cream text-xs font-bold">Update Settings</button>
       </div>
     </div>
   </div>
 
-  <!-- ========================================== -->
-  <!-- ADD TO HOME SCREEN GUIDE MODAL             -->
-  <!-- ========================================== -->
-  <div id="install-modal" class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-end sm:items-center justify-center p-4">
-    <div class="bg-white w-full max-w-sm rounded-3xl p-5 shadow-2xl animate-fade-up">
-      <div class="flex items-center justify-between mb-3">
-        <h3 class="font-serif text-xl font-bold text-charcoal">Save App Shortcut</h3>
-        <button onclick="closeInstallGuide()" class="w-8 h-8 rounded-full bg-cream flex items-center justify-center">
-          <i data-lucide="x" class="w-4 h-4"></i>
-        </button>
-      </div>
-      <p class="text-xs text-muted leading-relaxed">
-        Install <strong>Style For You</strong> on your phone home screen for 1-tap weekly shopping:
-      </p>
-      <div class="mt-3 space-y-2.5 text-xs text-charcoal bg-cream p-3.5 rounded-2xl">
-        <p><strong>Android (Chrome):</strong> Tap the <strong>3 dots (&vellip;)</strong> at the top right &rarr; tap <strong>Add to Home screen</strong>.</p>
+  <!-- Add to Home Screen Guide Modal -->
+  <div id="installModal" class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-cream w-full max-w-xs rounded-3xl p-5 text-center shadow-2xl">
+      <div class="w-12 h-12 rounded-2xl bg-ink text-cream font-serif text-2xl font-bold flex items-center justify-center mx-auto">S</div>
+      <h3 class="font-serif text-2xl font-bold text-ink mt-2">Install Style For You</h3>
+      <p class="text-xs text-muted mt-1 leading-relaxed">Save this storefront on your phone's home screen for instant weekly drop browsing:</p>
+      <div class="bg-white border border-ink/10 rounded-2xl p-3 text-left text-xs space-y-2 mt-3">
+        <p><strong>Android (Chrome):</strong> Tap the <strong>&#8942;</strong> menu at the top right &rarr; tap <strong>Add to Home screen</strong>.</p>
         <p><strong>iPhone (Safari):</strong> Tap the <strong>Share</strong> icon at the bottom &rarr; tap <strong>Add to Home Screen</strong>.</p>
       </div>
-      <button onclick="closeInstallGuide()" class="mt-4 w-full py-2.5 rounded-xl bg-charcoal text-white text-xs font-semibold">
-        Got It
-      </button>
+      <button onclick="closeInstallModal()" class="mt-4 w-full py-2.5 rounded-xl bg-ink text-cream text-xs font-bold">Got It</button>
     </div>
   </div>
 
-  <!-- Custom Toast Notification -->
-  <div id="toast" class="hidden fixed bottom-5 left-1/2 -translate-x-1/2 z-50 bg-charcoal text-white text-xs font-medium px-4 py-2.5 rounded-full shadow-lg flex items-center gap-2 whitespace-nowrap">
-    <i data-lucide="check-circle-2" class="w-4 h-4 text-[#25D366]"></i>
-    <span id="toast-msg">Added to bag</span>
-  </div>
-
-  <!-- ========================================== -->
-  <!-- APPLICATION LOGIC                          -->
-  <!-- ========================================== -->
   <script>
-    const STORAGE_KEYS = {
-      PRODUCTS: 'sfy_products_v2',
-      CART: 'sfy_cart_v2',
-      SETTINGS: 'sfy_settings_v2',
-    };
+    const STORAGE_KEY = 'sfy_products_v2';
+    const SETTINGS_KEY = 'sfy_settings_v2';
+    const BAG_KEY = 'sfy_bag_v2';
 
     const DEFAULT_SETTINGS = {
-      whatsappNumber: '918446079809',
-      adminPin: '1234',
+      whatsapp: '918446079809',
+      pin: '1234'
     };
 
-    const DEFAULT_PRODUCTS = [
+    const DEMO_PRODUCTS = [
       {
         id: 'p1',
-        title: 'Champagne Satin Cord Set',
+        name: 'Champagne Satin Lounge Co-ord Set',
         gender: 'Women',
         category: 'Cord set',
-        cost: 1150,
-        price: 1899,
+        cost: 620,
+        margin: 279,
+        price: 899,
         sizes: ['S', 'M', 'L', 'XL'],
+        inStock: true,
         image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=80',
-        desc: 'Relaxed-fit luxe satin shirt and wide-leg trouser set. Lightweight, breathable drape ideal for brunches and evening outings.',
+        desc: 'Fluid satin-finish relaxed shirt and wide-leg trouser set. Breathable, wrinkle-resistant, and perfect for brunch or travel.'
       },
       {
         id: 'p2',
-        title: 'Rose-Gold Petite Watch',
+        name: 'Rose-Gold Petite Mesh Watch',
         gender: 'Women',
         category: 'Watch',
-        cost: 950,
-        price: 1699,
+        cost: 480,
+        margin: 269,
+        price: 749,
         sizes: ['Free Size'],
+        inStock: true,
         image: 'https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=700&q=80',
-        desc: 'Minimalist mother-of-pearl dial with brushed rose-gold mesh strap and splash-resistant casing.',
+        desc: 'Minimalist mother-of-pearl dial with adjustable rose-gold stainless mesh strap. Splash-resistant everyday luxury.'
       },
       {
         id: 'p3',
-        title: 'Terracotta Pleated Midi Dress',
+        name: 'Terracotta Pleated Midi Dress',
         gender: 'Women',
         category: 'Dress',
-        cost: 1050,
-        price: 1749,
-        sizes: ['XS', 'S', 'M', 'L'],
+        cost: 680,
+        margin: 319,
+        price: 999,
+        sizes: ['S', 'M', 'L'],
+        inStock: true,
         image: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=700&q=80',
-        desc: 'Flattering cinched-waist A-line midi dress with soft flowy pleats and concealed side zip.',
+        desc: 'Flattering A-line silhouette with soft accordion pleats and cinch waist tie. Lightweight georgette with full inner lining.'
       },
       {
         id: 'p4',
-        title: 'Tortoiseshell Cat-Eye Sunglasses',
+        name: 'Tortoiseshell Cat-Eye Sunglasses',
         gender: 'Women',
         category: 'Sunglasses',
-        cost: 520,
-        price: 999,
+        cost: 290,
+        margin: 209,
+        price: 499,
         sizes: ['Standard'],
+        inStock: true,
         image: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=700&q=80',
-        desc: 'UV400 polarized lenses in a hand-polished Italian acetate cat-eye frame. Includes hard protective case.',
+        desc: 'UV400 polarized gradient lenses in a lightweight acetate frame. Includes hard protective case and cleaning cloth.'
       },
       {
         id: 'p5',
-        title: 'Obsidian Chronograph Watch',
+        name: 'Obsidian Chronograph Leather Watch',
         gender: 'Men',
         category: 'Watch',
-        cost: 1350,
-        price: 2299,
+        cost: 590,
+        margin: 309,
+        price: 899,
         sizes: ['Free Size'],
+        inStock: true,
         image: 'https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=700&q=80',
-        desc: 'Matte black stainless steel chronograph with date window and genuine stitched leather strap.',
+        desc: 'Matte black dial with tan vegan-leather strap and date window. Pairs effortlessly with casual and formal wear.'
       },
       {
         id: 'p6',
-        title: 'Classic Aviator Polarized Shades',
+        name: 'Classic Aviator Polarized Sunglasses',
         gender: 'Men',
         category: 'Sunglasses',
-        cost: 600,
-        price: 1149,
+        cost: 320,
+        margin: 229,
+        price: 549,
         sizes: ['Standard'],
+        inStock: true,
         image: 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=700&q=80',
-        desc: 'Ultra-light gunmetal frame with anti-glare polarized tint for everyday driving and outdoor wear.',
-      },
+        desc: 'Anti-glare UV400 polarized lenses with brushed gunmetal bridge. Built for driving and bright outdoor days.'
+      }
     ];
 
-    // App State
-    let products = [];
-    let cart = [];
-    let settings = { ...DEFAULT_SETTINGS };
+    let products = JSON.parse(localStorage.getItem(STORAGE_KEY)) || DEMO_PRODUCTS;
+    let settings = JSON.parse(localStorage.getItem(SETTINGS_KEY)) || DEFAULT_SETTINGS;
+    let bag = JSON.parse(localStorage.getItem(BAG_KEY)) || [];
+
     let selectedGender = 'All';
     let selectedCategory = 'All';
-    let searchQuery = '';
-    let activeModalProduct = null;
-    let activeModalSize = '';
-    let uploadedBase64Image = '';
+    let activeProduct = null;
+    let activeSize = '';
 
-    // Secret 5-tap state
-    let brandTapCount = 0;
-    let brandTapTimer = null;
-
-    // Initialize App
-    function initApp() {
-      try {
-        const savedProducts = localStorage.getItem(STORAGE_KEYS.PRODUCTS);
-        products = savedProducts ? JSON.parse(savedProducts) : [...DEFAULT_PRODUCTS];
-        if (!savedProducts) localStorage.setItem(STORAGE_KEYS.PRODUCTS, JSON.stringify(products));
-
-        const savedCart = localStorage.getItem(STORAGE_KEYS.CART);
-        cart = savedCart ? JSON.parse(savedCart) : [];
-
-        const savedSettings = localStorage.getItem(STORAGE_KEYS.SETTINGS);
-        settings = savedSettings ? { ...DEFAULT_SETTINGS, ...JSON.parse(savedSettings) } : { ...DEFAULT_SETTINGS };
-      } catch (e) {
-        products = [...DEFAULT_PRODUCTS];
-        cart = [];
-        settings = { ...DEFAULT_SETTINGS };
-      }
-
-      renderCategoryPills();
-      renderProducts();
-      updateCartUI();
-      lucide.createIcons();
-
-      // Check for ?admin=1 secret query parameter
-      const urlParams = new URLSearchParams(window.location.search);
-      if (urlParams.get('admin') === '1') {
+    // Secret 5-tap trigger on Brand Title
+    let tapCount = 0;
+    let tapTimer = null;
+    document.getElementById('brandHeader').addEventListener('click', () => {
+      tapCount++;
+      clearTimeout(tapTimer);
+      if (tapCount >= 5) {
+        tapCount = 0;
         openPinModal();
+      } else {
+        tapTimer = setTimeout(() => { tapCount = 0; }, 1500);
       }
+    });
+
+    // Check if opened via ?admin=1 link
+    if (new URLSearchParams(window.location.search).get('admin') === '1') {
+      setTimeout(() => openPinModal(), 300);
     }
 
-    // Secret 5-Tap Trigger on "Style For You" Header
-    function handleSecretTitleTap() {
-      brandTapCount += 1;
-      clearTimeout(brandTapTimer);
-
-      if (brandTapCount >= 5) {
-        brandTapCount = 0;
-        openPinModal();
-        return;
-      }
-
-      brandTapTimer = setTimeout(() => {
-        brandTapCount = 0;
-      }, 1500);
+    function saveState() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
+      localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+      localStorage.setItem(BAG_KEY, JSON.stringify(bag));
     }
 
-    // Categories Logic
-    function getCategoriesForGender(gender) {
-      if (gender === 'Women') return ['All', 'Watch', 'Dress', 'Cord set', 'Sunglasses'];
-      if (gender === 'Men') return ['All', 'Watch', 'Sunglasses'];
-      return ['All', 'Watch', 'Dress', 'Cord set', 'Sunglasses'];
-    }
-
-    function setGenderFilter(gender) {
+    function setGender(gender) {
       selectedGender = gender;
       selectedCategory = 'All';
-
-      document.querySelectorAll('.gender-btn').forEach((btn) => {
-        btn.className = 'gender-btn py-1.5 px-3 rounded-full text-xs font-semibold bg-white text-charcoal border border-stone-200 transition';
+      document.querySelectorAll('.gender-tab').forEach(btn => {
+        btn.className = 'gender-tab py-1.5 rounded-full text-xs font-semibold bg-white text-ink border border-ink/10 transition';
       });
-      const activeBtn = document.getElementById(`gender-${gender}`);
-      if (activeBtn) {
-        activeBtn.className = 'gender-btn py-1.5 px-3 rounded-full text-xs font-semibold bg-charcoal text-white transition';
-      }
-
-      renderCategoryPills();
-      renderProducts();
-    }
-
-    function setCategoryFilter(category) {
-      selectedCategory = category;
+      document.getElementById('tab-' + gender).className = 'gender-tab py-1.5 rounded-full text-xs font-semibold bg-ink text-cream transition';
       renderCategoryPills();
       renderProducts();
     }
 
     function renderCategoryPills() {
-      const container = document.getElementById('category-pills');
-      const categories = getCategoriesForGender(selectedGender);
-
-      container.innerHTML = categories
-        .map((cat) => {
-          const isActive = selectedCategory === cat;
-          const classes = isActive
-            ? 'bg-terracotta text-white border-terracotta'
-            : 'bg-white text-charcoal border-stone-200 hover:bg-sand';
-          return `
-            <button
-              onclick="setCategoryFilter('${cat}')"
-              class="shrink-0 px-3.5 py-1.5 rounded-full text-xs font-semibold border transition ${classes}"
-            >
-              ${cat}
-            </button>
-          `;
-        })
-        .join('');
-    }
-
-    function handleSearch(val) {
-      searchQuery = val.trim().toLowerCase();
-      const clearBtn = document.getElementById('clear-search-btn');
-      if (searchQuery.length > 0) {
-        clearBtn.classList.remove('hidden');
-      } else {
-        clearBtn.classList.add('hidden');
+      const container = document.getElementById('categoryPills');
+      let cats = ['All', 'Watch', 'Dress', 'Cord set', 'Sunglasses'];
+      if (selectedGender === 'Men') {
+        cats = ['All', 'Watch', 'Sunglasses'];
       }
-      renderProducts();
+      container.innerHTML = cats.map(cat => {
+        const active = selectedCategory === cat;
+        return `<button onclick="setCategory('${cat}')" class="px-3.5 py-1 rounded-full text-xs font-medium whitespace-nowrap transition ${active ? 'bg-terracotta text-white shadow-xs' : 'bg-white text-muted border border-ink/10'}">${cat}</button>`;
+      }).join('');
     }
 
-    function clearSearch() {
-      document.getElementById('search-input').value = '';
-      handleSearch('');
+    function setCategory(cat) {
+      selectedCategory = cat;
+      renderCategoryPills();
+      renderProducts();
     }
 
     function resetFilters() {
-      clearSearch();
-      setGenderFilter('All');
+      document.getElementById('searchInput').value = '';
+      setGender('All');
     }
 
-    // Render Product Grid
     function renderProducts() {
-      const grid = document.getElementById('product-grid');
-      const emptyState = document.getElementById('empty-state');
-      const countEl = document.getElementById('item-count');
-
-      const filtered = products.filter((p) => {
+      const query = document.getElementById('searchInput').value.trim().toLowerCase();
+      const filtered = products.filter(p => {
         const matchGender = selectedGender === 'All' || p.gender === selectedGender;
         const matchCat = selectedCategory === 'All' || p.category.toLowerCase() === selectedCategory.toLowerCase();
-        const matchQuery =
-          !searchQuery ||
-          p.title.toLowerCase().includes(searchQuery) ||
-          p.category.toLowerCase().includes(searchQuery) ||
-          p.gender.toLowerCase().includes(searchQuery);
+        const matchQuery = !query || p.name.toLowerCase().includes(query) || p.category.toLowerCase().includes(query) || p.desc.toLowerCase().includes(query);
         return matchGender && matchCat && matchQuery;
       });
 
-      countEl.textContent = filtered.length;
+      document.getElementById('dropCountLabel').textContent = `${filtered.length}${filtered.length === 1 ? 'Item' : 'Items'}`;
+      const grid = document.getElementById('productGrid');
+      const empty = document.getElementById('emptyState');
 
       if (filtered.length === 0) {
         grid.innerHTML = '';
-        emptyState.classList.remove('hidden');
+        empty.classList.remove('hidden');
         return;
       }
 
-      emptyState.classList.add('hidden');
-      grid.innerHTML = filtered
-        .map(
-          (p) => `
-          <div onclick="openProductModal('${p.id}')" class="bg-white rounded-2xl overflow-hidden border border-stone-200/80 shadow-2xs flex flex-col cursor-pointer group active:scale-[0.99] transition">
-            <div class="relative aspect-[4/5] bg-sand overflow-hidden">
-              <img
-                src="${p.image}"
-                alt="${p.title}"
-                onerror="this.src='https://placehold.co/600x750/F2ECE1/1F1D1A?text=Style+For+You'"
-                class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
-              />
-              <span class="absolute top-2.5 left-2.5 bg-terracotta text-white text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full shadow-2xs">
-                New This Week
-              </span>
-              <span class="absolute bottom-2.5 left-2.5 bg-white/95 backdrop-blur-xs text-charcoal text-[10px] font-semibold px-2.5 py-0.5 rounded-full shadow-2xs">
-                ${p.gender}'s &bull; ${p.category}
-              </span>
+      empty.classList.add('hidden');
+      grid.innerHTML = filtered.map(p => `
+        <div onclick="openProductModal('${p.id}')" class="bg-white rounded-2xl overflow-hidden border border-ink/10 shadow-xs flex flex-col cursor-pointer active:scale-[0.98] transition ${!p.inStock ? 'opacity-65' : ''}">
+          <div class="relative aspect-[4/5] bg-sand overflow-hidden">
+            <img src="${p.image}" alt="${p.name}" loading="lazy" class="w-full h-full object-cover" />
+            <span class="absolute top-2 left-2 px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider ${p.inStock ? 'bg-terracotta text-white' : 'bg-ink text-cream'}">
+              ${p.inStock ? 'New This Week' : 'Sold Out'}
+            </span>
+            <span class="absolute bottom-2 left-2 bg-white/90 backdrop-blur-xs text-ink text-[10px] font-semibold px-2 py-0.5 rounded-md">
+              ${p.gender}'s &bull; ${p.category}
+            </span>
+          </div>
+          <div class="p-3 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="font-serif text-base font-bold text-ink leading-snug line-clamp-2">${p.name}</h3>
+              <p class="text-[11px] text-muted mt-1">Sizes: ${p.sizes.join(', ')}</p>
             </div>
-            <div class="p-3 flex-1 flex flex-col justify-between">
-              <div>
-                <h3 class="font-serif text-[17px] font-bold text-charcoal leading-snug line-clamp-1">
-                  ${p.title}
-                </h3>
-                <p class="text-[11px] text-muted mt-0.5 truncate">
-                  Sizes: ${p.sizes.join(', ')}
-                </p>
-              </div>
-              <div class="mt-2.5 flex items-center justify-between gap-1">
-                <span class="text-sm font-bold text-charcoal">&#8377;${p.price.toLocaleString('en-IN')}</span>
-                <button
-                  onclick="event.stopPropagation(); quickAddToCart('${p.id}')"
-                  class="bg-charcoal hover:bg-terracotta text-white text-[11px] font-semibold px-2.5 py-1.5 rounded-full transition"
-                >
-                  + Add
-                </button>
-              </div>
+            <div class="mt-2.5 pt-2 border-t border-ink/5 flex items-center justify-between">
+              <span class="text-sm font-bold text-ink">&#8377;${p.price}</span>
+              <span class="text-[11px] font-bold text-terracotta">Select &rarr;</span>
             </div>
           </div>
-        `
-        )
-        .join('');
+        </div>
+      `).join('');
     }
 
-    // Product Detail Modal
-    function openProductModal(productId) {
-      const product = products.find((p) => p.id === productId);
-      if (!product) return;
+    function openProductModal(id) {
+      activeProduct = products.find(p => p.id === id);
+      if (!activeProduct) return;
+      activeSize = activeProduct.sizes.length === 1 ? activeProduct.sizes[0] : '';
 
-      activeModalProduct = product;
-      activeModalSize = product.sizes[0] || 'Free Size';
+      document.getElementById('modalImg').src = activeProduct.image;
+      document.getElementById('modalBadge').textContent = activeProduct.inStock ? 'In Stock • Ready to Ship' : 'Sold Out';
+      document.getElementById('modalCategory').textContent = `${activeProduct.gender}'s ${activeProduct.category}`; document.getElementById('modalTitle').textContent = activeProduct.name; document.getElementById('modalPrice').innerHTML = `&#8377;${activeProduct.price}`;
+      document.getElementById('modalDesc').textContent = activeProduct.desc;
+      document.getElementById('modalNote').value = '';
+      document.getElementById('sizeError').classList.add('hidden');
 
-      document.getElementById('modal-img').src = product.image;
-      document.getElementById('modal-category').textContent = `${product.gender}'s \u2022 ${product.category}`;
-      document.getElementById('modal-title').textContent = product.title;
-      document.getElementById('modal-price').innerHTML = `&#8377;${product.price.toLocaleString('en-IN')}`;
-      document.getElementById('modal-desc').textContent = product.desc || 'Handpicked weekly drop from Style For You.';
-
-      renderModalSizes();
-      document.getElementById('product-modal').classList.remove('hidden');
-      lucide.createIcons();
+      renderSizeButtons();
+      document.getElementById('productModal').classList.remove('hidden');
     }
 
-    function renderModalSizes() {
-      if (!activeModalProduct) return;
-      const container = document.getElementById('modal-sizes');
-      container.innerHTML = activeModalProduct.sizes
-        .map((sz) => {
-          const isSelected = activeModalSize === sz;
-          return `
-            <button
-              onclick="selectModalSize('${sz}')"
-              class="px-3.5 py-1.5 rounded-xl text-xs font-semibold border transition ${
-                isSelected
-                  ? 'bg-charcoal text-white border-charcoal'
-                  : 'bg-white text-charcoal border-stone-200 hover:bg-sand'
-              }"
-            >
-              ${sz}
-            </button>
-          `;
-        })
-        .join('');
+    function renderSizeButtons() {
+      const container = document.getElementById('modalSizes');
+      container.innerHTML = activeProduct.sizes.map(sz => {
+        const selected = activeSize === sz;
+        return `<button onclick="selectSize('${sz}')" class="px-3.5 py-1.5 rounded-xl text-xs font-bold border transition ${selected ? 'bg-ink text-cream border-ink' : 'bg-white text-ink border-ink/15'}">${sz}</button>`;
+      }).join('');
     }
 
-    function selectModalSize(size) {
-      activeModalSize = size;
-      renderModalSizes();
+    function selectSize(sz) {
+      activeSize = sz;
+      document.getElementById('sizeError').classList.add('hidden');
+      renderSizeButtons();
     }
 
     function closeProductModal() {
-      document.getElementById('product-modal').classList.add('hidden');
-      activeModalProduct = null;
+      document.getElementById('productModal').classList.add('hidden');
     }
 
-    // Cart Management
-    function quickAddToCart(productId) {
-      const product = products.find((p) => p.id === productId);
-      if (!product) return;
-      addToCart(product, product.sizes[0] || 'Free Size');
-    }
-
-    function addSelectedToCart() {
-      if (!activeModalProduct) return;
-      addToCart(activeModalProduct, activeModalSize);
+    function addCurrentToBag() {
+      if (!activeProduct.inStock) {
+        alert('Sorry, this item is currently sold out for this week.');
+        return;
+      }
+      if (!activeSize) {
+        document.getElementById('sizeError').classList.remove('hidden');
+        return;
+      }
+      const note = document.getElementById('modalNote').value.trim();
+      bag.push({
+        id: activeProduct.id,
+        name: activeProduct.name,
+        category: `${activeProduct.gender}'s${activeProduct.category}`,
+        price: activeProduct.price,
+        size: activeSize,
+        note: note
+      });
+      saveState();
+      updateBagUI();
       closeProductModal();
     }
 
-    function addToCart(product, size) {
-      const existingIndex = cart.findIndex((item) => item.id === product.id && item.size === size);
-      if (existingIndex > -1) {
-        cart[existingIndex].qty += 1;
-      } else {
-        cart.push({
-          id: product.id,
-          title: product.title,
-          price: product.price,
-          image: product.image,
-          gender: product.gender,
-          category: product.category,
-          size: size,
-          qty: 1,
-        });
-      }
-      saveCart();
-      updateCartUI();
-      showToast(`Added ${product.title} (${size})`);
-    }
-
-    function updateCartQty(index, delta) {
-      if (!cart[index]) return;
-      cart[index].qty += delta;
-      if (cart[index].qty <= 0) {
-        cart.splice(index, 1);
-      }
-      saveCart();
-      updateCartUI();
-    }
-
-    function saveCart() {
-      localStorage.setItem(STORAGE_KEYS.CART, JSON.stringify(cart));
-    }
-
-    function updateCartUI() {
-      const badge = document.getElementById('cart-badge');
-      const container = document.getElementById('cart-items-container');
-      const footer = document.getElementById('cart-footer');
-      const subtotalEl = document.getElementById('cart-subtotal');
-      const totalEl = document.getElementById('cart-total');
-
-      const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
-      const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-
-      if (totalCount > 0) {
-        badge.textContent = totalCount;
-        badge.classList.remove('hidden');
-      } else {
-        badge.classList.add('hidden');
-      }
-
-      if (cart.length === 0) {
-        footer.classList.add('hidden');
-        container.innerHTML = `
-          <div class="text-center py-16 px-4">
-            <div class="w-12 h-12 rounded-full bg-sand text-terracotta flex items-center justify-center mx-auto mb-3">
-              <i data-lucide="shopping-bag" class="w-6 h-6"></i>
-            </div>
-            <h4 class="font-serif text-xl font-bold text-charcoal">Your bag is empty</h4>
-            <p class="text-xs text-muted mt-1">Explore our weekly drop and add your favourite styles.</p>
-          </div>
-        `;
-        lucide.createIcons();
+    function orderSingleOnWhatsApp() {
+      if (!activeProduct.inStock) {
+        alert('Sorry, this item is currently sold out for this week.');
         return;
       }
-
-      footer.classList.remove('hidden');
-      subtotalEl.innerHTML = `&#8377;${subtotal.toLocaleString('en-IN')}`;
-      totalEl.innerHTML = `&#8377;${subtotal.toLocaleString('en-IN')}`;
-
-      container.innerHTML = cart
-        .map(
-          (item, idx) => `
-          <div class="bg-white border border-stone-200/80 rounded-2xl p-3 flex items-center gap-3">
-            <img src="${item.image}" alt="${item.title}" class="w-16 h-20 rounded-xl object-cover bg-sand shrink-0" />
-            <div class="flex-1 min-w-0">
-              <p class="text-[10px] font-semibold text-terracotta uppercase">${item.gender}'s &bull; ${item.category}</p>
-              <h4 class="font-serif text-base font-bold text-charcoal truncate">${item.title}</h4>
-              <p class="text-[11px] text-muted">Size: <strong class="text-charcoal">${item.size}</strong></p>
-              <div class="flex items-center justify-between mt-2">
-                <span class="text-xs font-bold text-charcoal">&#8377;${(item.price * item.qty).toLocaleString('en-IN')}</span>
-                <div class="flex items-center gap-2 bg-cream border border-stone-200 rounded-full px-2 py-0.5">
-                  <button onclick="updateCartQty(${idx}, -1)" class="text-charcoal font-bold text-xs px-1">&minus;</button>
-                  <span class="text-xs font-bold text-charcoal">${item.qty}</span>
-                  <button onclick="updateCartQty(${idx}, 1)" class="text-charcoal font-bold text-xs px-1">+</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        `
-        )
-        .join('');
-      lucide.createIcons();
-    }
-
-    function toggleCart(open) {
-      const drawer = document.getElementById('cart-drawer');
-      if (open) {
-        updateCartUI();
-        drawer.classList.remove('hidden');
-      } else {
-        drawer.classList.add('hidden');
+      if (!activeSize) {
+        document.getElementById('sizeError').classList.remove('hidden');
+        return;
       }
+      const note = document.getElementById('modalNote').value.trim();
+      const lines = [
+        `Hello *Style For You*! I would like to place an order from this week's drop:`,
+        ``,
+        `• *Item:* ${activeProduct.name} (${activeProduct.gender}'s ${activeProduct.category})`, `• *Size:* ${activeSize}`,
+        `• *Item Price:* ₹${activeProduct.price}`, `• *Shipping:* Extra (as per delivery location)`, note ? `• *Note:* ${note}` : null,
+        ``,
+        `Please share the total amount including shipping & payment details!`
+      ].filter(Boolean);
+
+      const url = `https://wa.me/${settings.whatsapp}?text=${encodeURIComponent(lines.join('\n'))}`; window.open(url, '_blank'); }  function updateBagUI() { const badge = document.getElementById('bagCountBadge'); const bar = document.getElementById('floatingBagBar'); if (bag.length === 0) { badge.classList.add('hidden'); bar.classList.add('hidden'); return; } const total = bag.reduce((sum, item) => sum + Number(item.price), 0); badge.textContent = bag.length; badge.classList.remove('hidden'); document.getElementById('floatingBagCount').textContent = `${bag.length} ${bag.length === 1 ? 'item' : 'items'}`; document.getElementById('floatingBagTotal').innerHTML = `&#8377;${total}`;
+      bar.classList.remove('hidden');
     }
 
-    // WhatsApp Order Generation (With Automatic "Shipping: Extra (as per delivery location)")
-    function orderSingleOnWhatsApp() {
-      if (!activeModalProduct) return;
-      const p = activeModalProduct;
-      const lines = [
-        `*New Order Inquiry - Style For You*`,
-        ``,
-        `1. *${p.title}* (${p.gender}'s ${p.category})`,
-        `   Size: ${activeModalSize} | Qty: 1 | Price: Rs.${p.price}`,
-        ``,
-        `*Items Subtotal:* Rs.${p.price}`,
-        `*Shipping:* Extra (as per delivery location)`,
-        ``,
-        `Please confirm availability & total amount with shipping!`,
-      ];
-      sendWhatsAppMessage(lines.join('\n'));
-    }
-
-    function checkoutOnWhatsApp() {
-      if (cart.length === 0) return;
-
-      const custName = document.getElementById('cust-name').value.trim();
-      const custCity = document.getElementById('cust-city').value.trim();
-      const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-
-      const itemLines = cart.map(
-        (item, idx) =>
-          `${idx + 1}. *${item.title}* (${item.gender}'s ${item.category})\n   Size: ${item.size} | Qty: ${item.qty} | Rs.${item.price * item.qty}`
-      );
+    function openBagModal() {
+      const container = document.getElementById('bagItemsContainer');
+      const footer = document.getElementById('bagFooter');
+      if (bag.length === 0) {
+        container.innerHTML = `<div class="text-center py-10"><p class="font-serif text-xl font-bold text-ink">Your bag is empty</p><p class="text-xs text-muted mt-1">Tap any style to select your size and add it here.</p></div>`;
+        footer.classList.add('hidden');
+      } else {
+        footer.classList.remove('hidden');
+        container.innerHTML = bag.map((item, idx) => `
+          <div class="bg-white border border-ink/10 rounded-2xl p-3 flex items-center justify-between gap-2">
+            <div>
+              <p class="text-xs font-bold text-ink">${item.name}</p>
+              <p class="text-[11px] text-muted">Size: ${item.size}${item.note ? '&bull; ' + item.note : ''}</p>
+              <p class="text-xs font-bold text-terracotta mt-0.5">&#8377;${item.price}</p>
+            </div>
+            <button onclick="removeBagItem(${idx})" class="text-xs text-red-600 font-semibold px-2 py-1">Remove</button>
+          </div>
+        `).join('');
+        const total = bag.reduce((sum, item) => sum + Number(item.price), 0);
+        document.getElementById('bagSubtotal').innerHTML = `&#8377;${total}`; } document.getElementById('bagModal').classList.remove('hidden'); }  function removeBagItem(index) { bag.splice(index, 1); saveState(); updateBagUI(); openBagModal(); }  function closeBagModal() { document.getElementById('bagModal').classList.add('hidden'); }  function checkoutBagOnWhatsApp() { if (bag.length === 0) return; const customer = document.getElementById('bagCustomerName').value.trim(); const total = bag.reduce((sum, item) => sum + Number(item.price), 0); const itemLines = bag.map((item, i) => `${i + 1}. *${item.name}* (Size:${item.size}) — ₹${item.price}${item.note ? ` [${item.note}]` : ''}`);
 
       const lines = [
-        `*New Order - Style For You*`,
-        custName ? `Customer: ${custName}` : null,
-        custCity ? `Delivery Location: ${custCity}` : null,
+        `Hello *Style For You*! I'd like to order the following items from this week's collection:`,
         ``,
         ...itemLines,
         ``,
-        `*Items Subtotal:* Rs.${subtotal}`,
-        `*Shipping:* Extra (as per delivery location)`,
+        `*Products Subtotal:* ₹${total}`,
+        `*Shipping Charges:* Extra (as per delivery location)`,
+        customer ? `*Customer / Address:* ${customer}` : null,
         ``,
-        `Please share shipping charges for my location and payment details!`,
-      ].filter((line) => line !== null);
+        `Please share the final bill with shipping & payment details!`
+      ].filter(Boolean);
 
-      sendWhatsAppMessage(lines.join('\n'));
-    }
-
-    function sendWhatsAppMessage(message) {
-      const cleanNumber = (settings.whatsappNumber || '918446079809').replace(/\D/g, '');
-      const url = `https://wa.me/${cleanNumber}?text=${encodeURIComponent(message)}`;
+      const url = `https://wa.me/${settings.whatsapp}?text=${encodeURIComponent(lines.join('\n'))}`;
       window.open(url, '_blank');
     }
 
-    // ==========================================
-    // SECRET RESELLER ADMIN LOGIC
-    // ==========================================
+    // Admin PIN & Dashboard
     function openPinModal() {
-      document.getElementById('pin-input').value = '';
-      document.getElementById('pin-error').classList.add('hidden');
-      document.getElementById('pin-modal').classList.remove('hidden');
-      setTimeout(() => document.getElementById('pin-input').focus(), 100);
+      document.getElementById('pinInput').value = '';
+      document.getElementById('pinError').classList.add('hidden');
+      document.getElementById('pinModal').classList.remove('hidden');
     }
 
     function closePinModal() {
-      document.getElementById('pin-modal').classList.add('hidden');
+      document.getElementById('pinModal').classList.add('hidden');
     }
 
     function verifyPin() {
-      const entered = document.getElementById('pin-input').value.trim();
-      if (entered === settings.adminPin) {
+      const entered = document.getElementById('pinInput').value.trim();
+      if (entered === settings.pin) {
         closePinModal();
-        openAdminPanel();
+        openAdminModal();
       } else {
-        document.getElementById('pin-error').classList.remove('hidden');
+        document.getElementById('pinError').classList.remove('hidden');
       }
     }
 
-    function openAdminPanel() {
-      document.getElementById('admin-modal').classList.remove('hidden');
-      document.getElementById('setting-whatsapp').value = settings.whatsappNumber;
-      document.getElementById('setting-pin').value = settings.adminPin;
-
-      const baseUrl = window.location.origin + window.location.pathname;
-      document.getElementById('secret-admin-url').textContent = `${baseUrl}?admin=1`;
-
-      switchAdminTab('products');
-      renderAdminProductList();
-      lucide.createIcons();
+    function openAdminModal() {
+      document.getElementById('settingWhatsapp').value = settings.whatsapp;
+      document.getElementById('settingPin').value = settings.pin;
+      resetAdminForm();
+      renderAdminProducts();
+      document.getElementById('adminModal').classList.remove('hidden');
     }
 
-    function closeAdminPanel() {
-      document.getElementById('admin-modal').classList.add('hidden');
+    function closeAdminModal() {
+      document.getElementById('adminModal').classList.add('hidden');
       renderProducts();
     }
 
-    function switchAdminTab(tab) {
-      ['products', 'add', 'settings'].forEach((t) => {
-        document.getElementById(`admin-view-${t}`).classList.add('hidden');
-        document.getElementById(`admin-tab-${t}`).className = 'py-3 border-b-2 border-transparent text-muted';
-      });
-      document.getElementById(`admin-view-${tab}`).classList.remove('hidden');
-      document.getElementById(`admin-tab-${tab}`).className = 'py-3 border-b-2 border-terracotta text-terracotta';
-    }
-
-    function renderAdminProductList() {
-      const list = document.getElementById('admin-product-list');
-      document.getElementById('admin-product-count').textContent = products.length;
-
-      list.innerHTML = products
-        .map((p) => {
-          const profit = p.cost ? p.price - p.cost : null;
-          return `
-            <div class="bg-white border border-stone-200 rounded-2xl p-3 flex items-center gap-3">
-              <img src="${p.image}" alt="${p.title}" class="w-14 h-16 rounded-xl object-cover bg-sand shrink-0" />
-              <div class="flex-1 min-w-0">
-                <p class="text-[10px] font-semibold text-terracotta uppercase">${p.gender}'s &bull; ${p.category}</p>
-                <h4 class="font-serif text-base font-bold text-charcoal truncate">${p.title}</h4>
-                <p class="text-[11px] text-charcoal font-bold">
-                  Sell: &#8377;${p.price}
-                  ${profit !== null ? `<span class="text-emerald-700 font-semibold ml-1">(Profit: &#8377;${profit})</span>` : ''}
-                </p>
-              </div>
-              <button onclick="deleteProduct('${p.id}')" title="Remove Drop" class="p-2 text-red-500 hover:bg-red-50 rounded-xl">
-                <i data-lucide="trash-2" class="w-4 h-4"></i>
-              </button>
-            </div>
-          `;
-        })
-        .join('');
-      lucide.createIcons();
-    }
-
-    function updateAdminCategoryOptions() {
-      const gender = document.getElementById('new-gender').value;
-      const catSelect = document.getElementById('new-category');
-      if (gender === 'Men') {
-        catSelect.innerHTML = `
-          <option value="Watch">Watch</option>
-          <option value="Sunglasses">Sunglasses</option>
-        `;
-      } else {
-        catSelect.innerHTML = `
-          <option value="Watch">Watch</option>
-          <option value="Dress">Dress</option>
-          <option value="Cord set">Cord set</option>
-          <option value="Sunglasses">Sunglasses</option>
-        `;
-      }
-    }
-
-    function calculateSellingPrice() {
-      const cost = parseFloat(document.getElementById('new-cost').value) || 0;
-      const margin = parseFloat(document.getElementById('new-margin').value) || 0;
+    function calcSellingPrice() {
+      const cost = Number(document.getElementById('prodCost').value) || 0;
+      const margin = Number(document.getElementById('prodMargin').value) || 0;
       if (cost > 0 || margin > 0) {
-        document.getElementById('new-price').value = Math.round(cost + margin);
+        document.getElementById('prodPrice').value = cost + margin;
       }
     }
 
-    function handleImageUpload(event) {
-      const file = event.target.files[0];
+    function handleImageUpload(e) {
+      const file = e.target.files[0];
       if (!file) return;
-
       const reader = new FileReader();
-      reader.onload = function (e) {
+      reader.onload = function(evt) {
         const img = new Image();
-        img.onload = function () {
+        img.onload = function() {
           const canvas = document.createElement('canvas');
           const maxW = 600;
           const scale = Math.min(1, maxW / img.width);
           canvas.width = img.width * scale;
           canvas.height = img.height * scale;
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-          uploadedBase64Image = canvas.toDataURL('image/jpeg', 0.78);
-          showToast('Photo ready to publish');
+          canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+          document.getElementById('prodImageUrl').value = canvas.toDataURL('image/jpeg', 0.8);
         };
-        img.src = e.target.result;
+        img.src = evt.target.result;
       };
       reader.readAsDataURL(file);
     }
 
-    function saveNewProduct() {
-      const title = document.getElementById('new-title').value.trim();
-      const gender = document.getElementById('new-gender').value;
-      const category = document.getElementById('new-category').value;
-      const cost = parseFloat(document.getElementById('new-cost').value) || 0;
-      const price = parseFloat(document.getElementById('new-price').value) || 0;
-      const sizesRaw = document.getElementById('new-sizes').value.trim();
-      const imageUrl = document.getElementById('new-image-url').value.trim();
-      const desc = document.getElementById('new-desc').value.trim();
+    function saveProduct() {
+      const editId = document.getElementById('editProductId').value;
+      const name = document.getElementById('prodName').value.trim();
+      const gender = document.getElementById('prodGender').value;
+      const category = document.getElementById('prodCategory').value;
+      const cost = Number(document.getElementById('prodCost').value) || 0;
+      const margin = Number(document.getElementById('prodMargin').value) || 0;
+      const price = Number(document.getElementById('prodPrice').value) || (cost + margin);
+      const sizesRaw = document.getElementById('prodSizes').value.trim();
+      const image = document.getElementById('prodImageUrl').value.trim() || 'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=700&q=80';
+      const desc = document.getElementById('prodDesc').value.trim() || 'Curated weekly drop piece from Style For You.';
 
-      if (!title || price <= 0) {
-        showToast('Please enter a title & selling price');
+      if (!name || !price) {
+        alert('Please enter at least a Product Name and Selling Price.');
         return;
       }
 
-      const finalImage =
-        uploadedBase64Image ||
-        imageUrl ||
-        'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=700&q=80';
+      const sizes = sizesRaw ? sizesRaw.split(',').map(s => s.trim()).filter(Boolean) : ['Free Size'];
 
-      const newProduct = {
-        id: 'p_' + Date.now(),
-        title,
-        gender,
-        category,
-        cost,
-        price,
-        sizes: sizesRaw ? sizesRaw.split(',').map((s) => s.trim()).filter(Boolean) : ['Free Size'],
-        image: finalImage,
-        desc: desc || 'New weekly drop curated by Style For You.',
-      };
+      if (editId) {
+        const idx = products.findIndex(p => p.id === editId);
+        if (idx !== -1) {
+          products[idx] = { ...products[idx], name, gender, category, cost, margin, price, sizes, image, desc };
+        }
+      } else {
+        products.unshift({
+          id: 'p_' + Date.now(),
+          name,
+          gender,
+          category,
+          cost,
+          margin,
+          price,
+          sizes,
+          inStock: true,
+          image,
+          desc
+        });
+      }
 
-      products.unshift(newProduct);
-      localStorage.setItem(STORAGE_KEYS.PRODUCTS, JSON.stringify(products));
+      saveState();
+      resetAdminForm();
+      renderAdminProducts();
+      renderProducts();
+    }
 
-      // Reset form
-      document.getElementById('new-title').value = '';
-      document.getElementById('new-cost').value = '';
-      document.getElementById('new-margin').value = '';
-      document.getElementById('new-price').value = '';
-      document.getElementById('new-image-url').value = '';
-      document.getElementById('new-image-file').value = '';
-      document.getElementById('new-desc').value = '';
-      uploadedBase64Image = '';
+    function editProduct(id) {
+      const p = products.find(item => item.id === id);
+      if (!p) return;
+      document.getElementById('formHeading').textContent = 'Edit Weekly Item';
+      document.getElementById('editProductId').value = p.id;
+      document.getElementById('prodName').value = p.name;
+      document.getElementById('prodGender').value = p.gender;
+      document.getElementById('prodCategory').value = p.category;
+      document.getElementById('prodCost').value = p.cost || '';
+      document.getElementById('prodMargin').value = p.margin || '';
+      document.getElementById('prodPrice').value = p.price;
+      document.getElementById('prodSizes').value = p.sizes.join(', ');
+      document.getElementById('prodImageUrl').value = p.image;
+      document.getElementById('prodDesc').value = p.desc;
+      document.getElementById('cancelEditBtn').classList.remove('hidden');
+    }
 
-      renderAdminProductList();
-      switchAdminTab('products');
-      showToast('New drop published!');
+    function resetAdminForm() {
+      document.getElementById('formHeading').textContent = '+ Add New Weekly Item';
+      document.getElementById('editProductId').value = '';
+      document.getElementById('prodName').value = '';
+      document.getElementById('prodCost').value = '';
+      document.getElementById('prodMargin').value = '';
+      document.getElementById('prodPrice').value = '';
+      document.getElementById('prodSizes').value = 'S, M, L, XL';
+      document.getElementById('prodImageUrl').value = '';
+      document.getElementById('prodImageFile').value = '';
+      document.getElementById('prodDesc').value = '';
+      document.getElementById('cancelEditBtn').classList.add('hidden');
+    }
+
+    function toggleStock(id) {
+      const p = products.find(item => item.id === id);
+      if (p) {
+        p.inStock = !p.inStock;
+        saveState();
+        renderAdminProducts();
+        renderProducts();
+      }
     }
 
     function deleteProduct(id) {
-      products = products.filter((p) => p.id !== id);
-      localStorage.setItem(STORAGE_KEYS.PRODUCTS, JSON.stringify(products));
-      renderAdminProductList();
-      showToast('Item removed from store');
+      if (!confirm('Remove this item from the weekly catalog?')) return;
+      products = products.filter(item => item.id !== id);
+      saveState();
+      renderAdminProducts();
+      renderProducts();
+    }
+
+    function resetDemoCatalog() {
+      if (!confirm('Restore the 6 sample products?')) return;
+      products = [...DEMO_PRODUCTS];
+      saveState();
+      renderAdminProducts();
+      renderProducts();
+    }
+
+    function renderAdminProducts() {
+      const list = document.getElementById('adminProductList');
+      list.innerHTML = products.map(p => `
+        <div class="bg-white border border-ink/10 rounded-2xl p-3 flex items-center gap-3">
+          <img src="${p.image}" class="w-14 h-16 rounded-xl object-cover bg-sand shrink-0" />
+          <div class="flex-1 min-w-0">
+            <p class="text-xs font-bold text-ink truncate">${p.name}</p>
+            <p class="text-[11px] text-muted">${p.gender}'s &bull; ${p.category} &bull; &#8377;${p.price}</p>
+            <div class="flex items-center gap-2 mt-1.5">
+              <button onclick="toggleStock('${p.id}')" class="text-[10px] font-bold px-2 py-0.5 rounded-full ${p.inStock ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-700'}">
+                ${p.inStock ? 'In Stock' : 'Sold Out'}
+              </button>
+              <button onclick="editProduct('${p.id}')" class="text-[10px] font-bold text-ink underline">Edit</button>
+              <button onclick="deleteProduct('${p.id}')" class="text-[10px] font-bold text-red-600 underline">Delete</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
     }
 
     function saveStoreSettings() {
-      const wa = document.getElementById('setting-whatsapp').value.trim();
-      const pin = document.getElementById('setting-pin').value.trim();
-
-      if (wa) settings.whatsappNumber = wa;
-      if (pin && pin.length === 4) settings.adminPin = pin;
-
-      localStorage.setItem(STORAGE_KEYS.SETTINGS, JSON.stringify(settings));
-      showToast('Store settings saved');
+      const wa = document.getElementById('settingWhatsapp').value.replace(/\D/g, '');
+      const pin = document.getElementById('settingPin').value.trim();
+      if (wa.length >= 10) settings.whatsapp = wa;
+      if (pin.length === 4) settings.pin = pin;
+      saveState();
+      alert('Store settings updated!');
     }
 
-    // Banner & Toast Helpers
-    function dismissBanner() {
-      document.getElementById('install-banner').classList.add('hidden');
-    }
+    function openInstallModal() { document.getElementById('installModal').classList.remove('hidden'); }
+    function closeInstallModal() { document.getElementById('installModal').classList.add('hidden'); }
 
-    function openInstallGuide() {
-      document.getElementById('install-modal').classList.remove('hidden');
-    }
-
-    function closeInstallGuide() {
-      document.getElementById('install-modal').classList.add('hidden');
-    }
-
-    function showToast(msg) {
-      const toast = document.getElementById('toast');
-      document.getElementById('toast-msg').textContent = msg;
-      toast.classList.remove('hidden');
-      clearTimeout(window._toastTimer);
-      window._toastTimer = setTimeout(() => {
-        toast.classList.add('hidden');
-      }, 2400);
-    }
-
-    window.addEventListener('DOMContentLoaded', initApp);
+    // Initial render
+    renderCategoryPills();
+    renderProducts();
+    updateBagUI();
   </script>
 </body>
 </html>
-```
