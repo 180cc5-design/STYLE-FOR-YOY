@@ -10,12 +10,12 @@
   <meta name="apple-mobile-web-app-title" content="Style For You" />
 
   <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
 
   <!-- Google Fonts: Cormorant Garamond & Plus Jakarta Sans -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)" />
+  <link rel="preconnect" href="[https://fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin />
+  <link href="[https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap](https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap)" rel="stylesheet" />
 
   <script>
     tailwind.config = {
@@ -30,6 +30,7 @@
             terracottaDark: '#9A4A2C',
             whatsapp: '#25D366',
             whatsappDark: '#1EBE5D',
+            partner: '#2B5B84',
           },
           fontFamily: {
             serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
@@ -80,14 +81,15 @@
     <!-- Search Bar -->
     <div class="mt-3 relative">
       <svg class="w-4 h-4 text-muted absolute left-3.5 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z"/></svg>
-      <input id="searchInput" type="text" oninput="renderProducts()" placeholder="Search watches, dresses, cord sets, sunglasses..." class="w-full bg-white border border-ink/10 rounded-full pl-9 pr-4 py-2 text-xs text-ink placeholder:text-muted focus:outline-none focus:border-terracotta" />
+      <input id="searchInput" type="text" oninput="renderProducts()" placeholder="Search watches, dresses, cord sets, partner deals..." class="w-full bg-white border border-ink/10 rounded-full pl-9 pr-4 py-2 text-xs text-ink placeholder:text-muted focus:outline-none focus:border-terracotta" />
     </div>
 
-    <!-- Gender Tabs -->
-    <div class="grid grid-cols-3 gap-2 mt-3">
-      <button onclick="setGender('All')" id="tab-All" class="gender-tab py-1.5 rounded-full text-xs font-semibold bg-ink text-cream transition">All Drops</button>
-      <button onclick="setGender('Women')" id="tab-Women" class="gender-tab py-1.5 rounded-full text-xs font-semibold bg-white text-ink border border-ink/10 transition">Women's</button>
-      <button onclick="setGender('Men')" id="tab-Men" class="gender-tab py-1.5 rounded-full text-xs font-semibold bg-white text-ink border border-ink/10 transition">Men's</button>
+    <!-- Main Collection Tabs -->
+    <div class="grid grid-cols-4 gap-1.5 mt-3">
+      <button onclick="setGender('All')" id="tab-All" class="gender-tab py-1.5 rounded-full text-[11px] font-semibold bg-ink text-cream transition">All</button>
+      <button onclick="setGender('Women')" id="tab-Women" class="gender-tab py-1.5 rounded-full text-[11px] font-semibold bg-white text-ink border border-ink/10 transition">Women's</button>
+      <button onclick="setGender('Men')" id="tab-Men" class="gender-tab py-1.5 rounded-full text-[11px] font-semibold bg-white text-ink border border-ink/10 transition">Men's</button>
+      <button onclick="setGender('Partner')" id="tab-Partner" class="gender-tab py-1.5 rounded-full text-[11px] font-semibold bg-white text-partner border border-partner/25 transition">&#9733; Deals</button>
     </div>
 
     <!-- Category Pills -->
@@ -96,12 +98,12 @@
 
   <!-- Main Catalog -->
   <main class="flex-1 px-4 pt-3 pb-24">
-    <!-- Weekly Drop Banner -->
-    <div class="bg-gradient-to-r from-[#EFE6DD] to-[#F7F1EB] border border-terracotta/20 rounded-2xl p-3.5 mb-4 flex items-center justify-between">
+    <!-- Dynamic Banner -->
+    <div id="topBanner" class="bg-gradient-to-r from-[#EFE6DD] to-[#F7F1EB] border border-terracotta/20 rounded-2xl p-3.5 mb-4 flex items-center justify-between">
       <div>
-        <span class="inline-block text-[10px] font-bold uppercase tracking-widest text-terracotta bg-white/80 px-2 py-0.5 rounded-full mb-1">&#10024; Fresh Weekly Drop</span>
-        <h2 class="font-serif text-xl font-bold text-ink leading-tight">Handpicked Styles, Direct to You</h2>
-        <p class="text-[11px] text-muted mt-0.5">Select your size &amp; tap Order on WhatsApp for instant confirmation.</p>
+        <span id="bannerBadge" class="inline-block text-[10px] font-bold uppercase tracking-widest text-terracotta bg-white/80 px-2 py-0.5 rounded-full mb-1">&#10024; Fresh Weekly Drop</span>
+        <h2 id="bannerTitle" class="font-serif text-xl font-bold text-ink leading-tight">Handpicked Styles, Direct to You</h2>
+        <p id="bannerSub" class="text-[11px] text-muted mt-0.5">Select your size &amp; tap Order on WhatsApp for instant confirmation.</p>
       </div>
       <div class="text-right shrink-0 ml-2">
         <span id="dropCountLabel" class="text-xs font-bold text-ink bg-white px-2.5 py-1 rounded-xl border border-ink/10 shadow-sm">0 Items</span>
@@ -121,7 +123,7 @@
 
   <!-- Subtle Footer (No visible admin button) -->
   <footer class="border-t border-ink/10 bg-sand/70 px-4 py-4 text-center">
-    <p class="text-[11px] text-muted">&copy; Style For You &bull; Curated Fashion &amp; Accessories</p>
+    <p class="text-[11px] text-muted">&copy; Style For You &bull; Curated Fashion &amp; Partner Picks</p>
   </footer>
 
   <!-- Floating Bag Bar -->
@@ -158,29 +160,41 @@
         </div>
         <p id="modalDesc" class="text-xs text-muted leading-relaxed mt-2"></p>
 
-        <!-- Size Selector -->
-        <div class="mt-4">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-bold text-ink">Select Size / Variant</span>
-            <span id="sizeError" class="hidden text-[11px] font-semibold text-red-600">Please pick a size</span>
+        <!-- Own Store Controls (Sizes + Note + WhatsApp) -->
+        <div id="ownStoreControls">
+          <div class="mt-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-ink">Select Size / Variant</span>
+              <span id="sizeError" class="hidden text-[11px] font-semibold text-red-600">Please pick a size</span>
+            </div>
+            <div id="modalSizes" class="flex flex-wrap gap-2 mt-2"></div>
           </div>
-          <div id="modalSizes" class="flex flex-wrap gap-2 mt-2"></div>
+
+          <div class="mt-4">
+            <label class="text-xs font-bold text-ink block">Optional Note (Color preference / Pincode)</label>
+            <input id="modalNote" type="text" placeholder="e.g. Need delivery in Nashik 422001" class="mt-1.5 w-full bg-white border border-ink/15 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-terracotta" />
+          </div>
+
+          <div class="grid grid-cols-2 gap-2.5 mt-5">
+            <button onclick="addCurrentToBag()" class="py-3 rounded-xl border-2 border-ink text-ink text-xs font-bold hover:bg-ink/5 active:scale-98 transition">
+              Add to Bag
+            </button>
+            <button onclick="orderSingleOnWhatsApp()" class="py-3 rounded-xl bg-whatsapp hover:bg-whatsappDark text-white text-xs font-bold shadow-md flex items-center justify-center gap-1.5 active:scale-98 transition">
+              <span>Order on WhatsApp</span>
+            </button>
+          </div>
         </div>
 
-        <!-- Customer Note -->
-        <div class="mt-4">
-          <label class="text-xs font-bold text-ink block">Optional Note (Color preference / Pincode)</label>
-          <input id="modalNote" type="text" placeholder="e.g. Need delivery in Nashik 422001" class="mt-1.5 w-full bg-white border border-ink/15 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-terracotta" />
-        </div>
-
-        <!-- Action Buttons -->
-        <div class="grid grid-cols-2 gap-2.5 mt-5">
-          <button onclick="addCurrentToBag()" class="py-3 rounded-xl border-2 border-ink text-ink text-xs font-bold hover:bg-ink/5 active:scale-98 transition">
-            Add to Bag
-          </button>
-          <button onclick="orderSingleOnWhatsApp()" class="py-3 rounded-xl bg-whatsapp hover:bg-whatsappDark text-white text-xs font-bold shadow-md flex items-center justify-center gap-1.5 active:scale-98 transition">
-            <span>Order on WhatsApp</span>
-          </button>
+        <!-- Partner Affiliate Controls -->
+        <div id="partnerControls" class="hidden mt-5">
+          <div class="bg-blue-50/80 border border-partner/20 rounded-xl p-3 mb-3">
+            <p class="text-[11px] text-partner font-semibold">&#9733; Verified Partner Deal</p>
+            <p class="text-[11px] text-muted mt-0.5">This handpicked item is fulfilled directly by our trusted shopping partner with full buyer protection.</p>
+          </div>
+          <a id="partnerBuyBtn" href="#" target="_blank" rel="noopener noreferrer" class="w-full py-3.5 rounded-xl bg-partner text-white text-xs font-bold shadow-md flex items-center justify-center gap-1.5 active:scale-98 transition">
+            <span id="partnerBuyLabel">Buy on Partner Store</span>
+            <span>&#8599;</span>
+          </a>
         </div>
       </div>
     </div>
@@ -232,8 +246,8 @@
   <div id="adminModal" class="hidden fixed inset-0 z-50 bg-cream flex flex-col max-w-md mx-auto">
     <div class="px-4 py-3.5 border-b border-ink/10 bg-white flex items-center justify-between">
       <div>
-        <h3 class="font-serif text-xl font-bold text-ink">Weekly Drop Manager</h3>
-        <p class="text-[11px] text-muted">Add, edit, or hide products for this week</p>
+        <h3 class="font-serif text-xl font-bold text-ink">Weekly Drop &amp; Deals Manager</h3>
+        <p class="text-[11px] text-muted">Manage your store stock &amp; affiliate partner deals</p>
       </div>
       <button onclick="closeAdminModal()" class="px-3 py-1.5 rounded-full bg-ink text-cream text-xs font-semibold">Done</button>
     </div>
@@ -241,27 +255,39 @@
     <div class="flex-1 overflow-y-auto p-4 space-y-5">
       <!-- Add / Edit Product Form -->
       <div class="bg-white border border-ink/10 rounded-2xl p-4 shadow-xs">
-        <h4 id="formHeading" class="text-xs font-bold uppercase tracking-wider text-terracotta mb-3">+ Add New Weekly Item</h4>
+        <h4 id="formHeading" class="text-xs font-bold uppercase tracking-wider text-terracotta mb-3">+ Add New Item</h4>
         <input type="hidden" id="editProductId" value="" />
 
         <div class="space-y-2.5">
+          <!-- Listing Type Switcher -->
+          <div>
+            <label class="text-[10px] font-bold uppercase text-muted block mb-1">Listing Type</label>
+            <select id="prodType" onchange="toggleFormType()" class="w-full bg-sand border border-ink/15 rounded-xl px-3 py-2 text-xs font-semibold text-ink">
+              <option value="own">My Own Stock (Order on WhatsApp)</option>
+              <option value="partner">Partner Deal (Affiliate Link Commission)</option>
+            </select>
+          </div>
+
           <input id="prodName" type="text" placeholder="Product Name (e.g. Emerald Satin Co-ord Set)" class="w-full bg-cream border border-ink/15 rounded-xl px-3 py-2 text-xs" />
 
           <div class="grid grid-cols-2 gap-2">
             <select id="prodGender" class="bg-cream border border-ink/15 rounded-xl px-3 py-2 text-xs">
               <option value="Women">Women's</option>
               <option value="Men">Men's</option>
+              <option value="Unisex">Unisex / All</option>
             </select>
             <select id="prodCategory" class="bg-cream border border-ink/15 rounded-xl px-3 py-2 text-xs">
               <option value="Watch">Watch</option>
               <option value="Dress">Dress</option>
               <option value="Cord set">Cord set</option>
               <option value="Sunglasses">Sunglasses</option>
+              <option value="Bag">Bag / Accessory</option>
+              <option value="Beauty">Perfume / Beauty</option>
             </select>
           </div>
 
-          <!-- Margin Calculator -->
-          <div class="bg-sand/70 rounded-xl p-3 border border-ink/10">
+          <!-- Own Stock Margin Calculator -->
+          <div id="ownMarginBox" class="bg-sand/70 rounded-xl p-3 border border-ink/10">
             <p class="text-[11px] font-bold text-ink mb-2">Profit &amp; Selling Price Calculator</p>
             <div class="grid grid-cols-2 gap-2">
               <div>
@@ -274,8 +300,27 @@
               </div>
             </div>
             <div class="mt-2 flex items-center justify-between pt-2 border-t border-ink/10">
-              <span class="text-[11px] font-semibold text-muted">Customer Price:</span>
+              <span class="text-[11px] font-semibold text-muted">Customer Price (&#8377;):</span>
               <input id="prodPrice" type="number" placeholder="800" class="w-24 text-right font-bold text-sm text-terracotta bg-white border border-ink/15 rounded-lg px-2 py-1" />
+            </div>
+          </div>
+
+          <!-- Partner Affiliate Link Box -->
+          <div id="partnerLinkBox" class="hidden bg-blue-50/70 rounded-xl p-3 border border-partner/20 space-y-2">
+            <p class="text-[11px] font-bold text-partner">Affiliate Partner Details</p>
+            <div class="grid grid-cols-2 gap-2">
+              <div>
+                <label class="text-[10px] text-muted block">Display Price (&#8377;)</label>
+                <input id="partnerPrice" type="number" placeholder="e.g. 699" class="w-full bg-white border border-ink/15 rounded-lg px-2.5 py-1.5 text-xs mt-0.5" />
+              </div>
+              <div>
+                <label class="text-[10px] text-muted block">Store Name</label>
+                <input id="partnerStoreName" type="text" value="Amazon" placeholder="Amazon / Myntra" class="w-full bg-white border border-ink/15 rounded-lg px-2.5 py-1.5 text-xs mt-0.5" />
+              </div>
+            </div>
+            <div>
+              <label class="text-[10px] text-muted block">Your Affiliate Product Link (URL)</label>
+              <input id="partnerUrl" type="url" placeholder="[https://amzn.to/](https://amzn.to/)..." class="w-full bg-white border border-ink/15 rounded-lg px-2.5 py-1.5 text-xs mt-0.5" />
             </div>
           </div>
 
@@ -288,7 +333,7 @@
             <input id="prodImageUrl" type="text" placeholder="Or paste image link..." class="mt-1.5 w-full bg-cream border border-ink/15 rounded-xl px-3 py-2 text-xs" />
           </div>
 
-          <textarea id="prodDesc" rows="2" placeholder="Short description (fabric, dial size, UV protection, etc.)" class="w-full bg-cream border border-ink/15 rounded-xl px-3 py-2 text-xs"></textarea>
+          <textarea id="prodDesc" rows="2" placeholder="Short description (fabric, dial size, deal highlights, etc.)" class="w-full bg-cream border border-ink/15 rounded-xl px-3 py-2 text-xs"></textarea>
 
           <div class="flex gap-2 pt-1">
             <button id="cancelEditBtn" onclick="resetAdminForm()" class="hidden flex-1 py-2.5 rounded-xl border border-ink/15 text-xs font-semibold">Cancel</button>
@@ -300,7 +345,7 @@
       <!-- Current Inventory List -->
       <div>
         <div class="flex items-center justify-between mb-2">
-          <h4 class="text-xs font-bold uppercase tracking-wider text-ink">Current Store Items</h4>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-ink">Current Store &amp; Partner Items</h4>
           <button onclick="resetDemoCatalog()" class="text-[11px] text-terracotta underline">Restore Sample Items</button>
         </div>
         <div id="adminProductList" class="space-y-2.5"></div>
@@ -333,9 +378,9 @@
   </div>
 
   <script>
-    const STORAGE_KEY = 'sfy_products_v2';
-    const SETTINGS_KEY = 'sfy_settings_v2';
-    const BAG_KEY = 'sfy_bag_v2';
+    const STORAGE_KEY = 'sfy_products_v3';
+    const SETTINGS_KEY = 'sfy_settings_v3';
+    const BAG_KEY = 'sfy_bag_v3';
 
     const DEFAULT_SETTINGS = {
       whatsapp: '918446079809',
@@ -345,6 +390,7 @@
     const DEMO_PRODUCTS = [
       {
         id: 'p1',
+        type: 'own',
         name: 'Champagne Satin Lounge Co-ord Set',
         gender: 'Women',
         category: 'Cord set',
@@ -353,11 +399,12 @@
         price: 899,
         sizes: ['S', 'M', 'L', 'XL'],
         inStock: true,
-        image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=80',
+        image: '[https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=80](https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=700&q=80)',
         desc: 'Fluid satin-finish relaxed shirt and wide-leg trouser set. Breathable, wrinkle-resistant, and perfect for brunch or travel.'
       },
       {
         id: 'p2',
+        type: 'own',
         name: 'Rose-Gold Petite Mesh Watch',
         gender: 'Women',
         category: 'Watch',
@@ -366,11 +413,12 @@
         price: 749,
         sizes: ['Free Size'],
         inStock: true,
-        image: 'https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=700&q=80',
+        image: '[https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=700&q=80](https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=700&q=80)',
         desc: 'Minimalist mother-of-pearl dial with adjustable rose-gold stainless mesh strap. Splash-resistant everyday luxury.'
       },
       {
         id: 'p3',
+        type: 'own',
         name: 'Terracotta Pleated Midi Dress',
         gender: 'Women',
         category: 'Dress',
@@ -379,24 +427,12 @@
         price: 999,
         sizes: ['S', 'M', 'L'],
         inStock: true,
-        image: 'https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=700&q=80',
+        image: '[https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=700&q=80](https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=700&q=80)',
         desc: 'Flattering A-line silhouette with soft accordion pleats and cinch waist tie. Lightweight georgette with full inner lining.'
       },
       {
         id: 'p4',
-        name: 'Tortoiseshell Cat-Eye Sunglasses',
-        gender: 'Women',
-        category: 'Sunglasses',
-        cost: 290,
-        margin: 209,
-        price: 499,
-        sizes: ['Standard'],
-        inStock: true,
-        image: 'https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=700&q=80',
-        desc: 'UV400 polarized gradient lenses in a lightweight acetate frame. Includes hard protective case and cleaning cloth.'
-      },
-      {
-        id: 'p5',
+        type: 'own',
         name: 'Obsidian Chronograph Leather Watch',
         gender: 'Men',
         category: 'Watch',
@@ -405,21 +441,36 @@
         price: 899,
         sizes: ['Free Size'],
         inStock: true,
-        image: 'https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=700&q=80',
+        image: '[https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=700&q=80](https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=700&q=80)',
         desc: 'Matte black dial with tan vegan-leather strap and date window. Pairs effortlessly with casual and formal wear.'
       },
       {
-        id: 'p6',
-        name: 'Classic Aviator Polarized Sunglasses',
-        gender: 'Men',
-        category: 'Sunglasses',
-        cost: 320,
-        margin: 229,
-        price: 549,
+        id: 'p5',
+        type: 'partner',
+        partnerStore: 'Amazon',
+        partnerUrl: '[https://www.amazon.in](https://www.amazon.in)',
+        name: 'Structured Tan Crossbody Sling Bag',
+        gender: 'Women',
+        category: 'Bag',
+        price: 699,
         sizes: ['Standard'],
         inStock: true,
-        image: 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=700&q=80',
-        desc: 'Anti-glare UV400 polarized lenses with brushed gunmetal bridge. Built for driving and bright outdoor days.'
+        image: '[https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=700&q=80](https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=700&q=80)',
+        desc: 'Partner Deal Pick: Gold-tone clasp, detachable shoulder strap, and spacious dual compartments. Replace link in Admin with your affiliate URL!'
+      },
+      {
+        id: 'p6',
+        type: 'partner',
+        partnerStore: 'Myntra',
+        partnerUrl: '[https://www.myntra.com](https://www.myntra.com)',
+        name: 'Classic Polarized Wayfarer Sunglasses',
+        gender: 'Men',
+        category: 'Sunglasses',
+        price: 599,
+        sizes: ['Standard'],
+        inStock: true,
+        image: '[https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=700&q=80](https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=700&q=80)',
+        desc: 'Partner Deal Pick: UV400 polarized lenses with matte frame. Replace link in Admin with your affiliate URL!'
       }
     ];
 
@@ -461,18 +512,33 @@
       selectedGender = gender;
       selectedCategory = 'All';
       document.querySelectorAll('.gender-tab').forEach(btn => {
-        btn.className = 'gender-tab py-1.5 rounded-full text-xs font-semibold bg-white text-ink border border-ink/10 transition';
+        btn.className = 'gender-tab py-1.5 rounded-full text-[11px] font-semibold bg-white text-ink border border-ink/10 transition';
       });
-      document.getElementById('tab-' + gender).className = 'gender-tab py-1.5 rounded-full text-xs font-semibold bg-ink text-cream transition';
+      document.getElementById('tab-Partner').className = 'gender-tab py-1.5 rounded-full text-[11px] font-semibold bg-white text-partner border border-partner/25 transition';
+
+      if (gender === 'Partner') {
+        document.getElementById('tab-Partner').className = 'gender-tab py-1.5 rounded-full text-[11px] font-semibold bg-partner text-white transition';
+        document.getElementById('bannerBadge').textContent = '★ Curated Partner Deals';
+        document.getElementById('bannerBadge').className = 'inline-block text-[10px] font-bold uppercase tracking-widest text-partner bg-white/90 px-2 py-0.5 rounded-full mb-1';
+        document.getElementById('bannerTitle').textContent = 'Top Partner Picks & Discounts';
+        document.getElementById('bannerSub').textContent = 'Tap any deal to shop directly on our trusted partner stores.';
+      } else {
+        document.getElementById('tab-' + gender).className = 'gender-tab py-1.5 rounded-full text-[11px] font-semibold bg-ink text-cream transition';
+        document.getElementById('bannerBadge').textContent = '✨ Fresh Weekly Drop';
+        document.getElementById('bannerBadge').className = 'inline-block text-[10px] font-bold uppercase tracking-widest text-terracotta bg-white/80 px-2 py-0.5 rounded-full mb-1';
+        document.getElementById('bannerTitle').textContent = 'Handpicked Styles, Direct to You';
+        document.getElementById('bannerSub').textContent = 'Select your size & tap Order on WhatsApp for instant confirmation.';
+      }
+
       renderCategoryPills();
       renderProducts();
     }
 
     function renderCategoryPills() {
       const container = document.getElementById('categoryPills');
-      let cats = ['All', 'Watch', 'Dress', 'Cord set', 'Sunglasses'];
+      let cats = ['All', 'Watch', 'Dress', 'Cord set', 'Sunglasses', 'Bag'];
       if (selectedGender === 'Men') {
-        cats = ['All', 'Watch', 'Sunglasses'];
+        cats = ['All', 'Watch', 'Sunglasses', 'Bag'];
       }
       container.innerHTML = cats.map(cat => {
         const active = selectedCategory === cat;
@@ -494,13 +560,19 @@
     function renderProducts() {
       const query = document.getElementById('searchInput').value.trim().toLowerCase();
       const filtered = products.filter(p => {
-        const matchGender = selectedGender === 'All' || p.gender === selectedGender;
+        const isPartner = p.type === 'partner';
+        let matchTab = true;
+        if (selectedGender === 'Partner') {
+          matchTab = isPartner;
+        } else if (selectedGender !== 'All') {
+          matchTab = p.gender === selectedGender || p.gender === 'Unisex';
+        }
         const matchCat = selectedCategory === 'All' || p.category.toLowerCase() === selectedCategory.toLowerCase();
         const matchQuery = !query || p.name.toLowerCase().includes(query) || p.category.toLowerCase().includes(query) || p.desc.toLowerCase().includes(query);
-        return matchGender && matchCat && matchQuery;
+        return matchTab && matchCat && matchQuery;
       });
 
-      document.getElementById('dropCountLabel').textContent = `${filtered.length}${filtered.length === 1 ? 'Item' : 'Items'}`;
+      document.getElementById('dropCountLabel').textContent = `${filtered.length} ${filtered.length === 1 ? 'Item' : 'Items'}`;
       const grid = document.getElementById('productGrid');
       const empty = document.getElementById('emptyState');
 
@@ -511,44 +583,61 @@
       }
 
       empty.classList.add('hidden');
-      grid.innerHTML = filtered.map(p => `
-        <div onclick="openProductModal('${p.id}')" class="bg-white rounded-2xl overflow-hidden border border-ink/10 shadow-xs flex flex-col cursor-pointer active:scale-[0.98] transition ${!p.inStock ? 'opacity-65' : ''}">
+      grid.innerHTML = filtered.map(p => {
+        const isPartner = p.type === 'partner';
+        return `
+        <div onclick="openProductModal('${p.id}')" class="bg-white rounded-2xl overflow-hidden border ${isPartner ? 'border-partner/25' : 'border-ink/10'} shadow-xs flex flex-col cursor-pointer active:scale-[0.98] transition ${!p.inStock ? 'opacity-65' : ''}">
           <div class="relative aspect-[4/5] bg-sand overflow-hidden">
             <img src="${p.image}" alt="${p.name}" loading="lazy" class="w-full h-full object-cover" />
-            <span class="absolute top-2 left-2 px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider ${p.inStock ? 'bg-terracotta text-white' : 'bg-ink text-cream'}">
-              ${p.inStock ? 'New This Week' : 'Sold Out'}
+            <span class="absolute top-2 left-2 px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider ${isPartner ? 'bg-partner text-white' : (p.inStock ? 'bg-terracotta text-white' : 'bg-ink text-cream')}">
+              ${isPartner ? '★ Partner Deal' : (p.inStock ? 'New This Week' : 'Sold Out')}
             </span>
             <span class="absolute bottom-2 left-2 bg-white/90 backdrop-blur-xs text-ink text-[10px] font-semibold px-2 py-0.5 rounded-md">
-              ${p.gender}'s &bull; ${p.category}
+              ${isPartner ? (p.partnerStore || 'Partner') : p.gender + "'s"} &bull; ${p.category}
             </span>
           </div>
           <div class="p-3 flex-1 flex flex-col justify-between">
             <div>
               <h3 class="font-serif text-base font-bold text-ink leading-snug line-clamp-2">${p.name}</h3>
-              <p class="text-[11px] text-muted mt-1">Sizes: ${p.sizes.join(', ')}</p>
+              <p class="text-[11px] text-muted mt-1">${isPartner ? 'Fulfilled by ' + (p.partnerStore || 'Partner') : 'Sizes: ' + p.sizes.join(', ')}</p>
             </div>
             <div class="mt-2.5 pt-2 border-t border-ink/5 flex items-center justify-between">
               <span class="text-sm font-bold text-ink">&#8377;${p.price}</span>
-              <span class="text-[11px] font-bold text-terracotta">Select &rarr;</span>
+              <span class="text-[11px] font-bold ${isPartner ? 'text-partner' : 'text-terracotta'}">${isPartner ? 'View Deal ↗' : 'Select →'}</span>
             </div>
           </div>
         </div>
-      `).join('');
+      `}).join('');
     }
 
     function openProductModal(id) {
       activeProduct = products.find(p => p.id === id);
       if (!activeProduct) return;
-      activeSize = activeProduct.sizes.length === 1 ? activeProduct.sizes[0] : '';
+      const isPartner = activeProduct.type === 'partner';
 
       document.getElementById('modalImg').src = activeProduct.image;
-      document.getElementById('modalBadge').textContent = activeProduct.inStock ? 'In Stock • Ready to Ship' : 'Sold Out';
-      document.getElementById('modalCategory').textContent = `${activeProduct.gender}'s ${activeProduct.category}`; document.getElementById('modalTitle').textContent = activeProduct.name; document.getElementById('modalPrice').innerHTML = `&#8377;${activeProduct.price}`;
+      document.getElementById('modalPrice').innerHTML = `&#8377;${activeProduct.price}`;
+      document.getElementById('modalTitle').textContent = activeProduct.name;
       document.getElementById('modalDesc').textContent = activeProduct.desc;
-      document.getElementById('modalNote').value = '';
-      document.getElementById('sizeError').classList.add('hidden');
 
-      renderSizeButtons();
+      if (isPartner) {
+        document.getElementById('modalBadge').textContent = `★ ${activeProduct.partnerStore || 'Partner'} Deal`;
+        document.getElementById('modalCategory').textContent = `Partner Pick • ${activeProduct.category}`;
+        document.getElementById('ownStoreControls').classList.add('hidden');
+        document.getElementById('partnerControls').classList.remove('hidden');
+        document.getElementById('partnerBuyLabel').textContent = `Buy on ${activeProduct.partnerStore || 'Partner Store'}`;
+        document.getElementById('partnerBuyBtn').href = activeProduct.partnerUrl || '#';
+      } else {
+        activeSize = activeProduct.sizes.length === 1 ? activeProduct.sizes[0] : '';
+        document.getElementById('modalBadge').textContent = activeProduct.inStock ? 'In Stock • Ready to Ship' : 'Sold Out';
+        document.getElementById('modalCategory').textContent = `${activeProduct.gender}'s ${activeProduct.category}`;
+        document.getElementById('modalNote').value = '';
+        document.getElementById('sizeError').classList.add('hidden');
+        document.getElementById('partnerControls').classList.add('hidden');
+        document.getElementById('ownStoreControls').classList.remove('hidden');
+        renderSizeButtons();
+      }
+
       document.getElementById('productModal').classList.remove('hidden');
     }
 
@@ -583,7 +672,7 @@
       bag.push({
         id: activeProduct.id,
         name: activeProduct.name,
-        category: `${activeProduct.gender}'s${activeProduct.category}`,
+        category: `${activeProduct.gender}'s ${activeProduct.category}`,
         price: activeProduct.price,
         size: activeSize,
         note: note
@@ -606,13 +695,32 @@
       const lines = [
         `Hello *Style For You*! I would like to place an order from this week's drop:`,
         ``,
-        `• *Item:* ${activeProduct.name} (${activeProduct.gender}'s ${activeProduct.category})`, `• *Size:* ${activeSize}`,
-        `• *Item Price:* ₹${activeProduct.price}`, `• *Shipping:* Extra (as per delivery location)`, note ? `• *Note:* ${note}` : null,
+        `• *Item:* ${activeProduct.name} (${activeProduct.gender}'s ${activeProduct.category})`,
+        `• *Size:* ${activeSize}`,
+        `• *Item Price:* ₹${activeProduct.price}`,
+        `• *Shipping:* Extra (as per delivery location)`,
+        note ? `• *Note:* ${note}` : null,
         ``,
         `Please share the total amount including shipping & payment details!`
       ].filter(Boolean);
 
-      const url = `https://wa.me/${settings.whatsapp}?text=${encodeURIComponent(lines.join('\n'))}`; window.open(url, '_blank'); }  function updateBagUI() { const badge = document.getElementById('bagCountBadge'); const bar = document.getElementById('floatingBagBar'); if (bag.length === 0) { badge.classList.add('hidden'); bar.classList.add('hidden'); return; } const total = bag.reduce((sum, item) => sum + Number(item.price), 0); badge.textContent = bag.length; badge.classList.remove('hidden'); document.getElementById('floatingBagCount').textContent = `${bag.length} ${bag.length === 1 ? 'item' : 'items'}`; document.getElementById('floatingBagTotal').innerHTML = `&#8377;${total}`;
+      const url = `[https://wa.me/$](https://wa.me/$){settings.whatsapp}?text=${encodeURIComponent(lines.join('\n'))}`;
+      window.open(url, '_blank');
+    }
+
+    function updateBagUI() {
+      const badge = document.getElementById('bagCountBadge');
+      const bar = document.getElementById('floatingBagBar');
+      if (bag.length === 0) {
+        badge.classList.add('hidden');
+        bar.classList.add('hidden');
+        return;
+      }
+      const total = bag.reduce((sum, item) => sum + Number(item.price), 0);
+      badge.textContent = bag.length;
+      badge.classList.remove('hidden');
+      document.getElementById('floatingBagCount').textContent = `${bag.length} ${bag.length === 1 ? 'item' : 'items'}`;
+      document.getElementById('floatingBagTotal').innerHTML = `&#8377;${total}`;
       bar.classList.remove('hidden');
     }
 
@@ -628,14 +736,34 @@
           <div class="bg-white border border-ink/10 rounded-2xl p-3 flex items-center justify-between gap-2">
             <div>
               <p class="text-xs font-bold text-ink">${item.name}</p>
-              <p class="text-[11px] text-muted">Size: ${item.size}${item.note ? '&bull; ' + item.note : ''}</p>
+              <p class="text-[11px] text-muted">Size: ${item.size} ${item.note ? '&bull; ' + item.note : ''}</p>
               <p class="text-xs font-bold text-terracotta mt-0.5">&#8377;${item.price}</p>
             </div>
             <button onclick="removeBagItem(${idx})" class="text-xs text-red-600 font-semibold px-2 py-1">Remove</button>
           </div>
         `).join('');
         const total = bag.reduce((sum, item) => sum + Number(item.price), 0);
-        document.getElementById('bagSubtotal').innerHTML = `&#8377;${total}`; } document.getElementById('bagModal').classList.remove('hidden'); }  function removeBagItem(index) { bag.splice(index, 1); saveState(); updateBagUI(); openBagModal(); }  function closeBagModal() { document.getElementById('bagModal').classList.add('hidden'); }  function checkoutBagOnWhatsApp() { if (bag.length === 0) return; const customer = document.getElementById('bagCustomerName').value.trim(); const total = bag.reduce((sum, item) => sum + Number(item.price), 0); const itemLines = bag.map((item, i) => `${i + 1}. *${item.name}* (Size:${item.size}) — ₹${item.price}${item.note ? ` [${item.note}]` : ''}`);
+        document.getElementById('bagSubtotal').innerHTML = `&#8377;${total}`;
+      }
+      document.getElementById('bagModal').classList.remove('hidden');
+    }
+
+    function removeBagItem(index) {
+      bag.splice(index, 1);
+      saveState();
+      updateBagUI();
+      openBagModal();
+    }
+
+    function closeBagModal() {
+      document.getElementById('bagModal').classList.add('hidden');
+    }
+
+    function checkoutBagOnWhatsApp() {
+      if (bag.length === 0) return;
+      const customer = document.getElementById('bagCustomerName').value.trim();
+      const total = bag.reduce((sum, item) => sum + Number(item.price), 0);
+      const itemLines = bag.map((item, i) => `${i + 1}. *${item.name}* (Size: ${item.size}) — ₹${item.price}${item.note ? ` [${item.note}]` : ''}`);
 
       const lines = [
         `Hello *Style For You*! I'd like to order the following items from this week's collection:`,
@@ -649,7 +777,7 @@
         `Please share the final bill with shipping & payment details!`
       ].filter(Boolean);
 
-      const url = `https://wa.me/${settings.whatsapp}?text=${encodeURIComponent(lines.join('\n'))}`;
+      const url = `[https://wa.me/$](https://wa.me/$){settings.whatsapp}?text=${encodeURIComponent(lines.join('\n'))}`;
       window.open(url, '_blank');
     }
 
@@ -687,6 +815,19 @@
       renderProducts();
     }
 
+    function toggleFormType() {
+      const type = document.getElementById('prodType').value;
+      if (type === 'partner') {
+        document.getElementById('ownMarginBox').classList.add('hidden');
+        document.getElementById('partnerLinkBox').classList.remove('hidden');
+        document.getElementById('prodSizes').classList.add('hidden');
+      } else {
+        document.getElementById('ownMarginBox').classList.remove('hidden');
+        document.getElementById('partnerLinkBox').classList.add('hidden');
+        document.getElementById('prodSizes').classList.remove('hidden');
+      }
+    }
+
     function calcSellingPrice() {
       const cost = Number(document.getElementById('prodCost').value) || 0;
       const margin = Number(document.getElementById('prodMargin').value) || 0;
@@ -717,41 +858,47 @@
 
     function saveProduct() {
       const editId = document.getElementById('editProductId').value;
+      const type = document.getElementById('prodType').value;
       const name = document.getElementById('prodName').value.trim();
       const gender = document.getElementById('prodGender').value;
       const category = document.getElementById('prodCategory').value;
-      const cost = Number(document.getElementById('prodCost').value) || 0;
-      const margin = Number(document.getElementById('prodMargin').value) || 0;
-      const price = Number(document.getElementById('prodPrice').value) || (cost + margin);
-      const sizesRaw = document.getElementById('prodSizes').value.trim();
-      const image = document.getElementById('prodImageUrl').value.trim() || 'https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=700&q=80';
-      const desc = document.getElementById('prodDesc').value.trim() || 'Curated weekly drop piece from Style For You.';
+      const image = document.getElementById('prodImageUrl').value.trim() || '[https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=700&q=80](https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=700&q=80)';
+      const desc = document.getElementById('prodDesc').value.trim() || 'Curated weekly pick from Style For You.';
 
-      if (!name || !price) {
-        alert('Please enter at least a Product Name and Selling Price.');
-        return;
+      let cost = 0, margin = 0, price = 0, sizes = ['Standard'], partnerStore = '', partnerUrl = '';
+
+      if (type === 'partner') {
+        price = Number(document.getElementById('partnerPrice').value) || 0;
+        partnerStore = document.getElementById('partnerStoreName').value.trim() || 'Amazon';
+        partnerUrl = document.getElementById('partnerUrl').value.trim();
+        if (!name || !price || !partnerUrl) {
+          alert('Please enter Product Name, Display Price, and your Affiliate Link URL.');
+          return;
+        }
+      } else {
+        cost = Number(document.getElementById('prodCost').value) || 0;
+        margin = Number(document.getElementById('prodMargin').value) || 0;
+        price = Number(document.getElementById('prodPrice').value) || (cost + margin);
+        const sizesRaw = document.getElementById('prodSizes').value.trim();
+        sizes = sizesRaw ? sizesRaw.split(',').map(s => s.trim()).filter(Boolean) : ['Free Size'];
+        if (!name || !price) {
+          alert('Please enter at least a Product Name and Selling Price.');
+          return;
+        }
       }
 
-      const sizes = sizesRaw ? sizesRaw.split(',').map(s => s.trim()).filter(Boolean) : ['Free Size'];
+      const itemData = { type, name, gender, category, cost, margin, price, sizes, partnerStore, partnerUrl, image, desc };
 
       if (editId) {
         const idx = products.findIndex(p => p.id === editId);
         if (idx !== -1) {
-          products[idx] = { ...products[idx], name, gender, category, cost, margin, price, sizes, image, desc };
+          products[idx] = { ...products[idx], ...itemData };
         }
       } else {
         products.unshift({
           id: 'p_' + Date.now(),
-          name,
-          gender,
-          category,
-          cost,
-          margin,
-          price,
-          sizes,
           inStock: true,
-          image,
-          desc
+          ...itemData
         });
       }
 
@@ -764,96 +911,34 @@
     function editProduct(id) {
       const p = products.find(item => item.id === id);
       if (!p) return;
-      document.getElementById('formHeading').textContent = 'Edit Weekly Item';
+      document.getElementById('formHeading').textContent = 'Edit Item';
       document.getElementById('editProductId').value = p.id;
+      document.getElementById('prodType').value = p.type || 'own';
+      toggleFormType();
+
       document.getElementById('prodName').value = p.name;
       document.getElementById('prodGender').value = p.gender;
       document.getElementById('prodCategory').value = p.category;
-      document.getElementById('prodCost').value = p.cost || '';
-      document.getElementById('prodMargin').value = p.margin || '';
-      document.getElementById('prodPrice').value = p.price;
-      document.getElementById('prodSizes').value = p.sizes.join(', ');
       document.getElementById('prodImageUrl').value = p.image;
       document.getElementById('prodDesc').value = p.desc;
+
+      if (p.type === 'partner') {
+        document.getElementById('partnerPrice').value = p.price;
+        document.getElementById('partnerStoreName').value = p.partnerStore || 'Amazon';
+        document.getElementById('partnerUrl').value = p.partnerUrl || '';
+      } else {
+        document.getElementById('prodCost').value = p.cost || '';
+        document.getElementById('prodMargin').value = p.margin || '';
+        document.getElementById('prodPrice').value = p.price;
+        document.getElementById('prodSizes').value = p.sizes.join(', ');
+      }
       document.getElementById('cancelEditBtn').classList.remove('hidden');
     }
 
     function resetAdminForm() {
-      document.getElementById('formHeading').textContent = '+ Add New Weekly Item';
+      document.getElementById('formHeading').textContent = '+ Add New Item';
       document.getElementById('editProductId').value = '';
+      document.getElementById('prodType').value = 'own';
+      toggleFormType();
       document.getElementById('prodName').value = '';
       document.getElementById('prodCost').value = '';
-      document.getElementById('prodMargin').value = '';
-      document.getElementById('prodPrice').value = '';
-      document.getElementById('prodSizes').value = 'S, M, L, XL';
-      document.getElementById('prodImageUrl').value = '';
-      document.getElementById('prodImageFile').value = '';
-      document.getElementById('prodDesc').value = '';
-      document.getElementById('cancelEditBtn').classList.add('hidden');
-    }
-
-    function toggleStock(id) {
-      const p = products.find(item => item.id === id);
-      if (p) {
-        p.inStock = !p.inStock;
-        saveState();
-        renderAdminProducts();
-        renderProducts();
-      }
-    }
-
-    function deleteProduct(id) {
-      if (!confirm('Remove this item from the weekly catalog?')) return;
-      products = products.filter(item => item.id !== id);
-      saveState();
-      renderAdminProducts();
-      renderProducts();
-    }
-
-    function resetDemoCatalog() {
-      if (!confirm('Restore the 6 sample products?')) return;
-      products = [...DEMO_PRODUCTS];
-      saveState();
-      renderAdminProducts();
-      renderProducts();
-    }
-
-    function renderAdminProducts() {
-      const list = document.getElementById('adminProductList');
-      list.innerHTML = products.map(p => `
-        <div class="bg-white border border-ink/10 rounded-2xl p-3 flex items-center gap-3">
-          <img src="${p.image}" class="w-14 h-16 rounded-xl object-cover bg-sand shrink-0" />
-          <div class="flex-1 min-w-0">
-            <p class="text-xs font-bold text-ink truncate">${p.name}</p>
-            <p class="text-[11px] text-muted">${p.gender}'s &bull; ${p.category} &bull; &#8377;${p.price}</p>
-            <div class="flex items-center gap-2 mt-1.5">
-              <button onclick="toggleStock('${p.id}')" class="text-[10px] font-bold px-2 py-0.5 rounded-full ${p.inStock ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-700'}">
-                ${p.inStock ? 'In Stock' : 'Sold Out'}
-              </button>
-              <button onclick="editProduct('${p.id}')" class="text-[10px] font-bold text-ink underline">Edit</button>
-              <button onclick="deleteProduct('${p.id}')" class="text-[10px] font-bold text-red-600 underline">Delete</button>
-            </div>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    function saveStoreSettings() {
-      const wa = document.getElementById('settingWhatsapp').value.replace(/\D/g, '');
-      const pin = document.getElementById('settingPin').value.trim();
-      if (wa.length >= 10) settings.whatsapp = wa;
-      if (pin.length === 4) settings.pin = pin;
-      saveState();
-      alert('Store settings updated!');
-    }
-
-    function openInstallModal() { document.getElementById('installModal').classList.remove('hidden'); }
-    function closeInstallModal() { document.getElementById('installModal').classList.add('hidden'); }
-
-    // Initial render
-    renderCategoryPills();
-    renderProducts();
-    updateBagUI();
-  </script>
-</body>
-</html>
