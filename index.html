@@ -3,438 +3,250 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Style For You • Curated Weekly Drops</title>
-  <meta name="theme-color" content="#FAF8F5" />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <title>Style For You</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
-    :root {
-      --cream: #FAF8F5; --sand: #F3EFEA; --ink: #1E1B18; --muted: #6E655F;
-      --terra: #B85D3B; --wa: #25D366; --partner: #2B5B84;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-    body {
-      background: #EAE5DF; color: var(--ink); font-family: 'Plus Jakarta Sans', sans-serif;
-      display: flex; justify-content: center; min-height: 100vh;
-    }
-    .app {
-      width: 100%; max-width: 440px; background: var(--cream); min-height: 100vh;
-      display: flex; flex-direction: column; box-shadow: 0 10px 30px rgba(0,0,0,0.08); position: relative;
-    }
-    header {
-      position: sticky; top: 0; z-index: 20; background: rgba(250,248,245,0.96);
-      backdrop-filter: blur(8px); border-bottom: 1px solid rgba(30,27,24,0.1); padding: 12px 16px 10px;
-    }
-    .top-row { display: flex; align-items: center; justify-content: space-between; }
-    .brand { touch-action: manipulation; cursor: pointer; user-select: none; -webkit-user-select: none; }
-    .brand h1 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 700; line-height: 1; }
-    .brand p { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--terra); margin-top: 4px; }
-    .icon-btns { display: flex; gap: 8px; }
-    .circle-btn {
-      width: 38px; height: 38px; border-radius: 50%; border: 1px solid rgba(30,27,24,0.12);
-      background: var(--sand); color: var(--ink); display: flex; align-items: center; justify-content: center;
-      cursor: pointer; position: relative; font-size: 16px; touch-action: manipulation;
-    }
-    .circle-btn.dark { background: var(--ink); color: var(--cream); border: none; }
-    .badge-dot {
-      position: absolute; top: -4px; right: -4px; width: 18px; height: 18px; border-radius: 50%;
-      background: var(--terra); color: #fff; font-size: 10px; font-weight: 700;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .search-box { margin-top: 10px; position: relative; }
-    .search-box input {
-      width: 100%; background: #fff; border: 1px solid rgba(30,27,24,0.12); border-radius: 99px;
-      padding: 8px 14px 8px 34px; font-size: 12px; outline: none;
-    }
-    .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 13px; color: var(--muted); }
-    .tabs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 10px; }
-    .tab {
-      padding: 6px 4px; border-radius: 99px; font-size: 11px; font-weight: 600;
-      background: #fff; color: var(--ink); border: 1px solid rgba(30,27,24,0.12); cursor: pointer; touch-action: manipulation;
-    }
-    .tab.active { background: var(--ink); color: var(--cream); border-color: var(--ink); }
-    .tab.partner-tab { color: var(--partner); border-color: rgba(43,91,132,0.3); }
-    .tab.partner-tab.active { background: var(--partner); color: #fff; border-color: var(--partner); }
-    .pills { display: flex; gap: 6px; overflow-x: auto; margin-top: 10px; scrollbar-width: none; }
-    .pills::-webkit-scrollbar { display: none; }
-    .pill {
-      padding: 5px 12px; border-radius: 99px; font-size: 11px; font-weight: 500; white-space: nowrap;
-      background: #fff; color: var(--muted); border: 1px solid rgba(30,27,24,0.1); cursor: pointer; touch-action: manipulation;
-    }
-    .pill.active { background: var(--terra); color: #fff; border-color: var(--terra); }
-    main { flex: 1; padding: 14px 16px 90px; }
-    .banner {
-      background: linear-gradient(135deg, #EFE6DD, #F7F1EB); border: 1px solid rgba(184,93,59,0.2);
-      border-radius: 16px; padding: 14px; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; gap: 8px;
-    }
-    .banner-tag { display: inline-block; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--terra); background: #fff; padding: 2px 8px; border-radius: 99px; margin-bottom: 4px; }
-    .banner h2 { font-family: 'Cormorant Garamond', serif; font-size: 20px; line-height: 1.15; }
-    .banner p { font-size: 11px; color: var(--muted); margin-top: 3px; }
-    .count-pill { background: #fff; border: 1px solid rgba(30,27,24,0.1); border-radius: 10px; padding: 5px 10px; font-size: 11px; font-weight: 700; white-space: nowrap; }
-    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .card {
-      background: #fff; border-radius: 16px; overflow: hidden; border: 1px solid rgba(30,27,24,0.1);
-      display: flex; flex-direction: column; cursor: pointer;
-    }
-    .card.partner { border-color: rgba(43,91,132,0.3); }
-    .card-img { position: relative; aspect-ratio: 4/5; background: var(--sand); }
-    .card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .tag-top {
-      position: absolute; top: 8px; left: 8px; padding: 3px 8px; border-radius: 99px;
-      font-size: 9px; font-weight: 700; text-transform: uppercase; background: var(--terra); color: #fff;
-    }
-    .tag-top.partner { background: var(--partner); }
-    .tag-top.sold { background: var(--ink); }
-    .photo-count-badge {
-      position: absolute; top: 8px; right: 8px; background: rgba(30,27,24,0.8); color: #fff;
-      font-size: 9px; font-weight: 700; padding: 3px 7px; border-radius: 99px;
-    }
-    .tag-bot {
-      position: absolute; bottom: 8px; left: 8px; background: rgba(255,255,255,0.92);
-      padding: 2px 7px; border-radius: 6px; font-size: 10px; font-weight: 600;
-    }
-    .card-body { padding: 10px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
-    .card-title { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 700; line-height: 1.2; }
-    .card-sub { font-size: 10px; color: var(--muted); margin-top: 4px; }
-    .card-foot { margin-top: 8px; padding-top: 7px; border-top: 1px solid rgba(30,27,24,0.06); display: flex; justify-content: space-between; align-items: center; }
-    .price { font-size: 13px; font-weight: 700; }
-    .cta-txt { font-size: 11px; font-weight: 700; color: var(--terra); }
-    .cta-txt.partner { color: var(--partner); }
-    footer { border-top: 1px solid rgba(30,27,24,0.1); background: var(--sand); padding: 14px; text-align: center; font-size: 11px; color: var(--muted); }
-    .float-bar {
-      position: fixed; bottom: 14px; left: 50%; transform: translateX(-50%); width: calc(100% - 32px); max-width: 408px;
-      background: var(--ink); color: var(--cream); border-radius: 16px; padding: 12px 16px;
-      display: flex; justify-content: space-between; align-items: center; box-shadow: 0 10px 25px rgba(0,0,0,0.2); z-index: 25; cursor: pointer;
-    }
-    .modal-bg {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 50;
-      display: flex; align-items: flex-end; justify-content: center;
-    }
-    .modal-bg.center { align-items: center; padding: 16px; }
-    .sheet {
-      background: var(--cream); width: 100%; max-width: 440px; border-radius: 24px 24px 0 0;
-      max-height: 92vh; overflow-y: auto; position: relative;
-    }
-    .box { background: var(--cream); width: 100%; max-width: 340px; border-radius: 22px; padding: 20px; text-align: center; }
-    .hidden { display: none !important; }
-    .btn {
-      padding: 11px 14px; border-radius: 12px; font-size: 12px; font-weight: 700;
-      border: none; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px; text-decoration: none;
-    }
-    .btn:disabled { opacity: 0.55; cursor: not-allowed; }
-    .btn-dark { background: var(--ink); color: var(--cream); }
-    .btn-outline { background: #fff; color: var(--ink); border: 1.5px solid var(--ink); }
-    .btn-wa { background: var(--wa); color: #fff; }
-    .btn-partner { background: var(--partner); color: #fff; width: 100%; }
-    .btn-terra { background: var(--terra); color: #fff; }
-    .input {
-      width: 100%; background: #fff; border: 1px solid rgba(30,27,24,0.16); border-radius: 10px;
-      padding: 9px 12px; font-size: 12px; margin-top: 6px;
-    }
-    .size-chip {
-      padding: 6px 12px; border-radius: 10px; font-size: 11px; font-weight: 700;
-      border: 1px solid rgba(30,27,24,0.2); background: #fff; cursor: pointer;
-    }
-    .size-chip.active { background: var(--ink); color: #fff; border-color: var(--ink); }
-    .gal-nav {
-      position: absolute; top: 50%; transform: translateY(-50%); width: 34px; height: 34px;
-      border-radius: 50%; border: none; background: rgba(255,255,255,0.9); color: var(--ink);
-      font-weight: 700; font-size: 16px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    }
-    .gal-counter {
-      position: absolute; bottom: 10px; right: 12px; background: rgba(30,27,24,0.8);
-      color: #fff; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 99px;
-    }
-    .thumb-strip {
-      display: flex; gap: 6px; overflow-x: auto; padding: 8px 16px 0; scrollbar-width: none;
-    }
-    .thumb-strip::-webkit-scrollbar { display: none; }
-    .thumb {
-      width: 46px; height: 54px; border-radius: 8px; object-fit: cover; flex-shrink: 0;
-      border: 2px solid transparent; opacity: 0.6; cursor: pointer;
-    }
-    .thumb.active { border-color: var(--terra); opacity: 1; }
-    .upload-box {
-      border: 1.5px dashed rgba(184,93,59,0.5); background: #FFFBF8; border-radius: 12px;
-      padding: 12px; text-align: center; margin-top: 8px; cursor: pointer; display: block;
-    }
+    :root{--cream:#FAF8F5;--sand:#F3EFEA;--ink:#1E1B18;--muted:#6E655F;--terra:#B85D3B;--wa:#25D366;--partner:#2B5B84}
+    *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+    body{background:#EAE5DF;color:var(--ink);font-family:'Plus Jakarta Sans',sans-serif;display:flex;justify-content:center;min-height:100vh}
+    .app{width:100%;max-width:440px;background:var(--cream);min-height:100vh;display:flex;flex-direction:column}
+    header{position:sticky;top:0;z-index:20;background:var(--cream);border-bottom:1px solid rgba(0,0,0,.1);padding:12px 16px}
+    .row{display:flex;align-items:center;justify-content:space-between}
+    .brand{touch-action:manipulation;cursor:pointer;user-select:none}
+    .brand h1{font-family:'Cormorant Garamond',serif;font-size:28px;line-height:1}
+    .brand p{font-size:10px;font-weight:700;text-transform:uppercase;color:var(--terra);margin-top:4px}
+    .cbtn{width:38px;height:38px;border-radius:50%;border:1px solid rgba(0,0,0,.12);background:var(--sand);display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;font-size:16px}
+    .cbtn.dark{background:var(--ink);color:#fff;border:none}
+    .dot{position:absolute;top:-4px;right:-4px;width:18px;height:18px;border-radius:50%;background:var(--terra);color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center}
+    .sbox{margin-top:10px}.sbox input{width:100%;background:#fff;border:1px solid rgba(0,0,0,.12);border-radius:99px;padding:8px 14px;font-size:12px}
+    .tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:10px}
+    .tab{padding:6px 4px;border-radius:99px;font-size:11px;font-weight:600;background:#fff;border:1px solid rgba(0,0,0,.12);cursor:pointer}
+    .tab.active{background:var(--ink);color:#fff}.tab.pt{color:var(--partner)}.tab.pt.active{background:var(--partner);color:#fff}
+    .pills{display:flex;gap:6px;overflow-x:auto;margin-top:10px;scrollbar-width:none}.pills::-webkit-scrollbar{display:none}
+    .pill{padding:5px 12px;border-radius:99px;font-size:11px;background:#fff;color:var(--muted);border:1px solid rgba(0,0,0,.1);white-space:nowrap;cursor:pointer}
+    .pill.active{background:var(--terra);color:#fff}
+    main{flex:1;padding:14px 16px 90px}
+    .banner{background:#EFE6DD;border-radius:16px;padding:14px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+    .banner h2{font-family:'Cormorant Garamond',serif;font-size:20px}
+    .cpill{background:#fff;border-radius:10px;padding:5px 10px;font-size:11px;font-weight:700;white-space:nowrap}
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .card{background:#fff;border-radius:16px;overflow:hidden;border:1px solid rgba(0,0,0,.1);display:flex;flex-direction:column;cursor:pointer}
+    .card.partner{border-color:rgba(43,91,132,.35)}
+    .cimg{position:relative;aspect-ratio:4/5;background:var(--sand)}.cimg img{width:100%;height:100%;object-fit:cover}
+    .ttop{position:absolute;top:8px;left:8px;padding:3px 8px;border-radius:99px;font-size:9px;font-weight:700;background:var(--terra);color:#fff}
+    .ttop.partner{background:var(--partner)}.ttop.sold{background:var(--ink)}
+    .pcnt{position:absolute;top:8px;right:8px;background:rgba(0,0,0,.75);color:#fff;font-size:9px;font-weight:700;padding:3px 7px;border-radius:99px}
+    .cbody{padding:10px;flex:1;display:flex;flex-direction:column;justify-content:space-between}
+    .ctitle{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:700;line-height:1.2}
+    .cfoot{margin-top:8px;padding-top:7px;border-top:1px solid rgba(0,0,0,.06);display:flex;justify-content:space-between;font-size:12px;font-weight:700}
+    .mbg{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:50;display:flex;align-items:flex-end;justify-content:center}
+    .mbg.center{align-items:center;padding:16px}
+    .sheet{background:var(--cream);width:100%;max-width:440px;border-radius:24px 24px 0 0;max-height:92vh;overflow-y:auto;padding:16px}
+    .box{background:var(--cream);width:100%;max-width:340px;border-radius:22px;padding:20px;text-align:center}
+    .hidden{display:none!important}
+    .btn{padding:11px 14px;border-radius:12px;font-size:12px;font-weight:700;border:none;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
+    .btn:disabled{opacity:.5}
+    .btn-dark{background:var(--ink);color:#fff}.btn-out{background:#fff;color:var(--ink);border:1.5px solid var(--ink)}.btn-wa{background:var(--wa);color:#fff}.btn-terra{background:var(--terra);color:#fff}.btn-p{background:var(--partner);color:#fff;width:100%}
+    .inp{width:100%;background:#fff;border:1px solid rgba(0,0,0,.16);border-radius:10px;padding:9px 12px;font-size:12px;margin-top:6px}
+    .schip{padding:6px 12px;border-radius:10px;font-size:11px;font-weight:700;border:1px solid rgba(0,0,0,.2);background:#fff;cursor:pointer}
+    .schip.active{background:var(--ink);color:#fff}
+    .gnav{position:absolute;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%;border:none;background:#fff;font-weight:700;font-size:16px;cursor:pointer}
+    .tstrip{display:flex;gap:6px;overflow-x:auto;padding-top:8px;scrollbar-width:none}
+    .thumb{width:46px;height:54px;border-radius:8px;object-fit:cover;flex-shrink:0;border:2px solid transparent;opacity:.6;cursor:pointer}
+    .thumb.active{border-color:var(--terra);opacity:1}
+    .ubox{border:1.5px dashed var(--terra);background:#FFFBF8;border-radius:12px;padding:12px;text-align:center;margin-top:8px;cursor:pointer;display:block}
+    .fbar{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);width:calc(100% - 32px);max-width:408px;background:var(--ink);color:#fff;border-radius:16px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;z-index:25;cursor:pointer}
   </style>
 </head>
 <body>
 <div class="app">
   <header>
-    <div class="top-row">
+    <div class="row">
       <div id="brandHeader" class="brand">
         <h1>Style For You</h1>
-        <p>Curated Weekly Drops <span id="syncDot" style="color:#16a34a;">• Syncing...</span></p>
+        <p>Curated Weekly Drops <span id="syncDot" style="color:#16a34a">• Syncing...</span></p>
       </div>
-      <div class="icon-btns">
-        <button class="circle-btn" onclick="toggleModal('installModal', true)" title="Install App">📲</button>
-        <button class="circle-btn dark" onclick="openBag()">🛍️<span id="bagBadge" class="badge-dot hidden">0</span></button>
+      <div style="display:flex;gap:8px">
+        <button class="cbtn dark" onclick="openBag()">🛍️<span id="bagBadge" class="dot hidden">0</span></button>
       </div>
     </div>
-    <div class="search-box">
-      <span class="search-icon">🔍</span>
-      <input id="searchInput" type="text" oninput="render()" placeholder="Search watches, dresses, cord sets, deals..." />
-    </div>
+    <div class="sbox"><input id="searchInput" oninput="render()" placeholder="Search watches, dresses, cord sets, deals..." /></div>
     <div class="tabs">
       <button id="tab-All" class="tab active" onclick="setTab('All')">All</button>
       <button id="tab-Women" class="tab" onclick="setTab('Women')">Women's</button>
       <button id="tab-Men" class="tab" onclick="setTab('Men')">Men's</button>
-      <button id="tab-Partner" class="tab partner-tab" onclick="setTab('Partner')">★ Deals</button>
+      <button id="tab-Partner" class="tab pt" onclick="setTab('Partner')">★ Deals</button>
     </div>
     <div id="pills" class="pills"></div>
   </header>
 
   <main>
     <div class="banner">
-      <div>
-        <span id="bTag" class="banner-tag">✨ Fresh Weekly Drop</span>
-        <h2 id="bTitle">Handpicked Styles, Direct to You</h2>
-        <p id="bSub">Pick your size &amp; tap Order on WhatsApp for instant confirmation.</p>
-      </div>
-      <span id="countLabel" class="count-pill">Loading...</span>
+      <div><h2>Handpicked Styles</h2><p style="font-size:11px;color:var(--muted)">Pick size &amp; tap Order on WhatsApp</p></div>
+      <span id="countLabel" class="cpill">Loading...</span>
     </div>
     <div id="grid" class="grid"></div>
-    <div id="empty" class="hidden" style="text-align:center; padding:40px 10px;">
-      <h3 style="font-family:'Cormorant Garamond',serif; font-size:22px;">No styles found</h3>
-      <p style="font-size:12px; color:var(--muted); margin:6px 0 14px;">Try switching category or clearing search.</p>
-      <button class="btn btn-dark" onclick="resetFilters()">Show All Styles</button>
+    <div id="empty" class="hidden" style="text-align:center;padding:30px 10px">
+      <p style="font-size:13px;color:var(--muted)">No items yet. Tap "Style For You" 5 times to add products!</p>
     </div>
   </main>
 
-  <footer>© Style For You • Curated Fashion &amp; Partner Picks</footer>
-
-  <div id="floatBar" class="float-bar hidden" onclick="openBag()">
-    <div><span id="floatCount" style="background:var(--terra); padding:2px 8px; border-radius:99px; font-size:11px; font-weight:700;">1 item</span> <span style="font-size:12px; margin-left:6px;">View Bag</span></div>
-    <div id="floatTotal" style="font-weight:700; font-size:14px;">₹0 →</div>
+  <div id="floatBar" class="fbar hidden" onclick="openBag()">
+    <span id="floatCount">1 item • View Bag</span>
+    <strong id="floatTotal">₹0 →</strong>
   </div>
 </div>
 
-<!-- Product Detail Modal -->
-<div id="prodModal" class="modal-bg hidden" onclick="if(event.target===this)toggleModal('prodModal',false)">
-  <div class="sheet">
-    <div style="position:relative;">
-      <img id="mImg" src="" style="width:100%; height:290px; object-fit:cover; display:block; background:var(--sand);" />
-      <button onclick="toggleModal('prodModal',false)" style="position:absolute; top:12px; right:12px; width:34px; height:34px; border-radius:50%; border:none; background:#fff; font-weight:700; cursor:pointer; box-shadow:0 2px 8px rgba(0,0,0,0.15);">✕</button>
-      <button id="prevImgBtn" class="gal-nav hidden" style="left:10px;" onclick="stepGallery(-1)">‹</button>
-      <button id="nextImgBtn" class="gal-nav hidden" style="right:10px;" onclick="stepGallery(1)">›</button>
-      <span id="galCounter" class="gal-counter hidden">1 / 1</span>
+<!-- Product Modal -->
+<div id="prodModal" class="mbg hidden" onclick="if(event.target===this)toggleModal('prodModal',false)">
+  <div class="sheet" style="padding:0">
+    <div style="position:relative">
+      <img id="mImg" style="width:100%;height:290px;object-fit:cover;display:block;background:var(--sand)" />
+      <button onclick="toggleModal('prodModal',false)" style="position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:50%;border:none;background:#fff;font-weight:700">✕</button>
+      <button id="prevBtn" class="gnav hidden" style="left:10px" onclick="stepGal(-1)">‹</button>
+      <button id="nextBtn" class="gnav hidden" style="right:10px" onclick="stepGal(1)">›</button>
+      <span id="galCnt" class="pcnt hidden" style="top:auto;bottom:10px">1/1</span>
     </div>
-    <div id="thumbStrip" class="thumb-strip hidden"></div>
-    <div style="padding:16px 18px 20px;">
-      <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:8px;">
-        <div>
-          <p id="mCat" style="font-size:11px; font-weight:700; text-transform:uppercase; color:var(--terra);"></p>
-          <h3 id="mTitle" style="font-family:'Cormorant Garamond',serif; font-size:24px; margin-top:2px;"></h3>
-        </div>
-        <span id="mPrice" style="font-size:20px; font-weight:700;"></span>
+    <div id="thumbStrip" class="tstrip hidden" style="padding:8px 16px 0"></div>
+    <div style="padding:16px">
+      <div class="row">
+        <div><p id="mCat" style="font-size:11px;font-weight:700;color:var(--terra)"></p><h3 id="mTitle" style="font-family:'Cormorant Garamond',serif;font-size:24px"></h3></div>
+        <strong id="mPrice" style="font-size:20px"></strong>
       </div>
-      <p id="mDesc" style="font-size:12px; color:var(--muted); line-height:1.5; margin-top:8px;"></p>
-
-      <div id="ownControls">
-        <p style="font-size:12px; font-weight:700; margin-top:14px;">Select Size <span id="sizeErr" class="hidden" style="color:#c00; font-size:11px;">(Please pick a size)</span></p>
-        <div id="mSizes" style="display:flex; flex-wrap:wrap; gap:8px; margin-top:8px;"></div>
-        <input id="mNote" class="input" placeholder="Optional note (e.g. Photo #3 color / Pincode)" style="margin-top:12px;" />
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:16px;">
-          <button class="btn btn-outline" onclick="addToBag()">Add to Bag</button>
-          <button class="btn btn-wa" onclick="orderWhatsApp()">Order on WhatsApp</button>
+      <p id="mDesc" style="font-size:12px;color:var(--muted);margin-top:8px"></p>
+      <div id="ownCtrl">
+        <p style="font-size:12px;font-weight:700;margin-top:12px">Select Size <span id="sizeErr" class="hidden" style="color:#c00">(Pick a size)</span></p>
+        <div id="mSizes" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px"></div>
+        <input id="mNote" class="inp" placeholder="Optional note (e.g. Photo #3 / Pincode)" />
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px">
+          <button class="btn btn-out" onclick="addToBag()">Add to Bag</button>
+          <button class="btn btn-wa" onclick="orderWA()">Order on WhatsApp</button>
         </div>
       </div>
-
-      <div id="partnerControls" class="hidden" style="margin-top:16px;">
-        <p style="font-size:11px; color:var(--partner); background:#eef5fb; padding:10px; border-radius:10px; margin-bottom:12px;">★ Handpicked Partner Deal — Fulfilled directly by our trusted partner store.</p>
-        <a id="partnerLink" href="#" target="_blank" rel="noopener" class="btn btn-partner">Buy on Partner Store ↗</a>
+      <div id="partnerCtrl" class="hidden" style="margin-top:14px">
+        <a id="partnerLink" href="#" target="_blank" class="btn btn-p">Buy on Partner Store ↗</a>
       </div>
     </div>
   </div>
 </div>
 
 <!-- Bag Modal -->
-<div id="bagModal" class="modal-bg hidden" onclick="if(event.target===this)toggleModal('bagModal',false)">
-  <div class="sheet" style="padding:18px;">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-      <h3 style="font-family:'Cormorant Garamond',serif; font-size:24px;">Your Shopping Bag</h3>
-      <button onclick="toggleModal('bagModal',false)" class="circle-btn">✕</button>
-    </div>
-    <div id="bagList" style="max-height:45vh; overflow-y:auto;"></div>
-    <div id="bagFoot" style="border-top:1px solid rgba(30,27,24,0.1); padding-top:12px; margin-top:12px;">
-      <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--muted); margin-bottom:4px;">
-        <span>Shipping Charges</span><span style="color:var(--terra); font-weight:700;">Extra (as per location)</span>
-      </div>
-      <div style="display:flex; justify-content:space-between; font-size:15px; font-weight:700; margin-bottom:10px;">
-        <span>Products Subtotal</span><span id="bagSub">₹0</span>
-      </div>
-      <input id="custInfo" class="input" placeholder="Your Name & City / Pincode" style="margin-bottom:10px;" />
-      <button class="btn btn-wa" style="width:100%;" onclick="checkoutBag()">Send Order on WhatsApp</button>
+<div id="bagModal" class="mbg hidden" onclick="if(event.target===this)toggleModal('bagModal',false)">
+  <div class="sheet">
+    <div class="row" style="margin-bottom:12px"><h3 style="font-family:'Cormorant Garamond',serif;font-size:24px">Shopping Bag</h3><button onclick="toggleModal('bagModal',false)" class="cbtn">✕</button></div>
+    <div id="bagList"></div>
+    <div id="bagFoot" style="border-top:1px solid rgba(0,0,0,.1);padding-top:12px;margin-top:12px">
+      <p style="font-size:12px;color:var(--terra);font-weight:700">Shipping: Extra (as per location)</p>
+      <div class="row" style="margin:6px 0 10px"><strong>Subtotal</strong><strong id="bagSub">₹0</strong></div>
+      <input id="custInfo" class="inp" placeholder="Your Name & City / Pincode" style="margin-bottom:10px" />
+      <button class="btn btn-wa" style="width:100%" onclick="checkoutBag()">Send Order on WhatsApp</button>
     </div>
   </div>
 </div>
 
 <!-- PIN Modal -->
-<div id="pinModal" class="modal-bg center hidden">
+<div id="pinModal" class="mbg center hidden">
   <div class="box">
-    <span class="banner-tag">Owner Access</span>
-    <h3 style="font-family:'Cormorant Garamond',serif; font-size:24px;">Reseller Admin</h3>
-    <p style="font-size:12px; color:var(--muted); margin-top:4px;">Enter 4-digit PIN (Default: 1234)</p>
-    <input id="pinInput" type="password" inputmode="numeric" maxlength="4" class="input" style="text-align:center; font-size:20px; letter-spacing:8px; width:150px; margin:14px auto;" />
-    <p id="pinErr" class="hidden" style="color:#c00; font-size:11px; font-weight:700;">Incorrect PIN</p>
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:14px;">
-      <button class="btn btn-outline" onclick="toggleModal('pinModal',false)">Cancel</button>
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:24px">Admin PIN</h3>
+    <p style="font-size:12px;color:var(--muted)">Default PIN: 1234</p>
+    <input id="pinInput" type="password" inputmode="numeric" maxlength="4" class="inp" style="text-align:center;font-size:20px;letter-spacing:8px;width:150px;margin:14px auto" />
+    <p id="pinErr" class="hidden" style="color:#c00;font-size:11px">Wrong PIN</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px">
+      <button class="btn btn-out" onclick="toggleModal('pinModal',false)">Cancel</button>
       <button class="btn btn-dark" onclick="checkPin()">Unlock</button>
     </div>
   </div>
 </div>
 
-<!-- Admin Dashboard -->
-<div id="adminModal" class="modal-bg hidden">
-  <div class="sheet" style="height:95vh; max-height:95vh; padding:16px;">
-    <div style="display:flex; justify-content:space-between; align-items:center; padding-bottom:10px; border-bottom:1px solid rgba(30,27,24,0.1);">
-      <div>
-        <h3 style="font-family:'Cormorant Garamond',serif; font-size:22px;">Store &amp; Deals Manager</h3>
-        <p style="font-size:10px; color:#16a34a; font-weight:700;">● Cloud Live Sync Active</p>
-      </div>
-      <button class="btn btn-dark" style="padding:6px 14px;" onclick="toggleModal('adminModal',false); render();">Done</button>
+<!-- Admin Modal -->
+<div id="adminModal" class="mbg hidden">
+  <div class="sheet" style="height:95vh;max-height:95vh">
+    <div class="row" style="padding-bottom:10px;border-bottom:1px solid rgba(0,0,0,.1)">
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:22px">Store Manager (Live)</h3>
+      <button class="btn btn-dark" style="padding:6px 14px" onclick="toggleModal('adminModal',false);render()">Done</button>
     </div>
-
-    <div style="background:#fff; border:1px solid rgba(30,27,24,0.1); border-radius:16px; padding:14px; margin-top:12px;">
-      <p style="font-size:11px; font-weight:700; color:var(--terra); text-transform:uppercase;">+ Add New Item (Live to All Customers)</p>
-      <select id="fType" class="input" onchange="toggleAdminFields()">
+    <div style="background:#fff;border-radius:16px;padding:12px;margin-top:12px;border:1px solid rgba(0,0,0,.1)">
+      <select id="fType" class="inp" onchange="toggleAdminFields()">
         <option value="own">My Own Stock (WhatsApp Order)</option>
         <option value="partner">Partner Deal (Affiliate Link)</option>
       </select>
-      <input id="fName" class="input" placeholder="Product Name" />
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-        <select id="fGender" class="input"><option value="Women">Women's</option><option value="Men">Men's</option><option value="Unisex">Unisex</option></select>
-        <select id="fCat" class="input"><option>Watch</option><option>Dress</option><option>Cord set</option><option>Sunglasses</option><option>Bag</option></select>
+      <input id="fName" class="inp" placeholder="Product Name" />
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <select id="fGender" class="inp"><option value="Women">Women's</option><option value="Men">Men's</option><option value="Unisex">Unisex</option></select>
+        <select id="fCat" class="inp"><option>Watch</option><option>Dress</option><option>Cord set</option><option>Sunglasses</option><option>Bag</option></select>
       </div>
       <div id="ownFields">
-        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px;">
-          <input id="fCost" type="number" class="input" placeholder="Cost ₹" oninput="calcPrice()" />
-          <input id="fMargin" type="number" class="input" placeholder="Profit ₹" oninput="calcPrice()" />
-          <input id="fPrice" type="number" class="input" placeholder="Sell ₹" />
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px">
+          <input id="fCost" type="number" class="inp" placeholder="Cost ₹" oninput="calcP()" />
+          <input id="fMargin" type="number" class="inp" placeholder="Profit ₹" oninput="calcP()" />
+          <input id="fPrice" type="number" class="inp" placeholder="Sell ₹" />
         </div>
-        <input id="fSizes" class="input" value="S, M, L, XL" placeholder="Sizes (comma separated)" />
+        <input id="fSizes" class="inp" value="S, M, L, XL" placeholder="Sizes" />
       </div>
       <div id="partnerFields" class="hidden">
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
-          <input id="fPPrice" type="number" class="input" placeholder="Price ₹" />
-          <input id="fPStore" class="input" value="Amazon" placeholder="Store (Amazon/Myntra)" />
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <input id="fPPrice" type="number" class="inp" placeholder="Price ₹" />
+          <input id="fPStore" class="inp" value="Amazon" placeholder="Store Name" />
         </div>
-        <input id="fPUrl" type="url" class="input" placeholder="Paste Affiliate Link (https://...)" />
+        <input id="fPUrl" type="url" class="inp" placeholder="Affiliate Link (https://...)" />
       </div>
-
-      <!-- Direct Phone Gallery Multi-Photo Upload (Up to 25 photos) -->
-      <label class="upload-box">
-        <span style="font-size:12px; font-weight:700; color:var(--terra);">📸 Select Up to 25 Photos from Gallery</span>
-        <span id="fileCountTxt" style="display:block; font-size:11px; color:var(--muted); margin-top:3px;">Tap here to pick photos directly from your phone</span>
-        <input id="fGallery" type="file" accept="image/*" multiple style="display:none;" onchange="handleGallerySelect(event)" />
+      <label class="ubox">
+        <strong style="font-size:12px;color:var(--terra)">📸 Select Up to 25 Photos from Gallery</strong>
+        <span id="fileCntTxt" style="display:block;font-size:11px;color:var(--muted);margin-top:2px">Tap to pick photos from phone</span>
+        <input id="fGallery" type="file" accept="image/*" multiple style="display:none" onchange="onPickFiles(event)" />
       </label>
-      <div id="previewStrip" class="thumb-strip hidden" style="padding:8px 0 0;"></div>
-
-      <textarea id="fDesc" rows="2" class="input" placeholder="Short description (fabric, colors, fit)"></textarea>
-      <button id="saveBtn" class="btn btn-terra" style="width:100%; margin-top:10px;" onclick="saveItem()">Save &amp; Publish Live</button>
+      <div id="prevStrip" class="tstrip hidden"></div>
+      <textarea id="fDesc" rows="2" class="inp" placeholder="Description"></textarea>
+      <button id="saveBtn" class="btn btn-terra" style="width:100%;margin-top:10px" onclick="saveItem()">Save &amp; Publish Live</button>
     </div>
-
-    <div style="margin-top:16px;">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-        <strong style="font-size:12px;">Live Store Items</strong>
-        <button onclick="seedSamples()" style="background:none; border:none; color:var(--terra); font-size:11px; text-decoration:underline; cursor:pointer;">Load Sample Items</button>
-      </div>
+    <div style="margin-top:14px">
+      <div class="row" style="margin-bottom:8px"><strong style="font-size:12px">Live Items</strong><button onclick="seedSamples()" style="background:none;border:none;color:var(--terra);font-size:11px;text-decoration:underline">Load Samples</button></div>
       <div id="adminList"></div>
     </div>
-
-    <div style="background:#fff; border:1px solid rgba(30,27,24,0.1); border-radius:16px; padding:14px; margin-top:16px;">
-      <strong style="font-size:12px;">Store Settings (Synced to Cloud)</strong>
-      <input id="sWa" class="input" placeholder="WhatsApp Number (91...)" />
-      <input id="sPin" class="input" maxlength="4" placeholder="4-Digit PIN" />
-      <button class="btn btn-dark" style="width:100%; margin-top:10px;" onclick="saveSettings()">Update Cloud Settings</button>
+    <div style="background:#fff;border-radius:16px;padding:12px;margin-top:14px;border:1px solid rgba(0,0,0,.1)">
+      <strong style="font-size:12px">Settings</strong>
+      <input id="sWa" class="inp" placeholder="WhatsApp (91...)" />
+      <input id="sPin" class="inp" maxlength="4" placeholder="4-Digit PIN" />
+      <button class="btn btn-dark" style="width:100%;margin-top:10px" onclick="saveSettings()">Save Settings</button>
     </div>
-  </div>
-</div>
-
-<!-- Install Modal -->
-<div id="installModal" class="modal-bg center hidden">
-  <div class="box">
-    <h3 style="font-family:'Cormorant Garamond',serif; font-size:24px;">Save to Home Screen</h3>
-    <p style="font-size:12px; color:var(--muted); margin:8px 0 12px; line-height:1.5;">Tap Chrome's <strong>⋮</strong> menu (top right) → <strong>Add to Home screen</strong> to use Style For You like an app.</p>
-    <button class="btn btn-dark" style="width:100%;" onclick="toggleModal('installModal',false)">Got It</button>
   </div>
 </div>
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
   import { getFirestore, collection, doc, setDoc, addDoc, updateDoc, deleteDoc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
-  import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-storage.js";
 
-  const firebaseConfig = {
+  const app = initializeApp({
     apiKey: "AIzaSyC1jxF4Lct_p-W2lOTOAhw0vmDoE1KPCUI",
     authDomain: "style-for-you-7eb61.firebaseapp.com",
     projectId: "style-for-you-7eb61",
     storageBucket: "style-for-you-7eb61.firebasestorage.app",
     messagingSenderId: "807237840658",
     appId: "1:807237840658:web:866dd6af7d0886546e4dcb"
-  };
-
-  const app = initializeApp(firebaseConfig);
+  });
   const db = getFirestore(app);
-  const storage = getStorage(app);
+  let products = [], settings = { whatsapp: '918446079809', pin: '1234' }, bag = JSON.parse(localStorage.getItem('sfy_b6')) || [];
+  let files = [], curTab = 'All', curCat = 'All', curProd = null, curSize = '', gIdx = 0, taps = 0, tapT = null, holdT = null;
 
-  const K_BAG = 'sfy_b_v6';
-  let products = [];
-  let settings = { whatsapp: '918446079809', pin: '1234' };
-  let bag = JSON.parse(localStorage.getItem(K_BAG)) || [];
-  let selectedFiles = [];
-  let curTab = 'All', curCat = 'All', curProd = null, curSize = '', curImgIdx = 0, taps = 0, tapT = null, holdT = null;
-
-  // Real-time listener for products
-  const qProd = query(collection(db, 'products'), orderBy('createdAt', 'desc'));
-  onSnapshot(qProd, (snap) => {
-    products = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  onSnapshot(query(collection(db, 'products'), orderBy('createdAt', 'desc')), (s) => {
+    products = s.docs.map(d => ({ id: d.id, ...d.data() }));
     document.getElementById('syncDot').textContent = '• Live';
     render();
     if (!document.getElementById('adminModal').classList.contains('hidden')) renderAdmin();
-  }, (err) => {
-    console.error(err);
-    document.getElementById('syncDot').textContent = '• Offline';
-    document.getElementById('syncDot').style.color = '#c00';
-  });
+  }, () => { document.getElementById('syncDot').textContent = '• Check Rules'; });
 
-  // Real-time listener for store settings
-  onSnapshot(doc(db, 'config', 'store'), (snap) => {
-    if (snap.exists()) settings = { ...settings, ...snap.data() };
-  });
+  onSnapshot(doc(db, 'config', 'store'), (s) => { if (s.exists()) settings = { ...settings, ...s.data() }; });
 
-  // Admin unlock triggers
   const bh = document.getElementById('brandHeader');
-  bh.addEventListener('pointerup', () => {
-    taps++; clearTimeout(tapT);
-    if (taps >= 5) { taps = 0; toggleModal('pinModal', true); }
-    else tapT = setTimeout(() => taps = 0, 3500);
-  });
-  bh.addEventListener('pointerdown', () => {
-    holdT = setTimeout(() => { taps = 0; toggleModal('pinModal', true); }, 2000);
-  });
+  bh.addEventListener('pointerup', () => { taps++; clearTimeout(tapT); if (taps >= 5) { taps = 0; toggleModal('pinModal', true); } else tapT = setTimeout(() => taps = 0, 3500); });
+  bh.addEventListener('pointerdown', () => { holdT = setTimeout(() => { taps = 0; toggleModal('pinModal', true); }, 2000); });
   bh.addEventListener('pointerleave', () => clearTimeout(holdT));
-  bh.addEventListener('pointercancel', () => clearTimeout(holdT));
   if (new URLSearchParams(location.search).get('admin') === '1') toggleModal('pinModal', true);
 
-  function saveBag() { localStorage.setItem(K_BAG, JSON.stringify(bag)); }
   window.toggleModal = (id, show) => document.getElementById(id).classList.toggle('hidden', !show);
-
-  window.setTab = (t) => {
-    curTab = t; curCat = 'All';
-    ['All','Women','Men','Partner'].forEach(x => document.getElementById('tab-'+x).classList.toggle('active', x === t));
-    document.getElementById('bTag').textContent = t === 'Partner' ? '★ Curated Partner Deals' : '✨ Fresh Weekly Drop';
-    document.getElementById('bTitle').textContent = t === 'Partner' ? 'Top Partner Picks & Discounts' : 'Handpicked Styles, Direct to You';
-    document.getElementById('bSub').textContent = t === 'Partner' ? 'Shop directly on our trusted partner stores.' : 'Pick your size & tap Order on WhatsApp for instant confirmation.';
-    render();
-  };
+  window.setTab = (t) => { curTab = t; curCat = 'All'; ['All','Women','Men','Partner'].forEach(x => document.getElementById('tab-'+x).classList.toggle('active', x===t)); render(); };
   window.setCat = (c) => { curCat = c; render(); };
-  window.resetFilters = () => { document.getElementById('searchInput').value = ''; setTab('All'); };
-
-  function getImgs(p) {
-    return (p.images && p.images.length) ? p.images : ['https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=600&q=80'];
-  }
+  const getImgs = (p) => (p.images && p.images.length) ? p.images : ['https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=600&q=80'];
 
   window.render = () => {
     const cats = curTab === 'Men' ? ['All','Watch','Sunglasses','Bag'] : ['All','Watch','Dress','Cord set','Sunglasses','Bag'];
@@ -442,276 +254,144 @@
     const q = document.getElementById('searchInput').value.trim().toLowerCase();
     const list = products.filter(p => {
       const isP = p.type === 'partner';
-      const mTab = curTab === 'All' ? true : (curTab === 'Partner' ? isP : (p.gender === curTab || p.gender === 'Unisex'));
-      const mCat = curCat === 'All' || p.category.toLowerCase() === curCat.toLowerCase();
-      const mQ = !q || p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q);
-      return mTab && mCat && mQ;
+      return (curTab==='All' || (curTab==='Partner'?isP:(p.gender===curTab||p.gender==='Unisex'))) &&
+             (curCat==='All' || p.category.toLowerCase()===curCat.toLowerCase()) &&
+             (!q || p.name.toLowerCase().includes(q));
     });
-    document.getElementById('countLabel').textContent = list.length + (list.length === 1 ? ' Item' : ' Items');
+    document.getElementById('countLabel').textContent = list.length + ' Items';
     document.getElementById('empty').classList.toggle('hidden', list.length > 0);
     document.getElementById('grid').innerHTML = list.map(p => {
-      const isP = p.type === 'partner';
-      const imgs = getImgs(p);
+      const isP = p.type === 'partner', imgs = getImgs(p);
       return `<div class="card ${isP?'partner':''}" onclick="openProd('${p.id}')">
-        <div class="card-img">
-          <img src="${imgs[0]}" alt="${p.name}" loading="lazy" />
-          <span class="tag-top ${isP?'partner':(!p.inStock?'sold':'')}">${isP?'★ Partner Deal':(p.inStock?'New This Week':'Sold Out')}</span>
-          ${imgs.length > 1 ? `<span class="photo-count-badge">📷 ${imgs.length}</span>` : ''}
-          <span class="tag-bot">${isP?(p.partnerStore||'Partner'):p.gender+"'s"} • ${p.category}</span>
+        <div class="cimg"><img src="${imgs[0]}" loading="lazy" />
+          <span class="ttop ${isP?'partner':(!p.inStock?'sold':'')}">${isP?'★ Deal':(p.inStock?'New':'Sold Out')}</span>
+          ${imgs.length>1?`<span class="pcnt">📷 ${imgs.length}</span>`:''}
         </div>
-        <div class="card-body">
-          <div>
-            <div class="card-title">${p.name}</div>
-            <div class="card-sub">${isP?'Via '+(p.partnerStore||'Partner'):'Sizes: '+p.sizes.join(', ')}</div>
-          </div>
-          <div class="card-foot">
-            <span class="price">₹${p.price}</span>
-            <span class="cta-txt ${isP?'partner':''}">${isP?'View Deal ↗':'Select →'}</span>
-          </div>
+        <div class="cbody">
+          <div class="ctitle">${p.name}</div>
+          <div class="cfoot"><span>₹${p.price}</span><span style="color:${isP?'var(--partner)':'var(--terra)'}">${isP?'Deal ↗':'Order →'}</span></div>
         </div>
       </div>`;
     }).join('');
-    updateBagBar();
+    updateBag();
   };
 
   window.openProd = (id) => {
-    curProd = products.find(p => p.id === id);
-    if (!curProd) return;
-    curImgIdx = 0;
-    renderGallery();
+    curProd = products.find(p => p.id === id); if (!curProd) return;
+    gIdx = 0; renderGal();
     const isP = curProd.type === 'partner';
-    document.getElementById('mCat').textContent = isP ? `Partner Pick • ${curProd.category}` : `${curProd.gender}'s ${curProd.category}`;
+    document.getElementById('mCat').textContent = isP ? 'Partner Deal' : `${curProd.gender}'s ${curProd.category}`;
     document.getElementById('mTitle').textContent = curProd.name;
     document.getElementById('mPrice').textContent = '₹' + curProd.price;
     document.getElementById('mDesc').textContent = curProd.desc;
-    document.getElementById('ownControls').classList.toggle('hidden', isP);
-    document.getElementById('partnerControls').classList.toggle('hidden', !isP);
-    if (isP) {
-      document.getElementById('partnerLink').textContent = `Buy on ${curProd.partnerStore || 'Partner Store'} ↗`;
-      document.getElementById('partnerLink').href = curProd.partnerUrl || '#';
-    } else {
-      curSize = curProd.sizes.length === 1 ? curProd.sizes[0] : '';
-      document.getElementById('sizeErr').classList.add('hidden');
-      document.getElementById('mNote').value = '';
-      renderSizes();
-    }
+    document.getElementById('ownCtrl').classList.toggle('hidden', isP);
+    document.getElementById('partnerCtrl').classList.toggle('hidden', !isP);
+    if (isP) { document.getElementById('partnerLink').href = curProd.partnerUrl || '#'; }
+    else { curSize = curProd.sizes.length === 1 ? curProd.sizes[0] : ''; renderSizes(); }
     toggleModal('prodModal', true);
   };
-
-  function renderGallery() {
-    const imgs = getImgs(curProd);
-    document.getElementById('mImg').src = imgs[curImgIdx];
-    const multi = imgs.length > 1;
-    document.getElementById('prevImgBtn').classList.toggle('hidden', !multi);
-    document.getElementById('nextImgBtn').classList.toggle('hidden', !multi);
-    document.getElementById('galCounter').classList.toggle('hidden', !multi);
-    document.getElementById('galCounter').textContent = `${curImgIdx + 1} / ${imgs.length}`;
-    const strip = document.getElementById('thumbStrip');
-    strip.classList.toggle('hidden', !multi);
-    if (multi) {
-      strip.innerHTML = imgs.map((u, idx) => `<img src="${u}" class="thumb ${idx===curImgIdx?'active':''}" onclick="setGalIdx(${idx})" />`).join('');
-    }
+  function renderGal() {
+    const imgs = getImgs(curProd), m = imgs.length > 1;
+    document.getElementById('mImg').src = imgs[gIdx];
+    ['prevBtn','nextBtn','galCnt','thumbStrip'].forEach(x => document.getElementById(x).classList.toggle('hidden', !m));
+    document.getElementById('galCnt').textContent = `${gIdx+1}/${imgs.length}`;
+    if (m) document.getElementById('thumbStrip').innerHTML = imgs.map((u, i) => `<img src="${u}" class="thumb ${i===gIdx?'active':''}" onclick="setG(${i})" />`).join('');
   }
-  window.setGalIdx = (idx) => { curImgIdx = idx; renderGallery(); };
-  window.stepGallery = (dir) => {
-    const imgs = getImgs(curProd);
-    curImgIdx = (curImgIdx + dir + imgs.length) % imgs.length;
-    renderGallery();
-  };
-
-  window.renderSizes = () => {
-    document.getElementById('mSizes').innerHTML = curProd.sizes.map(s => `<button class="size-chip ${curSize===s?'active':''}" onclick="pickSize('${s}')">${s}</button>`).join('');
-  };
-  window.pickSize = (s) => { curSize = s; document.getElementById('sizeErr').classList.add('hidden'); renderSizes(); };
+  window.setG = (i) => { gIdx = i; renderGal(); };
+  window.stepGal = (d) => { const imgs = getImgs(curProd); gIdx = (gIdx + d + imgs.length) % imgs.length; renderGal(); };
+  window.renderSizes = () => { document.getElementById('mSizes').innerHTML = curProd.sizes.map(s => `<button class="schip ${curSize===s?'active':''}" onclick="pickS('${s}')">${s}</button>`).join(''); };
+  window.pickS = (s) => { curSize = s; document.getElementById('sizeErr').classList.add('hidden'); renderSizes(); };
 
   window.addToBag = () => {
-    if (!curProd.inStock) return alert('Sold out for this week.');
     if (!curSize) return document.getElementById('sizeErr').classList.remove('hidden');
-    bag.push({ name: curProd.name, size: curSize, price: curProd.price, note: document.getElementById('mNote').value.trim() });
-    saveBag(); updateBagBar(); toggleModal('prodModal', false);
+    bag.push({ name: curProd.name, size: curSize, price: curProd.price });
+    localStorage.setItem('sfy_b6', JSON.stringify(bag)); updateBag(); toggleModal('prodModal', false);
   };
-
-  window.orderWhatsApp = () => {
-    if (!curProd.inStock) return alert('Sold out for this week.');
+  window.orderWA = () => {
     if (!curSize) return document.getElementById('sizeErr').classList.remove('hidden');
     const note = document.getElementById('mNote').value.trim();
-    const msg = `Hello *Style For You*! I want to order:\n\n• *Item:* ${curProd.name}\n• *Size:* ${curSize}\n• *Price:* ₹${curProd.price}\n• *Shipping:* Extra (as per delivery location)${note?'\n• *Note:* '+note:''}\n\nPlease share total with shipping & payment details!`;
+    const msg = `Hello *Style For You*! Order:\n• *Item:* ${curProd.name}\n• *Size:* ${curSize}\n• *Price:* ₹${curProd.price}\n• *Shipping:* Extra${note?'\n• *Note:* '+note:''}`;
     window.open(`https://wa.me/${settings.whatsapp}?text=${encodeURIComponent(msg)}`, '_blank');
   };
-
-  function updateBagBar() {
+  function updateBag() {
     const b = document.getElementById('bagBadge'), f = document.getElementById('floatBar');
     if (!bag.length) { b.classList.add('hidden'); f.classList.add('hidden'); return; }
-    const tot = bag.reduce((s, i) => s + Number(i.price), 0);
-    b.textContent = bag.length; b.classList.remove('hidden');
-    document.getElementById('floatCount').textContent = bag.length + (bag.length===1?' item':' items');
-    document.getElementById('floatTotal').textContent = '₹' + tot + ' →';
-    f.classList.remove('hidden');
+    b.textContent = bag.length; b.classList.remove('hidden'); f.classList.remove('hidden');
+    document.getElementById('floatCount').textContent = bag.length + ' item(s) • Bag';
+    document.getElementById('floatTotal').textContent = '₹' + bag.reduce((s, i) => s + Number(i.price), 0) + ' →';
   }
-
   window.openBag = () => {
-    const list = document.getElementById('bagList'), foot = document.getElementById('bagFoot');
-    if (!bag.length) { list.innerHTML = '<p style="text-align:center;color:var(--muted);padding:30px 0;font-size:13px;">Your bag is empty.</p>'; foot.classList.add('hidden'); }
-    else {
-      foot.classList.remove('hidden');
-      list.innerHTML = bag.map((x, i) => `<div style="display:flex;justify-content:space-between;align-items:center;background:#fff;padding:10px;border-radius:12px;margin-bottom:8px;border:1px solid rgba(30,27,24,0.1);"><div><div style="font-size:12px;font-weight:700;">${x.name}</div><div style="font-size:11px;color:var(--muted);">Size: ${x.size} • ₹${x.price}</div></div><button onclick="removeBag(${i})" style="color:#c00;background:none;border:none;font-size:11px;font-weight:700;cursor:pointer;">Remove</button></div>`).join('');
-      document.getElementById('bagSub').textContent = '₹' + bag.reduce((s, i) => s + Number(i.price), 0);
-    }
+    document.getElementById('bagList').innerHTML = bag.length ? bag.map((x, i) => `<div class="row" style="background:#fff;padding:8px;border-radius:10px;margin-bottom:6px"><span>${x.name} (${x.size}) - ₹${x.price}</span><button onclick="rmBag(${i})" style="color:#c00;border:none;background:none">✕</button></div>`).join('') : '<p style="text-align:center;padding:20px">Empty bag</p>';
+    document.getElementById('bagFoot').classList.toggle('hidden', !bag.length);
+    document.getElementById('bagSub').textContent = '₹' + bag.reduce((s, i) => s + Number(i.price), 0);
     toggleModal('bagModal', true);
   };
-  window.removeBag = (i) => { bag.splice(i, 1); saveBag(); openBag(); updateBagBar(); };
-
+  window.rmBag = (i) => { bag.splice(i, 1); localStorage.setItem('sfy_b6', JSON.stringify(bag)); openBag(); updateBag(); };
   window.checkoutBag = () => {
-    const tot = bag.reduce((s, i) => s + Number(i.price), 0);
-    const cust = document.getElementById('custInfo').value.trim();
-    const items = bag.map((x, i) => `${i+1}. *${x.name}* (${x.size}) — ₹${x.price}`).join('\n');
-    const msg = `Hello *Style For You*! Order details:\n\n${items}\n\n*Subtotal:* ₹${tot}\n*Shipping:* Extra (as per delivery location)${cust?'\n*Customer:* '+cust:''}\n\nPlease share final bill with shipping!`;
+    const items = bag.map((x, i) => `${i+1}. *${x.name}* (${x.size}) ₹${x.price}`).join('\n');
+    const msg = `Hello *Style For You*!\n${items}\n*Subtotal:* ₹${bag.reduce((s,i)=>s+Number(i.price),0)}\n*Shipping:* Extra\n*Customer:* ${document.getElementById('custInfo').value}`;
     window.open(`https://wa.me/${settings.whatsapp}?text=${encodeURIComponent(msg)}`, '_blank');
   };
 
-  // Admin functions
   window.checkPin = () => {
-    if (document.getElementById('pinInput').value === settings.pin) {
-      toggleModal('pinModal', false);
-      document.getElementById('sWa').value = settings.whatsapp;
-      document.getElementById('sPin').value = settings.pin;
-      renderAdmin(); toggleModal('adminModal', true);
-    } else document.getElementById('pinErr').classList.remove('hidden');
+    if (document.getElementById('pinInput').value === settings.pin) { toggleModal('pinModal', false); document.getElementById('sWa').value = settings.whatsapp; document.getElementById('sPin').value = settings.pin; renderAdmin(); toggleModal('adminModal', true); }
+    else document.getElementById('pinErr').classList.remove('hidden');
   };
-  window.toggleAdminFields = () => {
-    const isP = document.getElementById('fType').value === 'partner';
-    document.getElementById('ownFields').classList.toggle('hidden', isP);
-    document.getElementById('partnerFields').classList.toggle('hidden', !isP);
+  window.toggleAdminFields = () => { const p = document.getElementById('fType').value === 'partner'; document.getElementById('ownFields').classList.toggle('hidden', p); document.getElementById('partnerFields').classList.toggle('hidden', !p); };
+  window.calcP = () => { const c = Number(document.getElementById('fCost').value)||0, m = Number(document.getElementById('fMargin').value)||0; if (c||m) document.getElementById('fPrice').value = c+m; };
+  window.onPickFiles = (e) => {
+    files = Array.from(e.target.files).slice(0, 25);
+    document.getElementById('fileCntTxt').textContent = files.length ? `${files.length} photo(s) ready` : 'Tap to pick photos from phone';
+    const st = document.getElementById('prevStrip'); st.classList.toggle('hidden', !files.length);
+    st.innerHTML = files.map(f => `<img src="${URL.createObjectURL(f)}" class="thumb active" />`).join('');
   };
-  window.calcPrice = () => {
-    const c = Number(document.getElementById('fCost').value)||0, m = Number(document.getElementById('fMargin').value)||0;
-    if (c || m) document.getElementById('fPrice').value = c + m;
-  };
-
-  window.handleGallerySelect = (e) => {
-    selectedFiles = Array.from(e.target.files).slice(0, 25);
-    const txt = document.getElementById('fileCountTxt');
-    const strip = document.getElementById('previewStrip');
-    if (!selectedFiles.length) {
-      txt.textContent = 'Tap here to pick photos directly from your phone';
-      strip.classList.add('hidden');
-      return;
-    }
-    txt.textContent = `${selectedFiles.length} photo(s) ready to upload!`;
-    strip.classList.remove('hidden');
-    strip.innerHTML = selectedFiles.map(f => `<img src="${URL.createObjectURL(f)}" class="thumb active" />`).join('');
-  };
-
-  function compressImage(file) {
-    return new Promise((resolve) => {
+  function compDataUrl(f, maxW = 540, q = 0.62) {
+    return new Promise(res => {
       const r = new FileReader();
-      r.onload = (ev) => {
+      r.onload = e => {
         const img = new Image();
         img.onload = () => {
-          const c = document.createElement('canvas');
-          const scale = Math.min(1, 900 / Math.max(img.width, img.height));
-          c.width = img.width * scale;
-          c.height = img.height * scale;
+          const c = document.createElement('canvas'), s = Math.min(1, maxW / Math.max(img.width, img.height));
+          c.width = img.width * s; c.height = img.height * s;
           c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
-          c.toBlob((blob) => resolve(blob), 'image/jpeg', 0.8);
+          res(c.toDataURL('image/jpeg', q));
         };
-        img.src = ev.target.result;
+        img.src = e.target.result;
       };
-      r.readAsDataURL(file);
+      r.readAsDataURL(f);
     });
   }
-
   window.saveItem = async () => {
-    const type = document.getElementById('fType').value;
-    const name = document.getElementById('fName').value.trim();
-    const gender = document.getElementById('fGender').value;
-    const category = document.getElementById('fCat').value;
-    const desc = document.getElementById('fDesc').value.trim() || 'Curated weekly drop piece.';
-    if (!name) return alert('Enter product name');
-
-    let item = { type, name, gender, category, desc, inStock: true, createdAt: Date.now() };
-    if (type === 'partner') {
-      item.price = Number(document.getElementById('fPPrice').value)||0;
-      item.partnerStore = document.getElementById('fPStore').value.trim()||'Amazon';
-      item.partnerUrl = document.getElementById('fPUrl').value.trim();
-      item.sizes = ['Standard'];
-      if (!item.price || !item.partnerUrl) return alert('Enter price and affiliate link');
-    } else {
-      item.price = Number(document.getElementById('fPrice').value)||0;
-      item.sizes = document.getElementById('fSizes').value.split(',').map(s=>s.trim()).filter(Boolean);
-      if (!item.price) return alert('Enter selling price');
-    }
-
-    const btn = document.getElementById('saveBtn');
-    btn.disabled = true;
-
+    const type = document.getElementById('fType').value, name = document.getElementById('fName').value.trim();
+    if (!name) return alert('Enter name');
+    let item = { type, name, gender: document.getElementById('fGender').value, category: document.getElementById('fCat').value, desc: document.getElementById('fDesc').value.trim() || 'Curated weekly drop.', inStock: true, createdAt: Date.now() };
+    if (type === 'partner') { item.price = Number(document.getElementById('fPPrice').value)||0; item.partnerStore = document.getElementById('fPStore').value; item.partnerUrl = document.getElementById('fPUrl').value; item.sizes = ['Standard']; }
+    else { item.price = Number(document.getElementById('fPrice').value)||0; item.sizes = document.getElementById('fSizes').value.split(',').map(s=>s.trim()).filter(Boolean); }
+    const btn = document.getElementById('saveBtn'); btn.disabled = true;
     try {
-      const uploadedUrls = [];
-      for (let i = 0; i < selectedFiles.length; i++) {
-        btn.textContent = `Uploading photo ${i + 1} of ${selectedFiles.length}...`;
-        const blob = await compressImage(selectedFiles[i]);
-        const fileRef = ref(storage, `products/${Date.now()}_${i}.jpg`);
-        await uploadBytes(fileRef, blob);
-        const url = await getDownloadURL(fileRef);
-        uploadedUrls.push(url);
+      let imgs = [];
+      if (files.length) {
+        btn.textContent = `Preparing ${files.length} photo(s)...`;
+        const maxW = files.length > 10 ? 440 : 580;
+        const q = files.length > 10 ? 0.55 : 0.68;
+        imgs = await Promise.all(files.map(f => compDataUrl(f, maxW, q)));
       }
-      item.images = uploadedUrls.length ? uploadedUrls : ['https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=600&q=80'];
+      item.images = imgs.length ? imgs : ['https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=600&q=80'];
       btn.textContent = 'Publishing live...';
       await addDoc(collection(db, 'products'), item);
-
-      // Reset form
-      document.getElementById('fName').value = '';
-      document.getElementById('fDesc').value = '';
-      document.getElementById('fGallery').value = '';
-      selectedFiles = [];
-      document.getElementById('fileCountTxt').textContent = 'Tap here to pick photos directly from your phone';
-      document.getElementById('previewStrip').classList.add('hidden');
-      alert('Published live! Customers can see it right now.');
-    } catch (err) {
-      console.error(err);
-      alert('Upload error: ' + err.message);
-    } finally {
-      btn.disabled = false;
-      btn.textContent = 'Save & Publish Live';
-    }
+      files = []; document.getElementById('fName').value = ''; document.getElementById('prevStrip').classList.add('hidden');
+      document.getElementById('fileCntTxt').textContent = 'Tap to pick photos from phone';
+      alert('Published Live in 1 second!');
+    } catch (err) { alert('Error: ' + err.message); }
+    btn.disabled = false; btn.textContent = 'Save & Publish Live';
   };
-
   window.renderAdmin = () => {
-    document.getElementById('adminList').innerHTML = products.map((p) => {
-      const imgs = getImgs(p);
-      return `
-      <div style="display:flex;align-items:center;gap:10px;background:#fff;padding:8px;border-radius:12px;margin-bottom:8px;border:1px solid rgba(30,27,24,0.1);">
-        <img src="${imgs[0]}" style="width:44px;height:50px;object-fit:cover;border-radius:8px;" />
-        <div style="flex:1;min-width:0;">
-          <div style="font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${p.name}</div>
-          <div style="font-size:11px;color:var(--muted);">${p.type==='partner'?'★ Partner':'Own'} • ₹${p.price} • ${imgs.length} photo(s)</div>
-        </div>
-        ${p.type!=='partner'?`<button onclick="toggleStock('${p.id}', ${!p.inStock})" style="font-size:10px;padding:4px 8px;border-radius:99px;border:none;background:${p.inStock?'#dcfce7':'#fee2e2'};cursor:pointer;">${p.inStock?'In Stock':'Sold Out'}</button>`:''}
-        <button onclick="delProd('${p.id}')" style="color:#c00;background:none;border:none;font-size:11px;font-weight:700;cursor:pointer;">Del</button>
-      </div>`;
-    }).join('');
+    document.getElementById('adminList').innerHTML = products.map(p => `<div class="row" style="background:#fff;padding:8px;border-radius:10px;margin-bottom:6px"><span style="font-size:12px;font-weight:700">${p.name} (₹${p.price})</span><div><button onclick="togStk('${p.id}',${!p.inStock})" style="font-size:10px;margin-right:6px">${p.inStock?'In Stock':'Sold Out'}</button><button onclick="delP('${p.id}')" style="color:#c00;border:none;background:none">Del</button></div></div>`).join('');
   };
-
-  window.toggleStock = async (id, state) => { await updateDoc(doc(db, 'products', id), { inStock: state }); };
-  window.delProd = async (id) => { if (confirm('Remove this item from live store?')) await deleteDoc(doc(db, 'products', id)); };
-
-  window.seedSamples = async () => {
-    const samples = [
-      { type:'own', name:'Champagne Satin Lounge Co-ord Set', gender:'Women', category:'Cord set', price:899, sizes:['S','M','L','XL'], inStock:true, images:['https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600&q=80','https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=600&q=80'], desc:'Fluid satin-finish shirt & wide-leg trouser set.', createdAt: Date.now() },
-      { type:'own', name:'Rose-Gold Petite Mesh Watch', gender:'Women', category:'Watch', price:749, sizes:['Free Size'], inStock:true, images:['https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=600&q=80'], desc:'Minimalist mother-of-pearl dial with adjustable mesh strap.', createdAt: Date.now() - 1000 },
-      { type:'partner', partnerStore:'Amazon', partnerUrl:'https://www.amazon.in', name:'Structured Tan Crossbody Sling Bag', gender:'Women', category:'Bag', price:699, sizes:['Standard'], inStock:true, images:['https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=600&q=80'], desc:'Partner Deal: Gold-tone clasp & detachable shoulder strap.', createdAt: Date.now() - 2000 }
-    ];
-    for (const s of samples) await addDoc(collection(db, 'products'), s);
-  };
-
-  window.saveSettings = async () => {
-    const w = document.getElementById('sWa').value.replace(/\D/g,''), p = document.getElementById('sPin').value.trim();
-    const updated = { ...settings };
-    if (w.length >= 10) updated.whatsapp = w;
-    if (p.length === 4) updated.pin = p;
-    await setDoc(doc(db, 'config', 'store'), updated);
-    alert('Cloud settings updated!');
-  };
+  window.togStk = async (id, s) => updateDoc(doc(db, 'products', id), { inStock: s });
+  window.delP = async (id) => deleteDoc(doc(db, 'products', id));
+  window.seedSamples = async () => { await addDoc(collection(db, 'products'), { type:'own', name:'Champagne Satin Co-ord Set', gender:'Women', category:'Cord set', price:899, sizes:['S','M','L'], inStock:true, images:['https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600&q=80'], desc:'Satin shirt & trouser set.', createdAt: Date.now() }); };
+  window.saveSettings = async () => { await setDoc(doc(db, 'config', 'store'), { whatsapp: document.getElementById('sWa').value.replace(/\D/g,''), pin: document.getElementById('sPin').value.trim() }); alert('Saved!'); };
 </script>
 </body>
 </html>
